@@ -28,20 +28,6 @@
         </a-col>
       </a-row>
 
-      <!-- Tiêu đề + Phụ đề -->
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-form-item label="Tiêu đề (Title)">
-            <a-input v-model="form.titleText" placeholder="Nhập tiêu đề..." />
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="Phụ đề (Subtitle)">
-            <a-input v-model="form.subtitleText" placeholder="Nhập phụ đề..." />
-          </a-form-item>
-        </a-col>
-      </a-row>
-
       <!-- Thumbnail (optional) -->
       <a-form-item label="Thumbnail — ảnh bìa (tùy chọn)">
         <label class="upload-btn">
@@ -279,8 +265,6 @@ export default {
         this.form = {
           projectId: d.projectId || projectId,
           projectName: d.projectName || "",
-          titleText: d.titleText || "",
-          subtitleText: d.subtitleText || "",
           projectBody: d.projectBody || "",
           isActive: d.isActive !== undefined ? d.isActive : true,
           languageCode: languageCode,
@@ -311,7 +295,7 @@ export default {
       this.selectedTagIds = this.selectedTagIds.filter((id) => id !== tagId);
     },
     defaultForm() {
-      return { projectName: "", titleText: "", subtitleText: "", projectBody: "", isActive: true, languageCode: "vi" };
+      return { projectName: "", projectBody: "", isActive: true, languageCode: "vi" };
     },
     async fetchTags() {
       this.tagsLoading = true;
@@ -424,8 +408,6 @@ export default {
       const fd = new FormData();
       fd.append("LanguageCode", this.form.languageCode || "vi");
       fd.append("ProjectName", this.form.projectName || "");
-      fd.append("TitleText", this.form.titleText || "");
-      fd.append("SubtitleText", this.form.subtitleText || "");
       this.selectedTagIds.forEach((id) => fd.append("ListTagId", id));
       if (this.thumbnailFile) fd.append("Thumbnail", this.thumbnailFile);
       if (this.imageFile) fd.append("image", this.imageFile);
@@ -443,8 +425,6 @@ export default {
               projectId: this.form.projectId,
               languageCode: this.form.languageCode || "vi",
               projectName: this.form.projectName || "",
-              titleText: this.form.titleText || "",
-              subtitleText: this.form.subtitleText || "",
               isActive: this.form.isActive,
             },
             this.thumbnailFile || null,
