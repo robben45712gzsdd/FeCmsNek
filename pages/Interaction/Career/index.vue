@@ -27,7 +27,7 @@
 <script>
 import { getListSendMailCareer, deleteMailCareer } from "../../../apis/interaction";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

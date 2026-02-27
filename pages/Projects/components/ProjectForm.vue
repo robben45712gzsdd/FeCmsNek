@@ -273,7 +273,7 @@ export default {
         this.selectedTagIds = rawTags
           .map((t) => (typeof t === "object" ? t.tagId ?? t.id : Number(t)))
           .filter(Boolean);
-        const fileBase = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+        const fileBase = process.env.NUXT_ENV_FILE_API_URL;
         const toFull = (url) => !url ? null : /^https?:\/\//i.test(url) ? url : fileBase.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
         this.thumbnailPreview = toFull(d.thumbnailUrl) || null;
         this.imagePreview = toFull(d.imageUrl) || null;

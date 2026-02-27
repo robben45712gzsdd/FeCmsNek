@@ -103,7 +103,7 @@
 <script>
 import { uploadImageMedia, deleteImageMedia } from "@/apis/files";
 
-const FILE_API_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_API_BASE = process.env.NUXT_ENV_FILE_API_URL;
 const toFullUrl = (url) => {
   if (!url) return url;
   if (/^https?:\/\//i.test(url)) return url;

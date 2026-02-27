@@ -76,7 +76,7 @@
 import GameForm from "./components/GameForm.vue";
 import { getGameList, getGameDetail, deleteGame } from "../../apis/games";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

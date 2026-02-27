@@ -104,7 +104,7 @@
 <script>
 import { createGame, updateGame, getGameDetail } from "../../../apis/games";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 function defaultForm(languageCode) {
   return {

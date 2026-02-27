@@ -64,7 +64,7 @@ import axios from "axios";
 import JobForm from "./components/JobForm.vue";
 import { getJobCms, getJobDetailCms, deleteJob } from "../../../apis/interaction";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

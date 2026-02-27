@@ -97,7 +97,7 @@ export default {
       showForm: false,
       isEdit: false,
       selectedRecord: null,
-      baseImageUrl: process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com",
+      baseImageUrl: process.env.NUXT_ENV_FILE_API_URL,
     };
   },
   computed: {
