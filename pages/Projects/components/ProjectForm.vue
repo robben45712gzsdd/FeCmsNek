@@ -16,7 +16,7 @@
           <a-form-item label="Ngôn ngữ" required>
             <a-select v-model="form.languageCode" style="width: 100%">
               <a-select-option value="vi">Tiếng Việt</a-select-option>
-              <a-select-option value="en">English</a-select-option>
+              <a-select-option value="us">English</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>

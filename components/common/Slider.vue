@@ -54,6 +54,12 @@
           <span>Games</span>
         </nuxt-link>
       </a-menu-item>
+      <a-menu-item key="100">
+        <nuxt-link to="/ImageUploadTool">
+          <a-icon type="picture" />
+          <span>Upload Ảnh</span>
+        </nuxt-link>
+      </a-menu-item>
 
       <a-sub-menu key="general">
         <span slot="title"><a-icon type="appstore" /><span>Chung</span></span>

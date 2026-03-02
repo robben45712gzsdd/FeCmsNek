@@ -15,7 +15,7 @@
       />
       <a-select v-model="langCode" style="width: 130px" @change="() => { page = 1; fetchList(); }">
         <a-select-option value="vi">Tiếng Việt</a-select-option>
-        <a-select-option value="en">English</a-select-option>
+        <a-select-option value="us">English</a-select-option>
       </a-select>
     </div>
 
