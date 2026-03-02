@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const fileAxios = axios.create({
-  baseURL: process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com",
+  baseURL: process.env.NUXT_ENV_FILE_API_URL,
   headers: { "Content-Type": "multipart/form-data" },
 });
 

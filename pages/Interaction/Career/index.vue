@@ -7,7 +7,7 @@
       <a-input-search v-model="keyword" placeholder="Tìm kiếm..." style="width:280px" @search="fetchList" allow-clear />
       <a-select v-model="langCode" style="width:130px" @change="() => { page = 1; fetchList(); }">
         <a-select-option value="vi">Tiếng Việt</a-select-option>
-        <a-select-option value="en">English</a-select-option>
+        <a-select-option value="us">English</a-select-option>
       </a-select>
     </div>
     <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" row-key="applicantId" @change="onTableChange">
@@ -27,7 +27,7 @@
 <script>
 import { getListSendMailCareer, deleteMailCareer } from "../../../apis/interaction";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

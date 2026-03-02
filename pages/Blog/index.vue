@@ -11,7 +11,7 @@
           <a-input-search v-model="keyword" placeholder="Tìm kiếm tiêu đề..." style="width: 280px" @search="fetchList" allow-clear />
           <a-select v-model="langCode" style="width: 130px" @change="() => { page = 1; fetchList(); }">
             <a-select-option value="vi">Tiếng Việt</a-select-option>
-            <a-select-option value="en">English</a-select-option>
+            <a-select-option value="us">English</a-select-option>
           </a-select>
         </div>
         <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" row-key="postId" @change="onTableChange">
@@ -46,7 +46,7 @@
           <a-input-search v-model="genKeyword" placeholder="Tìm kiếm tiêu đề..." style="width: 280px" @search="fetchGenerated" allow-clear />
           <a-select v-model="genLangCode" style="width: 130px" @change="() => { genPage = 1; fetchGenerated(); }">
             <a-select-option value="vi">Tiếng Việt</a-select-option>
-            <a-select-option value="en">English</a-select-option>
+            <a-select-option value="us">English</a-select-option>
           </a-select>
           <a-button type="primary" :loading="generatingAI" icon="robot" @click="handleGenerateBlog">Tạo bài AI</a-button>
         </div>
@@ -99,7 +99,7 @@
 import BlogForm from "./components/BlogForm.vue";
 import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

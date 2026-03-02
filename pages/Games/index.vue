@@ -15,7 +15,7 @@
       />
       <a-select v-model="langCode" style="width: 130px" @change="() => { page = 1; fetchList(); }">
         <a-select-option value="vi">Tiếng Việt</a-select-option>
-        <a-select-option value="en">English</a-select-option>
+        <a-select-option value="us">English</a-select-option>
       </a-select>
     </div>
 
@@ -76,7 +76,7 @@
 import GameForm from "./components/GameForm.vue";
 import { getGameList, getGameDetail, deleteGame } from "../../apis/games";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

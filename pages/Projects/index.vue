@@ -97,7 +97,7 @@ export default {
       showForm: false,
       isEdit: false,
       selectedRecord: null,
-      baseImageUrl: process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com",
+      baseImageUrl: process.env.NUXT_ENV_FILE_API_URL,
     };
   },
   computed: {
@@ -106,8 +106,6 @@ export default {
         { key: "ord", label: "#" },
         { key: "thumbnail", label: "Thumbnail", slot: "thumbnail" },
         { key: "projectName", label: "Tên dự án" },
-        { key: "titleText", label: "Tiêu đề" },
-        { key: "subtitleText", label: "Phụ đề" },
         { key: "createdAt", label: "Ngày tạo", slot: "createdAt" },
         { key: "isActive", label: "Trạng thái", slot: "isActive" },
         { key: "action", label: "Hành động", slot: "action" },

@@ -16,7 +16,7 @@
           <a-form-item label="Ngôn ngữ">
             <a-select v-model="form.languageCode" style="width:100%">
               <a-select-option value="vi">Tiếng Việt</a-select-option>
-              <a-select-option value="en">English</a-select-option>
+              <a-select-option value="us">English</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -113,7 +113,7 @@
 <script>
 import { createPost, updatePost } from "../../../apis/blog";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 const toFull = (url) => !url ? null : /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
 
 export default {

@@ -16,7 +16,7 @@
           <a-form-item label="Ngôn ngữ" required>
             <a-select v-model="form.languageCode" style="width: 100%">
               <a-select-option value="vi">Tiếng Việt</a-select-option>
-              <a-select-option value="en">English</a-select-option>
+              <a-select-option value="us">English</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -24,20 +24,6 @@
           <a-form-item label="Tên dự án" required>
             <a-input v-model="form.projectName" placeholder="Nhập tên dự án..." />
             <div v-if="errors.projectName" class="err">{{ errors.projectName }}</div>
-          </a-form-item>
-        </a-col>
-      </a-row>
-
-      <!-- Tiêu đề + Phụ đề -->
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-form-item label="Tiêu đề (Title)">
-            <a-input v-model="form.titleText" placeholder="Nhập tiêu đề..." />
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="Phụ đề (Subtitle)">
-            <a-input v-model="form.subtitleText" placeholder="Nhập phụ đề..." />
           </a-form-item>
         </a-col>
       </a-row>
@@ -279,8 +265,6 @@ export default {
         this.form = {
           projectId: d.projectId || projectId,
           projectName: d.projectName || "",
-          titleText: d.titleText || "",
-          subtitleText: d.subtitleText || "",
           projectBody: d.projectBody || "",
           isActive: d.isActive !== undefined ? d.isActive : true,
           languageCode: languageCode,
@@ -289,7 +273,7 @@ export default {
         this.selectedTagIds = rawTags
           .map((t) => (typeof t === "object" ? t.tagId ?? t.id : Number(t)))
           .filter(Boolean);
-        const fileBase = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+        const fileBase = process.env.NUXT_ENV_FILE_API_URL;
         const toFull = (url) => !url ? null : /^https?:\/\//i.test(url) ? url : fileBase.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
         this.thumbnailPreview = toFull(d.thumbnailUrl) || null;
         this.imagePreview = toFull(d.imageUrl) || null;
@@ -311,7 +295,7 @@ export default {
       this.selectedTagIds = this.selectedTagIds.filter((id) => id !== tagId);
     },
     defaultForm() {
-      return { projectName: "", titleText: "", subtitleText: "", projectBody: "", isActive: true, languageCode: "vi" };
+      return { projectName: "", projectBody: "", isActive: true, languageCode: "vi" };
     },
     async fetchTags() {
       this.tagsLoading = true;
@@ -424,8 +408,6 @@ export default {
       const fd = new FormData();
       fd.append("LanguageCode", this.form.languageCode || "vi");
       fd.append("ProjectName", this.form.projectName || "");
-      fd.append("TitleText", this.form.titleText || "");
-      fd.append("SubtitleText", this.form.subtitleText || "");
       this.selectedTagIds.forEach((id) => fd.append("ListTagId", id));
       if (this.thumbnailFile) fd.append("Thumbnail", this.thumbnailFile);
       if (this.imageFile) fd.append("image", this.imageFile);
@@ -443,8 +425,6 @@ export default {
               projectId: this.form.projectId,
               languageCode: this.form.languageCode || "vi",
               projectName: this.form.projectName || "",
-              titleText: this.form.titleText || "",
-              subtitleText: this.form.subtitleText || "",
               isActive: this.form.isActive,
             },
             this.thumbnailFile || null,

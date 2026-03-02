@@ -56,7 +56,7 @@
 import OurLeaderForm from "./components/OurLeaderForm.vue";
 import { getOurLeaders, getOurLeaderDetail, deleteOurLeader } from "../../../apis/general";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",

@@ -13,7 +13,7 @@
       <a-form-model-item label="Ngôn ngữ" prop="languageCode">
         <a-select v-model="form.languageCode">
           <a-select-option value="vi">Tiếng Việt</a-select-option>
-          <a-select-option value="en">English</a-select-option>
+          <a-select-option value="us">English</a-select-option>
         </a-select>
       </a-form-model-item>
 
@@ -71,7 +71,7 @@ import moment from "moment";
 import axios from "axios";
 import { createJob, updateJob, getCareerCategoryList } from "../../../../apis/interaction";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 function defaultForm(languageCode) {
   return { languageCode: languageCode || "vi", categoryId: undefined, position: "", yearsOfExperience: "", location: "", salary: "", startDate: null, endDate: null, status: 1, content: null, jobId: null };

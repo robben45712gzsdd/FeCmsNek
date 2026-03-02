@@ -8,15 +8,19 @@ Vue.use(VueI18n);
 export default ({ app }, inject) => {
   let userLocale = localStorage.getItem("selectedLanguage");
 
+  if (userLocale === "en") {
+    userLocale = "us";
+  }
+
   if (!userLocale) {
     const browserLang = navigator.language.toLowerCase();
-    userLocale = browserLang.startsWith("en") ? "en" : "vi";
+    userLocale = browserLang.startsWith("en") ? "us" : "vi";
   }
 
   const i18n = new VueI18n({
     locale: userLocale,
-    fallbackLocale: "en",
-    messages: { en, vi },
+    fallbackLocale: "us",
+    messages: { us: en, vi },
     silentTranslationWarn: true, 
     silentFallbackWarn: true, 
   });

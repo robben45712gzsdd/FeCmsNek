@@ -27,13 +27,13 @@
           <img
             v-else
             src="https://flagcdn.com/w20/gb.png"
-            alt="en"
+            alt="us"
           />
           <span>{{ currentLang.toUpperCase() }}</span>
           <a-icon type="down" />
         </a>
         <a-menu slot="overlay">
-          <a-menu-item key="en" @click="changeLanguage('en')">
+          <a-menu-item key="us" @click="changeLanguage('us')">
             🇬🇧 English
           </a-menu-item>
           <a-menu-item key="vi" @click="changeLanguage('vi')">
@@ -62,7 +62,7 @@ export default {
   },
   data() {
     return {
-      currentLang: this.$i18n.locale || "en",
+      currentLang: this.$i18n.locale || "us",
     };
   },
   computed: {
@@ -98,8 +98,9 @@ export default {
   mounted() {
     const savedLang = localStorage.getItem("selectedLanguage");
     if (savedLang) {
-      this.$i18n.locale = savedLang;
-      this.currentLang = savedLang;
+      const normalizedLang = savedLang === "en" ? "us" : savedLang;
+      this.$i18n.locale = normalizedLang;
+      this.currentLang = normalizedLang;
     }
   },
 };

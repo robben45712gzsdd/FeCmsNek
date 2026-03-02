@@ -55,7 +55,7 @@
 <script>
 import { createOurLeader, updateOurLeader } from "../../../../apis/general";
 
-const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL || "https://ldapiv2.neksolution.com";
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 function defaultForm() {
   return { leaderId: null, name: "", position: "", description: "", status: 1, imageUrl: null };
