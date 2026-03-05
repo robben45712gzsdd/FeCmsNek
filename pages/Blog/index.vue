@@ -77,7 +77,51 @@
           </template>
         </a-table>
       </a-tab-pane>
+
+      <a-tab-pane key="prompts" tab="Quản lý Prompt AI">
+        <div class="filter-bar">
+          <a-button type="primary" icon="plus" @click="openPromptModal(false)">Thêm Prompt</a-button>
+        </div>
+        <a-table :columns="promptColumns" :data-source="promptList" :loading="promptLoading" :pagination="promptPagination" row-key="contentPromptId" @change="onPromptTableChange">
+          <template #ord="text, record, index">{{ (promptPage - 1) * promptPageSize + index + 1 }}</template>
+          <template #prompt="text">
+            <span :title="text">{{ text && text.length > 120 ? text.substring(0, 120) + '...' : text }}</span>
+          </template>
+          <template #status="val">
+            <a-tag :color="val === 1 ? 'green' : 'red'">{{ val === 1 ? 'Hoạt động' : 'Ẩn' }}</a-tag>
+          </template>
+          <template #action="record">
+            <a-space>
+              <a-button size="small" type="primary" icon="edit" @click="openPromptModal(true, record)">Sửa</a-button>
+              <a-button size="small" type="danger" icon="delete" @click="confirmDeletePrompt(record)">Xóa</a-button>
+            </a-space>
+          </template>
+        </a-table>
+      </a-tab-pane>
     </a-tabs>
+
+    <!-- Modal Thêm/Sửa Prompt -->
+    <a-modal
+      :visible="promptModalVisible"
+      :title="promptIsEdit ? 'Chỉnh sửa Prompt' : 'Thêm Prompt mới'"
+      :confirm-loading="promptSaving"
+      ok-text="Lưu"
+      cancel-text="Hủy"
+      @ok="handlePromptSubmit"
+      @cancel="promptModalVisible = false"
+    >
+      <a-form layout="vertical">
+        <a-form-item label="Nội dung Prompt *">
+          <a-textarea v-model="promptForm.prompt" placeholder="Nhập nội dung prompt..." :auto-size="{ minRows: 3, maxRows: 8 }" />
+        </a-form-item>
+        <a-form-item v-if="promptIsEdit" label="Trạng thái">
+          <a-select v-model="promptForm.status" style="width:100%">
+            <a-select-option :value="1">Hoạt động</a-select-option>
+            <a-select-option :value="0">Ẩn</a-select-option>
+          </a-select>
+        </a-form-item>
+      </a-form>
+    </a-modal>
 
 
 
@@ -90,6 +134,7 @@
 
 <script>
 import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
+import { getListPromptCms, createPrompt, updatePrompt, deletePrompt, getDetailPrompt } from "../../apis/prompt";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
@@ -103,6 +148,10 @@ export default {
       genList: [], genLoading: false, genKeyword: "", genLangCode: "vi", genPage: 1, genPageSize: 10, genTotal: 0,
       previewRecord: null,
       generatingAI: false,
+      // Prompt management
+      promptList: [], promptLoading: false, promptPage: 1, promptPageSize: 10, promptTotal: 0,
+      promptModalVisible: false, promptIsEdit: false, promptSaving: false,
+      promptForm: { contentPromptId: null, prompt: "", status: 1 },
     };
   },
   computed: {
@@ -129,6 +178,15 @@ export default {
     },
     pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
     genPagination() { return { current: this.genPage, pageSize: this.genPageSize, total: this.genTotal, showSizeChanger: false }; },
+    promptColumns() {
+      return [
+        { title: "#", key: "ord", scopedSlots: { customRender: "ord" }, width: 55 },
+        { title: "Nội dung Prompt", dataIndex: "prompt", key: "prompt", scopedSlots: { customRender: "prompt" } },
+        { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 120 },
+        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 180 },
+      ];
+    },
+    promptPagination() { return { current: this.promptPage, pageSize: this.promptPageSize, total: this.promptTotal, showSizeChanger: false }; },
   },
   mounted() { this.fetchList(); },
   methods: {
@@ -136,7 +194,10 @@ export default {
       if (!url) return "";
       return /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
     },
-    onTabChange(tab) { if (tab === "generated" && !this.genList.length) this.fetchGenerated(); },
+    onTabChange(tab) {
+      if (tab === "generated" && !this.genList.length) this.fetchGenerated();
+      if (tab === "prompts" && !this.promptList.length) this.fetchPrompts();
+    },
     async fetchList() {
       this.loading = true;
       try {
@@ -215,6 +276,77 @@ export default {
         this.fetchGenerated();
       } catch { this.$message.error("Tạo bài AI thất bại, vui lòng thử lại!"); }
       finally { this.generatingAI = false; }
+    },
+    // Prompt management
+    async fetchPrompts() {
+      this.promptLoading = true;
+      try {
+        const res = await getListPromptCms({ currentPage: this.promptPage, recordPerPage: this.promptPageSize });
+        if (res && res.data) {
+          this.promptList = res.data.records || res.data.items || res.data || [];
+          this.promptTotal = res.data.totalRecord || res.data.total || 0;
+        } else { this.promptList = []; this.promptTotal = 0; }
+      } catch { this.$message.error("Không thể tải danh sách prompt!"); }
+      finally { this.promptLoading = false; }
+    },
+    onPromptTableChange(pag) { this.promptPage = pag.current; this.fetchPrompts(); },
+    openPromptModal(isEdit, record) {
+      this.promptIsEdit = isEdit;
+      if (isEdit && record) {
+        this.promptForm = {
+          contentPromptId: record.contentPromptId,
+          prompt: record.prompt || "",
+          status: record.status !== undefined ? record.status : 1,
+        };
+      } else {
+        this.promptForm = { contentPromptId: null, prompt: "", status: 1 };
+      }
+      this.promptModalVisible = true;
+    },
+    async handlePromptSubmit() {
+      if (!this.promptForm.prompt || !this.promptForm.prompt.trim()) {
+        this.$message.warning("Vui lòng nhập nội dung prompt!");
+        return;
+      }
+      this.promptSaving = true;
+      try {
+        let res;
+        if (this.promptIsEdit) {
+          res = await updatePrompt({
+            contentPromptId: this.promptForm.contentPromptId,
+            prompt: this.promptForm.prompt.trim(),
+            status: this.promptForm.status,
+          });
+        } else {
+          res = await createPrompt({ prompt: this.promptForm.prompt.trim() });
+        }
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.$message.success(this.promptIsEdit ? "Cập nhật prompt thành công!" : "Thêm prompt thành công!");
+          this.promptModalVisible = false;
+          this.fetchPrompts();
+        } else {
+          this.$message.error(res?.message || "Thao tác thất bại!");
+        }
+      } catch { this.$message.error("Có lỗi xảy ra, vui lòng thử lại!"); }
+      finally { this.promptSaving = false; }
+    },
+    confirmDeletePrompt(record) {
+      this.$confirm({
+        title: "Xác nhận xóa",
+        content: `Xóa prompt này?`,
+        okText: "Xóa", okType: "danger", cancelText: "Hủy",
+        onOk: async () => {
+          try {
+            const res = await deletePrompt(record.contentPromptId);
+            if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+              this.$message.success("Đã xóa prompt!");
+              this.fetchPrompts();
+            } else {
+              this.$message.error(res?.message || "Xóa thất bại!");
+            }
+          } catch { this.$message.error("Xóa prompt thất bại!"); }
+        },
+      });
     },
     formatDate(dateStr) {
       if (!dateStr) return "";

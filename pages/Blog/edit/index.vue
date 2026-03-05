@@ -69,6 +69,42 @@
             </div>
           </a-form-item>
 
+          <!-- Tạo nội dung bằng AI -->
+          <a-form-item label="Tạo nội dung bằng AI (tùy chọn)">
+            <div class="ai-generate-section">
+              <div class="ai-prompt-row">
+                <a-select
+                  v-model="selectedPromptId"
+                  placeholder="Chọn prompt có sẵn hoặc nhập tùy chỉnh..."
+                  style="flex:1"
+                  :loading="loadingPrompts"
+                  allow-clear
+                  @change="onPromptSelect"
+                >
+                  <a-select-option v-for="p in promptList" :key="p.contentPromptId" :value="p.contentPromptId">
+                    {{ p.prompt && p.prompt.length > 80 ? p.prompt.substring(0, 80) + '...' : p.prompt }}
+                  </a-select-option>
+                </a-select>
+                <a-button icon="reload" :loading="loadingPrompts" @click="fetchPrompts" title="Tải lại danh sách prompt" />
+              </div>
+              <a-textarea
+                v-model="customPrompt"
+                placeholder="Nhập prompt tùy chỉnh hoặc chỉnh sửa prompt đã chọn..."
+                :auto-size="{ minRows: 2, maxRows: 5 }"
+                style="margin-top:8px"
+              />
+              <div class="ai-actions">
+                <a-button type="primary" icon="robot" :loading="generatingAI" :disabled="!customPrompt" @click="handleGenerateAI">
+                  Tạo nội dung AI
+                </a-button>
+                <a-button v-if="customPrompt && !selectedPromptId" icon="save" @click="handleSavePrompt" :loading="savingPrompt">
+                  Lưu prompt
+                </a-button>
+                <span v-if="generatingAI" class="ai-hint"><a-icon type="loading" /> Đang tạo nội dung, vui lòng chờ...</span>
+              </div>
+            </div>
+          </a-form-item>
+
           <!-- Nội dung: chọn chế độ -->
           <a-form-item>
             <template #label>
@@ -128,6 +164,8 @@
 <script>
 import axios from "axios";
 import { getPostDetail, createPost, updatePost } from "../../../apis/blog";
+import { generateBlog } from "../../../apis/blog";
+import { getListPromptCms, createPrompt } from "../../../apis/prompt";
 import RichTextEditor from "@/components/RichTextEditor/index.vue";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
@@ -163,6 +201,13 @@ export default {
       contentPreviewUrl: null,
       contentMode: "editor",
       editorContent: "",
+      // AI Prompt
+      promptList: [],
+      loadingPrompts: false,
+      selectedPromptId: undefined,
+      customPrompt: "",
+      generatingAI: false,
+      savingPrompt: false,
     };
   },
   async mounted() {
@@ -173,10 +218,62 @@ export default {
       this.form.postId = id;
       await this.fetchDetail();
     }
+    this.fetchPrompts();
   },
   methods: {
     goBack() {
       this.$router.push("/Blog");
+    },
+    async fetchPrompts() {
+      this.loadingPrompts = true;
+      try {
+        const res = await getListPromptCms({ currentPage: 1, recordPerPage: 100 });
+        if (res && res.data) {
+          this.promptList = res.data.records || res.data.items || res.data || [];
+        }
+      } catch { /* ignore */ }
+      finally { this.loadingPrompts = false; }
+    },
+    onPromptSelect(val) {
+      if (!val) { this.customPrompt = ""; return; }
+      const found = this.promptList.find(p => p.contentPromptId === val);
+      if (found) this.customPrompt = found.prompt || "";
+    },
+    async handleSavePrompt() {
+      if (!this.customPrompt || !this.customPrompt.trim()) return;
+      this.savingPrompt = true;
+      try {
+        const res = await createPrompt({ prompt: this.customPrompt.trim() });
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.$message.success("Đã lưu prompt!");
+          this.fetchPrompts();
+        } else {
+          this.$message.error(res?.message || "Lưu prompt thất bại!");
+        }
+      } catch { this.$message.error("Có lỗi khi lưu prompt!"); }
+      finally { this.savingPrompt = false; }
+    },
+    async handleGenerateAI() {
+      if (!this.customPrompt || !this.customPrompt.trim()) {
+        this.$message.warning("Vui lòng nhập hoặc chọn prompt!");
+        return;
+      }
+      this.generatingAI = true;
+      try {
+        const res = await generateBlog();
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.$message.success("Tạo nội dung AI thành công!");
+          // Switch to editor mode to show generated content
+          this.contentMode = "editor";
+          // Reload the generated post list - the content may need to be fetched
+          if (res.data) {
+            this.editorContent = res.data;
+          }
+        } else {
+          this.$message.error(res?.message || "Tạo nội dung AI thất bại!");
+        }
+      } catch { this.$message.error("Tạo nội dung AI thất bại, vui lòng thử lại!"); }
+      finally { this.generatingAI = false; }
     },
     async fetchDetail() {
       if (!this.form.postId) return;
@@ -449,5 +546,26 @@ ${this.editorContent}
   color: #ef4444;
   font-size: 12px;
   margin-top: 2px;
+}
+.ai-generate-section {
+  background: linear-gradient(135deg, #f0f5ff 0%, #f5f3ff 100%);
+  border: 1px solid #d6e4ff;
+  border-radius: 12px;
+  padding: 16px;
+}
+.ai-prompt-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ai-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+.ai-hint {
+  font-size: 12px;
+  color: #6366f1;
 }
 </style>
