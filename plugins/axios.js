@@ -9,9 +9,9 @@ export default ({ app }, inject) => {
   axios.defaults.headers["Content-Type"] = "application/json";
 
   axios.interceptors.request.use((config) => {
-    const token = Cookies.get("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const accessToken = Cookies.get("accessToken");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   });
@@ -40,7 +40,8 @@ export default ({ app }, inject) => {
           centered: true,
           maskClosable: false,
           onOk() {
-            Cookies.remove("token");
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
             Cookies.remove("displayName");
             Vue.prototype.$isSessionExpired = false;
             window.location.href = "/login";

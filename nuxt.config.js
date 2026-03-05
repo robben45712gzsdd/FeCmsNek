@@ -36,6 +36,10 @@ export default {
 
   plugins: ["@/plugins/antd-ui", "@/plugins/i18n", "@/plugins/axios"],
 
+  router: {
+    middleware: ["auth"],
+  },
+
   modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
 
   axios: {

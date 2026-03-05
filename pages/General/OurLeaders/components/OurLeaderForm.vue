@@ -25,7 +25,16 @@
       </a-form-model-item>
 
       <a-form-model-item label="Mô tả" prop="description">
-        <a-textarea v-model="form.description" :rows="3" placeholder="Nhập mô tả" />
+        <client-only>
+          <editor
+            v-model="form.description"
+            :api-key="tinymceApiKey"
+            :init="editorInit"
+          />
+          <div slot="placeholder" class="editor-placeholder">
+            <a-spin tip="Đang tải editor..." />
+          </div>
+        </client-only>
       </a-form-model-item>
 
       <a-form-model-item label="Trạng thái" prop="status">
@@ -62,6 +71,12 @@ function defaultForm() {
 }
 
 export default {
+  components: {
+    editor: () =>
+      process.client
+        ? import("@tinymce/tinymce-vue").then((m) => m.default)
+        : Promise.resolve({ render: () => {} }),
+  },
   data() {
     return {
       visible: false,
@@ -70,6 +85,22 @@ export default {
       saving: false,
       photoFile: null,
       photoPreview: null,
+      tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
+      editorInit: {
+        height: 250,
+        menubar: false,
+        plugins: [
+          "advlist autolink lists link image charmap preview",
+          "searchreplace visualblocks code fullscreen",
+          "insertdatetime media table paste help wordcount",
+        ],
+        toolbar:
+          "undo redo | formatselect | bold italic underline | " +
+          "forecolor backcolor | alignleft aligncenter alignright | " +
+          "bullist numlist | link image | code | removeformat",
+        content_style:
+          "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.6; padding: 10px; }",
+      },
       rules: {
         name: [{ required: true, message: "Nhập họ tên!", trigger: "blur" }],
         position: [{ required: true, message: "Nhập chức vụ!", trigger: "blur" }],
@@ -152,4 +183,13 @@ export default {
 .upload-wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .img-preview { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 1px solid #e8e8e8; background: #f5f5f5; }
 .img-preview img { width: 100%; height: 100%; object-fit: cover; }
+.editor-placeholder {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
 </style>

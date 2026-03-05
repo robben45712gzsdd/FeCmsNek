@@ -52,10 +52,8 @@
             <a-menu-item key="1" @click="openEdit(record)">
               <a-icon type="edit" /> Chỉnh sửa
             </a-menu-item>
-            <a-menu-item key="2">
-              <nuxt-link :to="'/CaseStudyEditor?projectId=' + record.projectId">
-                <a-icon type="file-text" /> Mở Editor
-              </nuxt-link>
+            <a-menu-item key="2" @click="downloadHtml(record)" :disabled="!record.projectBody">
+              <a-icon type="download" /> Tải HTML
             </a-menu-item>
             <a-menu-item key="3" @click="confirmDelete(record)">
               <a-icon type="delete" style="color: #ff4d4f" />
@@ -66,37 +64,25 @@
       </template>
     </BoxTable>
 
-    <!-- Form thêm/sửa -->
-    <ProjectForm
-      :visible="showForm"
-      :isEdit="isEdit"
-      :record="selectedRecord"
-      @close="showForm = false"
-      @saved="fetchProjects"
-    />
+
   </div>
 </template>
 
 <script>
 import BoxTable from "../../components/BoxTable/index.vue";
-import ProjectForm from "./components/ProjectForm.vue";
-import { getProjectList, getProjectDetail, deleteProject } from "../../apis/projects";
+import { getProjectList, deleteProject } from "../../apis/projects";
 
 export default {
   layout: "adminLayout",
   middleware: "auth",
-  components: { BoxTable, ProjectForm },
+  components: { BoxTable },
   data() {
     return {
       projects: [],
       loading: false,
-      detailLoading: false,
       page: 1,
       pageSize: 10,
       total: 0,
-      showForm: false,
-      isEdit: false,
-      selectedRecord: null,
       baseImageUrl: process.env.NUXT_ENV_FILE_API_URL,
     };
   },
@@ -147,23 +133,10 @@ export default {
       this.fetchProjects();
     },
     openAdd() {
-      this.isEdit = false;
-      this.selectedRecord = null;
-      this.showForm = true;
+      this.$router.push({ path: '/Projects/edit', query: { lang: 'vi' } });
     },
-    async openEdit(record) {
-      this.detailLoading = true;
-      try {
-        const res = await getProjectDetail(record.projectId);
-        const detail = (res && res.data) ? res.data : record;
-        this.isEdit = true;
-        this.selectedRecord = detail;
-        this.showForm = true;
-      } catch {
-        this.$message.error("Không thể tải chi tiết dự án!");
-      } finally {
-        this.detailLoading = false;
-      }
+    openEdit(record) {
+      this.$router.push({ path: '/Projects/edit', query: { id: record.projectId, lang: 'vi' } });
     },
     confirmDelete(record) {
       this.$confirm({
@@ -192,6 +165,31 @@ export default {
         month: "2-digit",
         year: "numeric",
       });
+    },
+    async downloadHtml(record) {
+      if (!record.projectBody) {
+        this.$message.warning("Dự án này chưa có file HTML!");
+        return;
+      }
+      const fileUrl = /^https?:\/\//i.test(record.projectBody)
+        ? record.projectBody
+        : this.baseImageUrl.replace(/\/$/, '') + '/' + record.projectBody.replace(/^\//, '');
+      try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) throw new Error('Download failed');
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = (record.projectName || 'case-study') + '.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        this.$message.success("Tải file HTML thành công!");
+      } catch (err) {
+        this.$message.error("Không thể tải file HTML!");
+      }
     },
     onImgError(e) {
       e.target.style.display = "none";

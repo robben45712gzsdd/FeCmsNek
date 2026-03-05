@@ -33,14 +33,7 @@
       </template>
     </a-table>
 
-    <JobForm
-      :visible="showForm"
-      :is-edit="isEdit"
-      :record="selectedRecord"
-      :language-code="langCode"
-      @close="showForm = false"
-      @saved="fetchList"
-    />
+
 
     <a-modal
       :visible="!!previewHtml"
@@ -61,7 +54,6 @@
 
 <script>
 import axios from "axios";
-import JobForm from "./components/JobForm.vue";
 import { getJobCms, getJobDetailCms, deleteJob } from "../../../apis/interaction";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
@@ -69,11 +61,10 @@ const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 export default {
   layout: "adminLayout",
   middleware: "auth",
-  components: { JobForm },
   data() {
     return {
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
-      showForm: false, isEdit: false, selectedRecord: null, previewHtml: null,
+      previewHtml: null,
     };
   },
   computed: {
@@ -111,13 +102,11 @@ export default {
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },
-    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
-    async openEdit(record) {
-      try {
-        const res = await getJobDetailCms(this.langCode, record.jobId);
-        this.selectedRecord = res && res.data ? { ...res.data, jobId: record.jobId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
+    openAdd() {
+      this.$router.push({ path: '/Interaction/Jobs/edit', query: { lang: this.langCode } });
+    },
+    openEdit(record) {
+      this.$router.push({ path: '/Interaction/Jobs/edit', query: { id: record.jobId, lang: this.langCode } });
     },
     async openPreview(record) {
       try {

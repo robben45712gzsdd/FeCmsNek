@@ -108,43 +108,57 @@ export default {
 
 <style scoped>
 .app-header {
-  height: 60px;
-  background: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  height: 56px;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.6);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  gap: 20px;
-  border-radius: 18px;
-  box-shadow: 0 2px 6px #2553b91a;
+  padding: 0 24px;
+  gap: 16px;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(99,102,241,.06);
 }
 .header-left {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 .trigger {
   display: flex;
   cursor: pointer;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
+  color: #64748b;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s;
 }
-
+.trigger:hover {
+  background: #f0f4ff;
+  color: #6366f1;
+}
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
-
 .title-star {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+}
+.title-star .anticon {
+  color: #f59e0b;
 }
 .page-title {
   font-weight: 700;
   font-size: 16px;
+  color: #1e293b;
+  letter-spacing: -0.01em;
 }
 
 /* Dropdown ngôn ngữ */
@@ -153,23 +167,42 @@ export default {
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  color: #333;
+  color: #475569;
   font-weight: 500;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: all 0.2s;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
 }
 .lang-switch img {
-  width: 20px;
-  height: 14px;
+  width: 18px;
+  height: 13px;
   border-radius: 2px;
 }
 .lang-switch:hover {
-  color: #2553b9;
+  color: #6366f1;
+  border-color: #c7d2fe;
+  background: #f0f4ff;
 }
 
 .logout-btn {
-  border: none;
+  border: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
   display: flex;
   align-items: center;
-  
+  justify-content: center;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  color: #64748b !important;
+  transition: all 0.2s !important;
+  padding: 0 !important;
 }
-
+.logout-btn:hover {
+  border-color: #fca5a5 !important;
+  background: #fef2f2 !important;
+  color: #ef4444 !important;
+}
 </style>

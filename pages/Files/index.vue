@@ -217,61 +217,16 @@ export default {
 
 <style scoped>
 .file-page {
-  padding: 1rem;
-  color: #111827;
+  padding: 24px;
 }
 .title {
-  margin-bottom: 1rem;
+  font-size: 22px;
   font-weight: 700;
-  font-size: 1.125rem;
+  color: #1e293b;
+  margin-bottom: 16px;
 }
-.filter-form {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #eef2f6;
-}
-.button-actions {
-  display: flex;
-  padding: 20px 20px 20px 0px;
-  gap: 20px;
-}
-.form-row {
-  display: flex;
-  gap: 2.75rem;
-  align-items: flex-end;
-  margin-bottom: 0.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-}
-
-.form-group label {
+.bt-upload {
+  margin-bottom: 16px;
   font-weight: 600;
-  margin-bottom: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.tiny-input,
-.date-inputs input {
-  height: 36px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #d0d7dd;
-  background: #fff;
-  font-size: 0.95rem;
-  width: 220px;
-}
-.bt-upload{
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 150px;
-  height: 40px;
-  font-weight: 700;
-
 }
 </style>

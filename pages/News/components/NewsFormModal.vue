@@ -35,11 +35,16 @@
       </a-form-item>
 
       <a-form-item label="Nội dung chi tiết">
-        <a-textarea
-          v-model="form.content"
-          :auto-size="{ minRows: 6, maxRows: 12 }"
-          placeholder="Nhập nội dung bài viết (hỗ trợ HTML nhẹ)"
-        />
+        <client-only>
+          <editor
+            v-model="form.content"
+            :api-key="tinymceApiKey"
+            :init="editorInit"
+          />
+          <div slot="placeholder" class="editor-placeholder">
+            <a-spin tip="Đang tải editor..." />
+          </div>
+        </client-only>
       </a-form-item>
     </a-form>
 
@@ -58,6 +63,12 @@
 
 <script>
 export default {
+  components: {
+    editor: () =>
+      process.client
+        ? import("@tinymce/tinymce-vue").then((m) => m.default)
+        : Promise.resolve({ render: () => {} }),
+  },
   props: {
     visible: Boolean,
     item: Object,
@@ -72,6 +83,22 @@ export default {
         content: "",
       },
       loading: false,
+      tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
+      editorInit: {
+        height: 350,
+        menubar: false,
+        plugins: [
+          "advlist autolink lists link image charmap preview",
+          "searchreplace visualblocks code fullscreen",
+          "insertdatetime media table paste help wordcount",
+        ],
+        toolbar:
+          "undo redo | formatselect | bold italic underline | " +
+          "forecolor backcolor | alignleft aligncenter alignright | " +
+          "bullist numlist | link image table | code fullscreen | removeformat",
+        content_style:
+          "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.7; padding: 12px; }",
+      },
     };
   },
   computed: {
@@ -124,31 +151,25 @@ export default {
   flex-direction: column;
   gap: 8px;
 }
-
 .preview-thumb {
   width: 100%;
   max-height: 180px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #eee;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
-
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
-
-/* Giao diện input */
-:deep(.ant-input),
-:deep(.ant-input-textarea) {
-  border-radius: 6px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .modal-footer {
-    flex-direction: column;
-  }
+.editor-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
 }
 </style>

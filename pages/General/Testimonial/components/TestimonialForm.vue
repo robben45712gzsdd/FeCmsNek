@@ -32,7 +32,16 @@
       </a-form-model-item>
 
       <a-form-model-item label="Nội dung" prop="content">
-        <a-textarea v-model="form.content" :rows="4" placeholder="Nhập nội dung đánh giá" />
+        <client-only>
+          <editor
+            v-model="form.content"
+            :api-key="tinymceApiKey"
+            :init="editorInit"
+          />
+          <div slot="placeholder" class="editor-placeholder">
+            <a-spin tip="Đang tải editor..." />
+          </div>
+        </client-only>
       </a-form-model-item>
 
       <a-form-model-item label="Trạng thái" prop="status">
@@ -60,6 +69,12 @@ function defaultForm(languageCode) {
 }
 
 export default {
+  components: {
+    editor: () =>
+      process.client
+        ? import("@tinymce/tinymce-vue").then((m) => m.default)
+        : Promise.resolve({ render: () => {} }),
+  },
   props: {
     languageCode: { type: String, default: "vi" },
   },
@@ -69,6 +84,22 @@ export default {
       isEdit: false,
       form: defaultForm(this.languageCode),
       saving: false,
+      tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
+      editorInit: {
+        height: 250,
+        menubar: false,
+        plugins: [
+          "advlist autolink lists link image charmap preview",
+          "searchreplace visualblocks code fullscreen",
+          "insertdatetime media table paste help wordcount",
+        ],
+        toolbar:
+          "undo redo | formatselect | bold italic underline | " +
+          "forecolor backcolor | alignleft aligncenter alignright | " +
+          "bullist numlist | link image | code | removeformat",
+        content_style:
+          "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.6; padding: 10px; }",
+      },
       rules: {
         name: [{ required: true, message: "Nhập họ tên!", trigger: "blur" }],
         content: [{ required: true, message: "Nhập nội dung đánh giá!", trigger: "blur" }],
@@ -133,3 +164,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.editor-placeholder {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+</style>

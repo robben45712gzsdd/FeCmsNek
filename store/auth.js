@@ -4,14 +4,16 @@ const expiredTimeToken = 8;
 
 export default {
   state: () => ({
-    isLoggedIn: !!Cookies.get("token"),
-    token: Cookies.get("token") || null,
+    isLoggedIn: !!Cookies.get("accessToken"),
+    accessToken: Cookies.get("accessToken") || null,
+    refreshToken: Cookies.get("refreshToken") || null,
     displayName: Cookies.get("displayName") || null,
   }),
   // Getters
   getters: {
     isLoggedIn: (state) => state.isLoggedIn,
-    token: (state) => state.token,
+    accessToken: (state) => state.accessToken,
+    refreshToken: (state) => state.refreshToken,
     displayName: (state) => state.displayName,
   },
   // Mutations
@@ -19,8 +21,11 @@ export default {
     setIsLoggedIn(state, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
     },
-    setToken(state, token) {
-      state.token = token;
+    setAccessToken(state, accessToken) {
+      state.accessToken = accessToken;
+    },
+    setRefreshToken(state, refreshToken) {
+      state.refreshToken = refreshToken;
     },
     setDisplayName(state, displayName) {
       state.displayName = displayName;
@@ -28,38 +33,44 @@ export default {
   },
   // Actions
   actions: {
-    login({ commit }, { token, displayName }) {
-      // Cập nhật state
+    login({ commit }, { accessToken, refreshToken, displayName }) {
       commit("setIsLoggedIn", true);
-      commit("setToken", token);
+      commit("setAccessToken", accessToken);
+      commit("setRefreshToken", refreshToken);
       commit("setDisplayName", displayName);
 
       // Lưu cookies (thời hạn 8 ngày)
-      Cookies.set("token", token, { expires: expiredTimeToken });
+      Cookies.set("accessToken", accessToken, { expires: expiredTimeToken });
+      Cookies.set("refreshToken", refreshToken, { expires: expiredTimeToken });
       Cookies.set("displayName", displayName, { expires: expiredTimeToken });
 
-      return { token, displayName } 
+      return { accessToken, refreshToken, displayName };
     },
 
     logout({ commit }) {
       commit("setIsLoggedIn", false);
-      commit("setToken", null);
+      commit("setAccessToken", null);
+      commit("setRefreshToken", null);
       commit("setDisplayName", null);
 
       // Xóa cookies
-      Cookies.remove("token");
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
       Cookies.remove("displayName");
     },
 
     initAuth({ commit }) {
-      const token = Cookies.get("token");
+      const accessToken = Cookies.get("accessToken");
+      const refreshToken = Cookies.get("refreshToken");
       const displayName = Cookies.get("displayName");
 
-      if (token) {
+      if (accessToken) {
         commit("setIsLoggedIn", true);
-        commit("setToken", token);
+        commit("setAccessToken", accessToken);
       }
-
+      if (refreshToken) {
+        commit("setRefreshToken", refreshToken);
+      }
       if (displayName) {
         commit("setDisplayName", displayName);
       }

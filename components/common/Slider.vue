@@ -9,20 +9,10 @@
     <div class="logo" :class="{ collapsed }">
       <div class="brand">
         <a-avatar style="background-color: #4dabf7" icon="user" />
-        <span v-if="!collapsed" class="brand-title">{{ accountName }}</span>
+        <span v-if="!collapsed" class="brand-title">{{ 'Admin' }}</span>
       </div>
     </div>
-    <div class="balance-container">
-      <p class="balance" :class="{ collapsed }">
-        {{ $t("balance") }}: {{ formattedBalance }}
-        <a-icon
-          type="sync"
-          class="reload-icon"
-          :class="{ spinning: isReloading }"
-          @click="reloadBalance"
-        />
-      </p>
-    </div>
+ 
 
     <a-menu
       theme="light"
@@ -30,12 +20,6 @@
       :selectedKeys="localSelectedKeys"
       @select="onSelect"
     >
-      <a-menu-item key="8">
-        <nuxt-link to="/case-study-editor">
-          <a-icon type="file-text" />
-          <span>{{ $t("caseStudyEditor") }}</span>
-        </nuxt-link>
-      </a-menu-item>
       <a-menu-item key="9">
         <nuxt-link to="/Projects">
           <a-icon type="project" />
@@ -109,8 +93,6 @@
 </template>
 
 <script>
-import { getAccountDetail } from "../../apis/account";
-
 export default {
   name: "Sider",
   props: {
@@ -120,13 +102,10 @@ export default {
   data() {
     return {
       localSelectedKeys: this.selectedKeys,
-      accountName: "Loading...",
-      balance: 0,
-      isReloading: false,
+      accountName: "Admin",
     };
   },
   mounted() {
-    this.loadAccountDetail();
   },
   watch: {
     selectedKeys(newVal) {
@@ -134,35 +113,9 @@ export default {
     },
   },
   methods: {
-    loadAccountDetail() {
-      return getAccountDetail()
-        .then((res) => {
-          if (res && res.data) {
-            this.accountName =
-              res.data.displayName || res.data.customerName || "Admin";
-            this.balance = res.data.wallet || 0;
-          } else {
-            this.accountName = "Admin Portal";
-          }
-        })
-        .catch(() => {
-          this.accountName = "Admin Portal";
-          this.$message.error(this.$t("errorOccurred"));
-        });
-    },
+  
 
-    reloadBalance() {
-      if (this.isReloading) return; 
-      this.isReloading = true;
-
-      this.loadAccountDetail().finally(() => {
-        
-        setTimeout(() => {
-          this.isReloading = false;
-        }, 2000);
-      });
-    },
-
+ 
     onSelect({ key }) {
       this.localSelectedKeys = [key];
       this.$emit("update:selectedKeys", [key]);
@@ -173,24 +126,22 @@ export default {
       localStorage.setItem("selectedLanguage", lang);
     },
   },
-
-  computed: {
-    formattedBalance() {
-      return this.balance.toLocaleString();
-    },
-  },
 };
 </script>
 
 <style scoped>
 .custom-sider {
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 2px 6px #2553b91a;
+  background: rgba(255,255,255,.9) !important;
+  backdrop-filter: blur(12px);
+  border-radius: 20px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(99,102,241,.06);
+  margin: 16px 0 16px 16px;
+  border: 1px solid rgba(255,255,255,.6);
+  overflow: hidden;
 }
 .logo {
-  height: 64px;
-  margin: 16px 16px 0px 16px;
+  height: 60px;
+  margin: 14px 16px 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -198,53 +149,67 @@ export default {
   transition: all 0.3s ease;
 }
 .logo.collapsed {
-  display: flex;
-  align-items: center;
   justify-content: center;
-}
-.balance {
-  padding: 0px 20px 0px 20px;
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.balance.collapsed {
-  display: none;
-}
-.reload-icon {
-  cursor: pointer;
-
-  transition: transform 0.3s ease;
-}
-
-/* Xoay đúng 5 vòng trong 2s */
-.spinning {
-  animation: spin 1s linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(600deg); /* 360 * 5 */
-  }
 }
 
 .brand {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
-  padding: 0 5px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #2553b9;
+  gap: 12px;
+  padding: 0 4px;
+  font-weight: 800;
+  font-size: 17px;
+  color: #6366f1;
 }
 .brand-title {
-  color: #2553b9;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Menu styling */
+.custom-sider >>> .ant-menu {
+  background: transparent !important;
+  border-right: none !important;
+  padding: 0 8px;
+}
+.custom-sider >>> .ant-menu-item {
+  border-radius: 10px !important;
+  margin: 2px 0 !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+.custom-sider >>> .ant-menu-item:hover {
+  background: #f0f4ff !important;
+  color: #6366f1 !important;
+}
+.custom-sider >>> .ant-menu-item-selected {
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff) !important;
+  color: #6366f1 !important;
+  font-weight: 600 !important;
+}
+.custom-sider >>> .ant-menu-item-selected::after {
+  display: none !important;
+}
+.custom-sider >>> .ant-menu-submenu-title {
+  border-radius: 10px !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+  height: 40px !important;
+  line-height: 40px !important;
+}
+.custom-sider >>> .ant-menu-submenu-title:hover {
+  color: #6366f1 !important;
+}
+.custom-sider >>> .ant-menu-item a {
+  color: inherit !important;
+}
+.custom-sider >>> .ant-menu-item .anticon {
+  font-size: 16px !important;
 }
 </style>

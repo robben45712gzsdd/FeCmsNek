@@ -1,6 +1,6 @@
 import axios from "axios";
 export function login(body) {
-  const url = "/cms/login";
+  const url = "/api/Auth/Login";
   return new Promise((resolve, reject) => {
     axios
       .post(url, body)

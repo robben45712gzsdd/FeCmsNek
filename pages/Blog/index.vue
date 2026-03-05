@@ -79,14 +79,7 @@
       </a-tab-pane>
     </a-tabs>
 
-    <BlogForm
-      :visible="showForm"
-      :is-edit="isEdit"
-      :record="selectedRecord"
-      :language-code="langCode"
-      @close="showForm = false"
-      @saved="activeTab === 'generated' ? fetchGenerated() : fetchList()"
-    />
+
 
     <a-modal :visible="!!previewRecord" title="Xem nội dung bài viết" width="900px" :footer="null" @cancel="previewRecord = null">
       <iframe v-if="previewRecord && previewRecord.contentUrl" :src="previewRecord.contentUrl" style="width:100%;height:70vh;border:none;border-radius:6px;" />
@@ -96,7 +89,6 @@
 </template>
 
 <script>
-import BlogForm from "./components/BlogForm.vue";
 import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
@@ -104,13 +96,12 @@ const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 export default {
   layout: "adminLayout",
   middleware: "auth",
-  components: { BlogForm },
   data() {
     return {
       activeTab: "posts",
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
       genList: [], genLoading: false, genKeyword: "", genLangCode: "vi", genPage: 1, genPageSize: 10, genTotal: 0,
-      showForm: false, isEdit: false, selectedRecord: null, previewRecord: null,
+      previewRecord: null,
       generatingAI: false,
     };
   },
@@ -159,13 +150,11 @@ export default {
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },
-    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
-    async openEdit(record) {
-      try {
-        const res = await getPostDetail(record.postId, this.langCode);
-        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
+    openAdd() {
+      this.$router.push({ path: '/Blog/edit', query: { lang: this.langCode } });
+    },
+    openEdit(record) {
+      this.$router.push({ path: '/Blog/edit', query: { id: record.postId, lang: this.langCode } });
     },
     async fetchGenerated() {
       this.genLoading = true;
@@ -180,12 +169,8 @@ export default {
       finally { this.genLoading = false; }
     },
     onGenTableChange(pag) { this.genPage = pag.current; this.fetchGenerated(); },
-    async openEditGen(record) {
-      try {
-        const res = await getPostDetail(record.postId, this.genLangCode);
-        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
+    openEditGen(record) {
+      this.$router.push({ path: '/Blog/edit', query: { id: record.postId, lang: this.genLangCode } });
     },
     async approvePost(record, isAccepted) {
       try {
@@ -241,11 +226,41 @@ export default {
 </script>
 
 <style scoped>
-.blog-page { padding: 24px; }
-.blog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.title { font-size: 22px; font-weight: 600; color: #1e293b; margin: 0; }
-.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-.img-cell { width: 72px; height: 48px; overflow: hidden; border-radius: 6px; background: #f0f0f0; }
+.blog-page { padding: 0; }
+.blog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.img-cell {
+  width: 64px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f0f4ff, #faf5ff);
+}
 .post-img { width: 100%; height: 100%; object-fit: cover; }
-.no-img { color: #aaa; font-size: 12px; display: flex; align-items: center; justify-content: center; height: 100%; }
+.no-img {
+  color: #c7d2fe;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 </style>

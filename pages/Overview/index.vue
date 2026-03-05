@@ -166,26 +166,30 @@ export default {
 
 <style scoped>
 .dashboard {
-  padding: 20px;
+  padding: 24px;
 }
 .title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #1e293b;
+  letter-spacing: -0.02em;
 }
 .filter-section {
   margin-bottom: 20px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 14px 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.04);
 }
 .filter-title {
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  color: #333;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .filter-row {
   display: flex;
@@ -196,49 +200,83 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .negative {
-  color: #ff4d4f; 
+  color: #ef4444 !important;
 }
 
 .stat-card {
-  padding: 20px;
-  border-radius: 12px;
-  color: #000;
-  background: #f8f9fa;
+  padding: 22px 24px;
+  border-radius: 16px;
+  color: #1e293b;
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  transition: all 0.2s ease;
+}
+.stat-card:hover {
+  box-shadow: 0 4px 16px rgba(99,102,241,0.08);
+  transform: translateY(-2px);
 }
 .stat-card p {
   margin: 0;
-  font-size: 14px;
-  color: #333;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .stat-card h3 {
-  margin: 5px 0 0;
-  font-size: 22px;
-  font-weight: 600;
+  margin: 8px 0 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 .deposit {
-  background: #4dabf7;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.25);
 }
+.deposit p { color: rgba(255,255,255,0.8); }
+.deposit h3 { color: #fff; }
+
 .withdraw {
-  background: #a5c0d6;
+  background: linear-gradient(135deg, #64748b, #94a3b8);
   color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(100,116,139,0.2);
 }
+.withdraw p { color: rgba(255,255,255,0.8); }
+.withdraw h3 { color: #fff; }
+
 .balance {
-  background: #ff6b81;
+  background: linear-gradient(135deg, #f43f5e, #fb7185);
   color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(244,63,94,0.25);
 }
+.balance p { color: rgba(255,255,255,0.8); }
+.balance h3 { color: #fff; }
+
 .win {
-  background: #d0f0ff;
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+  border-color: #bbf7d0;
 }
+.win h3 { color: #059669; }
+
 .loss {
-  background: #e9eff5;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-color: #e2e8f0;
 }
+.loss h3 { color: #475569; }
+
 .profit {
-  background: #e0f7ff;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-color: #bfdbfe;
 }
+.profit h3 { color: #2563eb; }
 </style>
 
 
