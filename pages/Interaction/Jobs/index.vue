@@ -75,7 +75,7 @@ export default {
         { title: "Vị trí", dataIndex: "position", key: "position", ellipsis: true },
         { title: "Địa điểm", dataIndex: "location", key: "location" },
         { title: "Lương", dataIndex: "salary", key: "salary" },
-        { title: "Kinh nghiệm", dataIndex: "yearsOfExperience", key: "yearsOfExperience", width: 130 },
+        { title: "Kinh nghiệm", dataIndex: "YearOfExperience", key: "YearOfExperience", width: 130 },
         { title: "Ngày", dataIndex: "date", key: "date", width: 100 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
         { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },

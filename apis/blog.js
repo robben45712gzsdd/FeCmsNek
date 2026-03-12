@@ -75,10 +75,10 @@ export function changeApprovalStatus(req) {
   });
 }
 
-export function generateBlog() {
+export function generateBlog(prompt) {
   return new Promise((resolve, reject) => {
     axios
-      .post("/api/Service")
+      .post("/api/Service/GenerateBlog", { prompt })
       .then((res) => resolve(res.data))
       .catch((err) => reject(err));
   });

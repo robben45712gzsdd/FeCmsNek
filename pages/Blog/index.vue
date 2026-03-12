@@ -48,7 +48,7 @@
             <a-select-option value="vi">Tiếng Việt</a-select-option>
             <a-select-option value="us">English</a-select-option>
           </a-select>
-          <a-button type="primary" :loading="generatingAI" icon="robot" @click="handleGenerateBlog">Tạo bài AI</a-button>
+          <a-button type="primary" icon="robot" @click="openAIModal">Tạo bài AI</a-button>
         </div>
         <a-table :columns="genColumns" :data-source="genList" :loading="genLoading" :pagination="genPagination" row-key="postId" @change="onGenTableChange">
           <template #imageUrl="text">
@@ -123,6 +123,54 @@
       </a-form>
     </a-modal>
 
+    <!-- Modal Tạo bài viết AI -->
+    <a-modal
+      :visible="aiModalVisible"
+      title="Tạo bài viết bằng AI"
+      width="800px"
+      :footer="null"
+      :mask-closable="false"
+      @cancel="closeAIModal"
+    >
+      <!-- Bước 1: Chọn / nhập prompt -->
+      <div v-if="!aiResult">
+        <a-form layout="vertical">
+          <a-form-item label="Chọn Prompt có sẵn">
+            <a-select
+              v-model="aiSelectedPromptId"
+              placeholder="-- Chọn prompt đã lưu --"
+              style="width:100%"
+              :loading="aiLoadingPrompts"
+              allow-clear
+              @change="onAIPromptSelect"
+            >
+              <a-select-option v-for="p in aiPromptList" :key="p.contentPromptId" :value="p.contentPromptId">
+                {{ p.prompt && p.prompt.length > 100 ? p.prompt.substring(0, 100) + '...' : p.prompt }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item label="Hoặc nhập Prompt mới / chỉnh sửa">
+            <a-textarea
+              v-model="aiPromptText"
+              placeholder="Nhập nội dung prompt để AI tạo bài viết..."
+              :auto-size="{ minRows: 3, maxRows: 6 }"
+            />
+          </a-form-item>
+          <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+            <a-button type="primary" icon="robot" :loading="aiGenerating" :disabled="!aiPromptText" @click="handleAIGenerate">
+              Tạo bài viết
+            </a-button>
+          </div>
+        </a-form>
+      </div>
+
+      <!-- Bước 2: Preview kết quả -->
+      <div v-else>
+        <div class="ai-result-label">Kết quả AI tạo:</div>
+        <div class="ai-result-preview" v-html="aiResult"></div>
+      </div>
+    </a-modal>
+
 
 
     <a-modal :visible="!!previewRecord" title="Xem nội dung bài viết" width="900px" :footer="null" @cancel="previewRecord = null">
@@ -147,7 +195,14 @@ export default {
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
       genList: [], genLoading: false, genKeyword: "", genLangCode: "vi", genPage: 1, genPageSize: 10, genTotal: 0,
       previewRecord: null,
-      generatingAI: false,
+      // AI Modal
+      aiModalVisible: false,
+      aiPromptList: [],
+      aiLoadingPrompts: false,
+      aiSelectedPromptId: undefined,
+      aiPromptText: "",
+      aiGenerating: false,
+      aiResult: null,
       // Prompt management
       promptList: [], promptLoading: false, promptPage: 1, promptPageSize: 10, promptTotal: 0,
       promptModalVisible: false, promptIsEdit: false, promptSaving: false,
@@ -264,18 +319,57 @@ export default {
         },
       });
     },
-    async handleGenerateBlog() {
-      this.generatingAI = true;
+    // === AI Modal ===
+    async openAIModal() {
+      this.aiModalVisible = true;
+      this.aiResult = null;
+      this.aiPromptText = "";
+      this.aiSelectedPromptId = undefined;
+      this.fetchAIPrompts();
+    },
+    closeAIModal() {
+      this.aiModalVisible = false;
+      this.aiResult = null;
+      this.aiPromptText = "";
+      this.aiSelectedPromptId = undefined;
+    },
+    async fetchAIPrompts() {
+      this.aiLoadingPrompts = true;
       try {
-        const res = await generateBlog();
-        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
-          this.$message.success("Tạo bài AI thành công!");
-        } else {
-          this.$message.success("Tạo bài AI thành công!");
+        const res = await getListPromptCms({ currentPage: 1, recordPerPage: 100 });
+        if (res && res.data) {
+          this.aiPromptList = res.data.records || res.data.items || res.data || [];
         }
-        this.fetchGenerated();
+      } catch { /* ignore */ }
+      finally { this.aiLoadingPrompts = false; }
+    },
+    onAIPromptSelect(val) {
+      if (!val) { this.aiPromptText = ""; return; }
+      const found = this.aiPromptList.find(p => p.contentPromptId === val);
+      if (found) this.aiPromptText = found.prompt || "";
+    },
+    async handleAIGenerate() {
+      if (!this.aiPromptText || !this.aiPromptText.trim()) {
+        this.$message.warning("Vui lòng nhập hoặc chọn prompt!");
+        return;
+      }
+      this.aiGenerating = true;
+      this.aiResult = null;
+      try {
+        const res = await generateBlog(this.aiPromptText.trim());
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.aiResult = res.data || "";
+          if (!this.aiResult) {
+            this.$message.warning("AI không trả về nội dung!");
+          } else {
+            this.$message.success("Đã tạo và lưu bài viết thành công!");
+            this.fetchGenerated();
+          }
+        } else {
+          this.$message.error(res?.message || "Tạo bài AI thất bại!");
+        }
       } catch { this.$message.error("Tạo bài AI thất bại, vui lòng thử lại!"); }
-      finally { this.generatingAI = false; }
+      finally { this.aiGenerating = false; }
     },
     // Prompt management
     async fetchPrompts() {
@@ -395,4 +489,24 @@ export default {
   justify-content: center;
   height: 100%;
 }
+.ai-result-label {
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.ai-result-preview {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  max-height: 50vh;
+  overflow-y: auto;
+  background: #fafbfc;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #334155;
+}
+.ai-result-preview h1, .ai-result-preview h2, .ai-result-preview h3 { color: #0f172a; margin: 16px 0 8px; }
+.ai-result-preview p { margin: 8px 0; }
+.ai-result-preview img { max-width: 100%; border-radius: 8px; }
 </style>

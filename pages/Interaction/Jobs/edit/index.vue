@@ -37,8 +37,8 @@
           <!-- Row 2 -->
           <a-row :gutter="20">
             <a-col :span="8">
-              <a-form-model-item label="Kinh nghiệm" prop="yearsOfExperience">
-                <a-input v-model="form.yearsOfExperience" placeholder="VD: 2 năm" />
+              <a-form-model-item label="Kinh nghiệm" prop="YearOfExperience">
+                <a-input v-model="form.YearOfExperience" placeholder="VD: 2 năm" />
               </a-form-model-item>
             </a-col>
             <a-col :span="8">
@@ -165,7 +165,7 @@ export default {
         languageCode: "vi",
         categoryId: undefined,
         position: "",
-        yearsOfExperience: "",
+        YearOfExperience: "",
         location: "",
         salary: "",
         startDate: null,
@@ -222,7 +222,7 @@ export default {
             jobId: this.form.jobId,
             categoryId: r.categoryId || undefined,
             position: r.position || "",
-            yearsOfExperience: r.yearsOfExperience || "",
+            YearOfExperience: r.YearOfExperience || "",
             location: r.location || "",
             salary: r.salary || "",
             startDate: parseDate(r.startDate),
@@ -373,16 +373,16 @@ ${this.jdEditorContent}
           if (this.isEdit) {
             await updateJob(
               {
-                languageCode: this.form.languageCode,
-                jobId: this.form.jobId,
-                categoryId: this.form.categoryId,
+                LanguageCode: this.form.languageCode,
+                JobId: this.form.jobId,
+                CategoryId: this.form.categoryId,
                 position: this.form.position,
-                yearsOfExperience: this.form.yearsOfExperience,
-                location: this.form.location,
-                salary: this.form.salary,
-                startDate: toISO(this.form.startDate),
-                endDate: toISO(this.form.endDate),
-                status: this.form.status,
+                YearOfExperience: this.form.YearOfExperience,
+                Location: this.form.location,
+                Salary: this.form.salary,
+                StartDate: toISO(this.form.startDate),
+                EndDate: toISO(this.form.endDate),
+                Status: this.form.status,
               },
               finalJdFile
             );
@@ -393,7 +393,7 @@ ${this.jdEditorContent}
                 languageCode: this.form.languageCode,
                 categoryId: this.form.categoryId,
                 position: this.form.position,
-                yearsOfExperience: this.form.yearsOfExperience,
+                YearOfExperience: this.form.YearOfExperience,
                 location: this.form.location,
                 salary: this.form.salary,
                 startDate: toISO(this.form.startDate),

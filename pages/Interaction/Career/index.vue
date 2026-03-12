@@ -49,7 +49,7 @@
               <div class="job-tags">
                 <span v-if="job.location" class="job-tag"><a-icon type="environment" /> {{ job.location }}</span>
                 <span v-if="job.salary" class="job-tag"><a-icon type="dollar" /> {{ job.salary }}</span>
-                <span v-if="job.yearsOfExperience" class="job-tag"><a-icon type="clock-circle" /> {{ job.yearsOfExperience }}</span>
+                <span v-if="job.YearOfExperience" class="job-tag"><a-icon type="clock-circle" /> {{ job.YearOfExperience }}</span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
           <div class="job-info-row">
             <span v-if="activeJob.location" class="job-info-item"><a-icon type="environment" /> {{ activeJob.location }}</span>
             <span v-if="activeJob.salary" class="job-info-item"><a-icon type="dollar" /> {{ activeJob.salary }}</span>
-            <span v-if="activeJob.yearsOfExperience" class="job-info-item"><a-icon type="clock-circle" /> {{ activeJob.yearsOfExperience }}</span>
+            <span v-if="activeJob.YearOfExperience" class="job-info-item"><a-icon type="clock-circle" /> {{ activeJob.YearOfExperience }}</span>
             <span class="job-info-item count-badge"><a-icon type="team" /> {{ total }} ứng viên</span>
           </div>
         </div>

@@ -36,8 +36,8 @@
           </a-form-model-item>
         </a-col>
         <a-col :span="12">
-          <a-form-model-item label="Kinh nghiệm" prop="yearsOfExperience">
-            <a-input v-model="form.yearsOfExperience" placeholder="VD: 2 năm" />
+          <a-form-model-item label="Kinh nghiệm" prop="YearOfExperience">
+            <a-input v-model="form.YearOfExperience" placeholder="VD: 2 năm" />
           </a-form-model-item>
         </a-col>
       </a-row>
@@ -136,7 +136,7 @@ function defaultForm(languageCode) {
     languageCode: languageCode || "vi",
     categoryId: undefined,
     position: "",
-    yearsOfExperience: "",
+    YearOfExperience: "",
     location: "",
     salary: "",
     startDate: null,
@@ -189,7 +189,7 @@ export default {
             jobId: r.jobId,
             categoryId: r.categoryId || undefined,
             position: r.position || "",
-            yearsOfExperience: r.yearsOfExperience || "",
+            YearOfExperience: r.YearOfExperience || "",
             location: r.location || "",
             salary: r.salary || "",
             startDate: parseDate(r.startDate),
@@ -312,7 +312,7 @@ ${this.jdEditorContent}
               jobId: this.form.jobId,
               categoryId: this.form.categoryId,
               position: this.form.position,
-              yearsOfExperience: this.form.yearsOfExperience,
+              YearOfExperience: this.form.YearOfExperience,
               location: this.form.location,
               salary: this.form.salary,
               startDate: toISO(this.form.startDate),
@@ -325,7 +325,7 @@ ${this.jdEditorContent}
               languageCode: this.form.languageCode,
               categoryId: this.form.categoryId,
               position: this.form.position,
-              yearsOfExperience: this.form.yearsOfExperience,
+              YearOfExperience: this.form.YearOfExperience,
               location: this.form.location,
               salary: this.form.salary,
               startDate: toISO(this.form.startDate),
