@@ -266,8 +266,7 @@ export default {
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; color: #334155; padding: 40px 24px; max-width: 800px; margin: 0 auto; }
-    img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; }
+    body { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; color: #334155; padding: 40px 24px; margin: 0 auto; }
     a { color: #6366f1; }
     h1, h2, h3 { color: #0f172a; margin: 24px 0 12px; }
     table { border-collapse: collapse; width: 100%; margin: 16px 0; }
