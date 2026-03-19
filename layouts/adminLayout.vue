@@ -1,6 +1,6 @@
 ﻿<template>
-  <div style="padding: 20px; background: #F0F5F9; min-height: 100vh">
-    <a-layout style="min-height: 100vh">
+  <div style="padding-left: 20px; padding-right: 20px; padding-top: 20px; background: #F0F5F9; min-height: calc(100vh - 20px)">
+    <a-layout style="min-height: calc(100vh - 20px)">
       <!-- Sidebar -->
       <Sider :collapsed="collapsed" :selectedKeys="selectedKeys"  />
       <!-- Main -->
@@ -8,7 +8,7 @@
         <div style="padding-left: 20px">
           <Header :collapsed="collapsed" @toggle="collapsed = !collapsed" />
         </div>
-        <div style="padding-left: 20px">
+        <div class="scrollable-content" style="padding-left: 20px">
           <a-layout-content
             :style="{
               margin: '14px 0px 0 0px',
@@ -42,3 +42,10 @@ export default {
   computed: {}
 };
 </script>
+
+<style scoped>
+.scrollable-content {
+  max-height: calc(100vh - 20px);
+  overflow-y: auto;
+}
+</style>

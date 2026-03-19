@@ -99,10 +99,10 @@
                   <a-icon type="eye" /> Chi tiết
                 </a-menu-item>
                 <a-menu-item @click="openApprove(record)">
-                  <a-icon type="check" /> Duy�?t
+                  <a-icon type="check" /> Duyệt
                 </a-menu-item>
                 <a-menu-item @click="openReject(record)">
-                  <a-icon type="close" /> Từ ch�'i
+                  <a-icon type="close" /> Từ chối
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -169,8 +169,8 @@
 
     <a-modal
       :visible="approveVisible"
-      title="Duy�?t yêu cầu API Key"
-      ok-text="Duy�?t"
+      title="Duyệt yêu cầu API Key"
+      ok-text="Duyệt"
       cancel-text="Hủy"
       :confirm-loading="approveLoading"
       @ok="submitApprove"
@@ -190,19 +190,19 @@
 
     <a-modal
       :visible="rejectVisible"
-      title="Từ ch�'i yêu cầu API Key"
-      ok-text="Từ ch�'i"
+      title="Từ chối yêu cầu API Key"
+      ok-text="Từ chối"
       cancel-text="Hủy"
       :confirm-loading="rejectLoading"
       @ok="submitReject"
       @cancel="rejectVisible = false"
     >
       <a-form-model layout="vertical">
-        <a-form-model-item label="Lý do từ ch�'i">
+        <a-form-model-item label="Lý do từ chối">
           <a-textarea
             v-model="rejectForm.reason"
             :rows="3"
-            placeholder="Nhập lý do từ ch�'i"
+            placeholder="Nhập lý do từ chối"
           />
         </a-form-model-item>
       </a-form-model>
@@ -352,9 +352,9 @@ export default {
     },
     requestStatusText(status) {
       const map = {
-        0: "Chờ duy�?t",
-        1: "Đã duy�?t",
-        2: "Từ ch�'i",
+        0: "Chờ Duyệt",
+        1: "Đã Duyệt",
+        2: "Từ chối",
       };
       return map[Number(status)] || `Status ${status}`;
     },
@@ -520,12 +520,12 @@ export default {
           expiredAt: this.formatDateForRequest(this.approveForm.expiredAt),
         };
         await approveApiKeyRequest(body);
-        this.$message.success("Duy�?t yêu cầu thành công");
+        this.$message.success("Duyệt yêu cầu thành công");
         this.approveVisible = false;
         this.fetchRequestList();
         if (this.activeTab === "keys") this.fetchApiKeyList();
       } catch (error) {
-        this.$message.error("Duy�?t yêu cầu thất bại");
+        this.$message.error("Duyệt yêu cầu thất bại");
       } finally {
         this.approveLoading = false;
       }
@@ -545,11 +545,11 @@ export default {
           rejectReason: this.rejectForm.reason || "",
         };
         await rejectApiKeyRequest(body);
-        this.$message.success("Từ ch�'i yêu cầu thành công");
+        this.$message.success("Từ chối yêu cầu thành công");
         this.rejectVisible = false;
         this.fetchRequestList();
       } catch (error) {
-        this.$message.error("Từ ch�'i yêu cầu thất bại");
+        this.$message.error("Từ chối yêu cầu thất bại");
       } finally {
         this.rejectLoading = false;
       }
