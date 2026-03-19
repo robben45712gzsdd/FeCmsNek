@@ -2,7 +2,6 @@
   <a-modal
     :visible="visible"
     :title="isEdit ? 'Chỉnh sửa tin tuyển dụng' : 'Thêm tin tuyển dụng'"
-<<<<<<< HEAD
     :width="jdMode === 'editor' ? 960 : 700"
     :confirm-loading="saving"
     ok-text="Lưu"
@@ -32,7 +31,7 @@
 
       <a-row :gutter="16">
         <a-col :span="12">
-          <a-form-model-item label="Vị trí" prop="position">
+          <a-form-model-item label="vị trí" prop="position">
             <a-input v-model="form.position" placeholder="VD: Frontend Developer" />
           </a-form-model-item>
         </a-col>
@@ -45,8 +44,8 @@
 
       <a-row :gutter="16">
         <a-col :span="12">
-          <a-form-model-item label="Địa điểm" prop="location">
-            <a-input v-model="form.location" placeholder="VD: Hà Nội" />
+          <a-form-model-item label="Đại điểm" prop="location">
+            <a-input v-model="form.location" placeholder="VD: Hà N�Ti" />
           </a-form-model-item>
         </a-col>
         <a-col :span="12">
@@ -107,7 +106,7 @@
             <a-button><a-icon type="upload" /> {{ jdFile ? jdFile.name : 'Chọn file JD (HTML)' }}</a-button>
           </a-upload>
           <div v-if="isEdit && form.content && !jdFile" style="margin-top:8px">
-            <a-button size="small" type="primary" ghost @click="previewCurrentJd"><a-icon type="eye" /> Xem JD hiện tại</a-button>
+            <a-button size="small" type="primary" ghost @click="previewCurrentJd"><a-icon type="eye" /> Xem JD hi�?n tại</a-button>
           </div>
         </div>
 
@@ -116,68 +115,8 @@
           <RichTextEditor v-model="jdEditorContent" :height="380" placeholder="Soạn mô tả công việc..." />
           <div v-if="isEdit && form.content && !jdEditorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Tin đã có file JD. Soạn nội dung mới sẽ thay thế file cũ.
+            Tin �'ã có file JD. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
           </div>
-=======
-    width="700px"
-    :confirm-loading="saving"
-    ok-text="Lưu"
-    cancel-text="Hủy"
-    @ok="handleSave"
-    @cancel="$emit('close')"
-  >
-    <a-form-model ref="form" :model="form" :rules="rules" :label-col="{ span: 7 }" :wrapper-col="{ span: 17 }">
-      <a-form-model-item label="Ngôn ngữ" prop="languageCode">
-        <a-select v-model="form.languageCode">
-          <a-select-option value="vi">Tiếng Việt</a-select-option>
-          <a-select-option value="us">English</a-select-option>
-        </a-select>
-      </a-form-model-item>
-
-      <a-form-model-item label="Danh mục" prop="categoryId">
-        <a-select v-model="form.categoryId" placeholder="Chọn danh mục" :loading="loadingCategories" allow-clear>
-          <a-select-option v-for="c in categories" :key="c.categoryId" :value="c.categoryId">{{ c.categoryName }}</a-select-option>
-        </a-select>
-      </a-form-model-item>
-
-      <a-form-model-item label="Vị trí" prop="position">
-        <a-input v-model="form.position" />
-      </a-form-model-item>
-
-      <a-form-model-item label="Kinh nghiệm" prop="yearsOfExperience">
-        <a-input v-model="form.yearsOfExperience" placeholder="VD: 2 năm" />
-      </a-form-model-item>
-
-      <a-form-model-item label="Địa điểm" prop="location">
-        <a-input v-model="form.location" />
-      </a-form-model-item>
-
-      <a-form-model-item label="Mức lương" prop="salary">
-        <a-input v-model="form.salary" placeholder="VD: 15 - 20 triệu" />
-      </a-form-model-item>
-
-      <a-form-model-item label="Ngày bắt đầu" prop="startDate">
-        <a-date-picker v-model="form.startDate" style="width:100%" format="DD/MM/YYYY" />
-      </a-form-model-item>
-
-      <a-form-model-item label="Ngày kết thúc" prop="endDate">
-        <a-date-picker v-model="form.endDate" style="width:100%" format="DD/MM/YYYY" />
-      </a-form-model-item>
-
-      <a-form-model-item v-if="isEdit" label="Trạng thái" prop="status">
-        <a-select v-model="form.status">
-          <a-select-option :value="1">Hiển thị</a-select-option>
-          <a-select-option :value="0">Ẩn</a-select-option>
-        </a-select>
-      </a-form-model-item>
-
-      <a-form-model-item label="File JD (HTML)">
-        <a-upload :before-upload="onJdSelect" :show-upload-list="false" accept=".html,.htm">
-          <a-button><a-icon type="upload" /> {{ jdFile ? jdFile.name : 'Chọn file JD' }}</a-button>
-        </a-upload>
-        <div v-if="isEdit && form.content && !jdFile" style="margin-top:6px">
-          <a-button size="small" @click="previewCurrentJd"><a-icon type="eye" /> Xem JD hiện tại</a-button>
->>>>>>> feature_khuong_dev
         </div>
       </a-form-model-item>
     </a-form-model>
@@ -188,15 +127,11 @@
 import moment from "moment";
 import axios from "axios";
 import { createJob, updateJob, getCareerCategoryList } from "../../../../apis/interaction";
-<<<<<<< HEAD
 import RichTextEditor from "@/components/RichTextEditor/index.vue";
-=======
->>>>>>> feature_khuong_dev
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 function defaultForm(languageCode) {
-<<<<<<< HEAD
   return {
     languageCode: languageCode || "vi",
     categoryId: undefined,
@@ -214,12 +149,6 @@ function defaultForm(languageCode) {
 
 export default {
   components: { RichTextEditor },
-=======
-  return { languageCode: languageCode || "vi", categoryId: undefined, position: "", yearsOfExperience: "", location: "", salary: "", startDate: null, endDate: null, status: 1, content: null, jobId: null };
-}
-
-export default {
->>>>>>> feature_khuong_dev
   props: {
     visible: Boolean,
     isEdit: Boolean,
@@ -231,7 +160,6 @@ export default {
       form: defaultForm(this.languageCode),
       saving: false,
       jdFile: null,
-<<<<<<< HEAD
       jdMode: "file",
       jdEditorContent: "",
       logoFile: null,
@@ -239,12 +167,6 @@ export default {
       categories: [],
       loadingCategories: false,
       rules: {
-=======
-      categories: [],
-      loadingCategories: false,
-      rules: {
-        categoryId: [{ required: false }],
->>>>>>> feature_khuong_dev
         position: [{ required: true, message: "Nhập vị trí!" }],
         startDate: [{ required: true, message: "Chọn ngày bắt đầu!" }],
         endDate: [{ required: true, message: "Chọn ngày kết thúc!" }],
@@ -255,7 +177,6 @@ export default {
     visible(val) {
       if (val) {
         this.jdFile = null;
-<<<<<<< HEAD
         this.jdEditorContent = "";
         this.jdMode = "file";
         this.clearLogo();
@@ -263,22 +184,12 @@ export default {
         if (this.isEdit && this.record) {
           const r = this.record;
           const parseDate = (d) => (d ? moment(d) : null);
-=======
-        this.loadCategories();
-        if (this.isEdit && this.record) {
-          const r = this.record;
-          const parseDate = (d) => d ? moment(d) : null;
->>>>>>> feature_khuong_dev
           this.form = {
             languageCode: this.languageCode,
             jobId: r.jobId,
             categoryId: r.categoryId || undefined,
             position: r.position || "",
-<<<<<<< HEAD
             YearOfExperience: r.YearOfExperience || "",
-=======
-            yearsOfExperience: r.yearsOfExperience || "",
->>>>>>> feature_khuong_dev
             location: r.location || "",
             salary: r.salary || "",
             startDate: parseDate(r.startDate),
@@ -286,12 +197,9 @@ export default {
             status: r.status ?? 1,
             content: r.content || null,
           };
-<<<<<<< HEAD
           if (r.logoUrl) {
             this.logoPreview = this.toFullUrl(r.logoUrl);
           }
-=======
->>>>>>> feature_khuong_dev
         } else {
           this.form = defaultForm(this.languageCode);
         }
@@ -308,7 +216,6 @@ export default {
       this.loadingCategories = true;
       try {
         const res = await getCareerCategoryList(this.form.languageCode);
-<<<<<<< HEAD
         this.categories = res && res.data ? res.data : [];
       } catch {
         this.categories = [];
@@ -359,13 +266,6 @@ ${this.jdEditorContent}
       const blob = new Blob([html], { type: "text/html;charset=utf-8" });
       return new File([blob], `${(this.form.position || "jd").replace(/[^a-zA-Z0-9]/g, "-").toLowerCase()}.html`, { type: "text/html" });
     },
-=======
-        this.categories = (res && res.data) ? res.data : [];
-      } catch { this.categories = []; }
-      finally { this.loadingCategories = false; }
-    },
-    onJdSelect(file) { this.jdFile = file; return false; },
->>>>>>> feature_khuong_dev
     async previewCurrentJd() {
       if (!this.form.content) return;
       try {
@@ -380,18 +280,13 @@ ${this.jdEditorContent}
         const blobUrl = URL.createObjectURL(blob);
         window.open(blobUrl, "_blank");
         setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
-<<<<<<< HEAD
       } catch {
-        this.$message.error("Không thể tải file JD!");
+        this.$message.error("Không th�f tải file JD!");
       }
-=======
-      } catch { this.$message.error("Không thể tải file JD!"); }
->>>>>>> feature_khuong_dev
     },
     handleSave() {
       this.$refs.form.validate(async (valid) => {
         if (!valid) return;
-<<<<<<< HEAD
 
         // Determine JD file
         let finalJdFile = null;
@@ -403,82 +298,53 @@ ${this.jdEditorContent}
 
         // For new job: need at least some JD content
         if (!this.isEdit && !finalJdFile) {
-          this.$message.warning("Vui lòng tạo nội dung JD (upload file hoặc soạn trực tiếp)!");
+          this.$message.warning("Vui lòng tạo n�Ti dung JD (upload file hoặc soạn trực tiếp)!");
           return;
         }
 
         this.saving = true;
         try {
           const toISO = (m) => (m ? (m.toISOString ? m.toISOString() : m) : undefined);
-=======
-        this.saving = true;
-        try {
-          const toISO = (m) => m ? (m.toISOString ? m.toISOString() : m) : undefined;
->>>>>>> feature_khuong_dev
           if (this.isEdit) {
             const params = {
               languageCode: this.form.languageCode,
               jobId: this.form.jobId,
               categoryId: this.form.categoryId,
               position: this.form.position,
-<<<<<<< HEAD
               YearOfExperience: this.form.YearOfExperience,
-=======
-              yearsOfExperience: this.form.yearsOfExperience,
->>>>>>> feature_khuong_dev
               location: this.form.location,
               salary: this.form.salary,
               startDate: toISO(this.form.startDate),
               endDate: toISO(this.form.endDate),
               status: this.form.status,
             };
-<<<<<<< HEAD
             await updateJob(params, finalJdFile);
           } else {
-=======
-            await updateJob(params, this.jdFile || null);
-          } else {
-            if (!this.jdFile) { this.$message.warning("Vui lòng chọn file JD!"); this.saving = false; return; }
->>>>>>> feature_khuong_dev
             const params = {
               languageCode: this.form.languageCode,
               categoryId: this.form.categoryId,
               position: this.form.position,
-<<<<<<< HEAD
               YearOfExperience: this.form.YearOfExperience,
-=======
-              yearsOfExperience: this.form.yearsOfExperience,
->>>>>>> feature_khuong_dev
               location: this.form.location,
               salary: this.form.salary,
               startDate: toISO(this.form.startDate),
               endDate: toISO(this.form.endDate),
             };
-<<<<<<< HEAD
             await createJob(params, finalJdFile);
-=======
-            await createJob(params, this.jdFile);
->>>>>>> feature_khuong_dev
           }
           this.$message.success("Lưu thành công!");
           this.$emit("saved");
           this.$emit("close");
-<<<<<<< HEAD
         } catch {
-          this.$message.error("Có lỗi, vui lòng thử lại!");
+          this.$message.error("Có l�-i, vui lòng thử lại!");
         } finally {
           this.saving = false;
         }
-=======
-        } catch { this.$message.error("Có lỗi, vui lòng thử lại!"); }
-        finally { this.saving = false; }
->>>>>>> feature_khuong_dev
       });
     },
   },
 };
 </script>
-<<<<<<< HEAD
 
 <style scoped>
 .content-label-row {
@@ -529,5 +395,3 @@ ${this.jdEditorContent}
   color: #94a3b8;
 }
 </style>
-=======
->>>>>>> feature_khuong_dev

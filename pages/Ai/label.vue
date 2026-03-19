@@ -44,7 +44,7 @@
       <template #action="record">
         <a-dropdown>
           <a class="ant-dropdown-link" @click.prevent>
-            Hành động <a-icon type="down" />
+            Hành Động <a-icon type="down" />
           </a>
           <a-menu slot="overlay">
             <a-menu-item @click="viewDetail(record)">
@@ -76,7 +76,7 @@
 
     <a-modal
       :visible="formVisible"
-      :title="isEdit ? 'Cập nhật Label' : 'Tạo Label mới'"
+      :title="isEdit ? 'Cập nhật Label' : 'Tạo Label m�>i'"
       :confirm-loading="formLoading"
       ok-text="Lưu"
       cancel-text="Hủy"
@@ -164,7 +164,7 @@ export default {
           key: "labelName",
         },
         {
-          title: "Hành động",
+          title: "Hành Động",
           key: "action",
           scopedSlots: { customRender: "action" },
           width: 150,
@@ -209,7 +209,7 @@ export default {
         const res = await getListLabelCMS(params);
         this.list = Array.isArray(res?.data) ? res.data : [];
       } catch (error) {
-        this.$message.error("Không thể tải danh sách label");
+        this.$message.error("Không th�f tải danh sách label");
       } finally {
         this.loading = false;
       }
@@ -231,7 +231,7 @@ export default {
         this.detailRecord = res?.data || { ...record };
       } catch (error) {
         this.detailRecord = { ...record, languageCode: this.langCode };
-        this.$message.error("Không thể tải chi tiết label");
+        this.$message.error("Không th�f tải chi tiết label");
       } finally {
         this.detailLoading = false;
       }
@@ -267,7 +267,7 @@ export default {
           languageCode: this.langCode,
           labelName: record.labelName || "",
         };
-        this.$message.error("Không thể tải dữ liệu label");
+        this.$message.error("Không th�f tải dữ li�?u label");
       } finally {
         this.formLoading = false;
       }
@@ -294,7 +294,7 @@ export default {
           languageCode,
           labelName: "",
         };
-        this.$message.warning("Chưa có dữ liệu cho ngôn ngữ này, bạn có thể nhập mới");
+        this.$message.warning("Chưa có dữ li�?u cho ngôn ngữ này, bạn có th�f nhập m�>i");
       } finally {
         this.formLoading = false;
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="news-page">
     <div class="news-header">
-      <h2>📰 Quản lý Tin tức</h2>
+      <h2>�Y"� Quản lý Tin tức</h2>
       <a-button class="bt-add-new" type="primary" @click="openCreate">
         + Thêm tin tức
       </a-button>
@@ -55,12 +55,12 @@
           </div>
         </div>
 
-        <!-- Nội dung -->
+        <!-- N�Ti dung -->
         <div class="card-content">
           <h3>{{ item.title }}</h3>
           <p class="desc">{{ item.description }}</p>
           <div class="footer">
-            <span class="date">🕓 {{ item.createdAt }}</span>
+            <span class="date">ðŸ•“ {{ item.createdAt }}</span>
           </div>
         </div>
       </a-card>
@@ -99,49 +99,21 @@ export default {
       newsList: [
         {
           id: 1,
-          title: "🎮 Ra mắt game mới: Legends of Valor",
-          description: "Game nhập vai thế giới mở với nền đồ họa 3D cực đẹp.",
+          title: "Ra mat game moi: Legends of Valor",
+          description: "Game nhap vai the gioi mo voi do hoa 3D dep mat.",
           content:
-            "<p>Legends of Valor là tựa game nhập vai phiêu lưu với cốt truyện sâu sắc và thế giới mở rộng lớn. Người chơi có thể tự do khám phá, chiến đấu với quái vật và thu thập vật phẩm quý hiếm.</p><p>Bản phát hành chính thức dự kiến vào <strong>15/11/2025</strong>.</p>",
+            "<p>Legends of Valor la tua game nhap vai phieu luu voi cot truyen sau sac.</p><p>Ban phat hanh du kien vao <strong>15/11/2025</strong>.</p>",
           createdAt: "2025-10-29",
           thumbnail: "https://picsum.photos/seed/game7/600/360",
         },
         {
           id: 2,
-          title: "🕹️ Cập nhật sự kiện Halloween 2025",
-          description: "Tham gia ngay để nhận skin độc quyền và quà khủng!",
+          title: "Cap nhat su kien Halloween 2025",
+          description: "Tham gia de nhan skin dac quyen va qua thuong.",
           content:
-            "<p>Sự kiện Halloween năm nay mang đến hàng loạt hoạt động hấp dẫn: săn bí ngô, chế tạo vật phẩm ma quái, và quà đăng nhập mỗi ngày.</p><p>Đừng bỏ lỡ cơ hội nhận skin <strong>Phù Thủy Bóng Đêm</strong> siêu hiếm!</p>",
+            "<p>Su kien Halloween nam nay mang den nhieu hoat dong hap dan.</p><p>Dang nhap moi ngay de nhan qua.</p>",
           createdAt: "2025-10-25",
           thumbnail: "https://picsum.photos/seed/halloween2025/600/360",
-        },
-        {
-          id: 3,
-          title: "⚙️ Bản cập nhật 2.0: Tối ưu hiệu năng & thêm bản đồ mới",
-          description:
-            "Tốc độ tải nhanh hơn 40%, gameplay mượt mà hơn bao giờ hết.",
-          content:
-            "<p>Phiên bản 2.0 mang đến bản đồ <strong>Frozen Valley</strong>, chế độ PvP mới và hàng loạt cải tiến hiệu năng.</p><ul><li>Cải thiện FPS trung bình trên mọi thiết bị</li><li>Giảm thời gian load bản đồ xuống chỉ còn 3 giây</li><li>Thêm hệ thống vật phẩm năng lượng</li></ul>",
-          createdAt: "2025-10-10",
-          thumbnail: "https://picsum.photos/seed/update20/600/360",
-        },
-        {
-          id: 4,
-          title: "🏆 Giải đấu eSports mùa đông chính thức khởi tranh",
-          description: "Tổng giải thưởng lên đến 200.000.000 VNĐ!",
-          content:
-            "<p>Giải đấu Winter Cup 2025 quy tụ 64 đội mạnh nhất toàn quốc. Trận chung kết sẽ được livestream trên kênh chính thức của game vào <strong>20/12/2025</strong>.</p><p>Đăng ký tại <a href='#'>wintercup.game.vn</a>.</p>",
-          createdAt: "2025-09-25",
-          thumbnail: "https://picsum.photos/seed/esport2025/600/360",
-        },
-        {
-          id: 5,
-          title: "💎 Sự kiện đặc biệt: Mừng 1 triệu người chơi!",
-          description: "Đăng nhập 7 ngày liên tiếp để nhận quà cực hiếm.",
-          content:
-            "<p>Chúng tôi chân thành cảm ơn cộng đồng 1 triệu người chơi đã ủng hộ!</p><p>Từ <strong>01/11 - 07/11/2025</strong>, hãy đăng nhập mỗi ngày để nhận <strong>1000 kim cương</strong> và skin giới hạn.</p>",
-          createdAt: "2025-10-31",
-          thumbnail: "https://picsum.photos/seed/1millionplayers/600/360",
         },
       ],
       showForm: false,
@@ -278,7 +250,7 @@ export default {
   opacity: 1;
 }
 
-/* Nội dung */
+/* N�Ti dung */
 .card-content {
   padding: 16px;
 }

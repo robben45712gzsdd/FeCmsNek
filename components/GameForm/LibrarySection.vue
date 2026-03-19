@@ -1,13 +1,13 @@
 <template>
   <div>
-    <!-- Ô tìm kiếm -->
+    <!-- �" tìm kiếm -->
     <a-input-search
       v-model="searchKeyword"
       :placeholder="$t('searchImage')"
       class="search-input"
     />
 
-    <!-- Lưới ảnh -->
+    <!-- Lư�>i ảnh -->
     <div class="image-grid">
       <div
         v-for="img in filteredImages"
@@ -113,7 +113,7 @@ export default {
           this.totalRecords = res?.data?.totalRecord || 0;
         })
         .catch((err) => {
-          console.error("Lỗi tải ảnh:", err);
+          console.error("L�-i tải ảnh:", err);
           this.$message.error(this.$t("loadImageError"));
         });
     },

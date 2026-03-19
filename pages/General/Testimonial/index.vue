@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="page-header">
       <h2 class="title">Quản lý Testimonial</h2>
-      <a-button type="primary" @click="openAdd">+ Thêm đánh giá</a-button>
+      <a-button type="primary" @click="openAdd">+ Thêm �'ánh giá</a-button>
     </div>
 
     <div class="filter-bar">
@@ -37,7 +37,7 @@
 
       <template #action="record">
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+          <a class="ant-dropdown-link" @click.prevent>Hành Động <a-icon type="down" /></a>
           <a-menu slot="overlay">
             <a-menu-item @click="openEdit(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
             <a-menu-item @click="confirmDelete(record)">
@@ -78,9 +78,9 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Họ tên", dataIndex: "name", key: "name", width: 150 },
         { title: "Chức vụ / Công ty", dataIndex: "businessName", key: "businessName", width: 180 },
-        { title: "Nội dung", dataIndex: "content", key: "content", scopedSlots: { customRender: "content" }, ellipsis: true },
+        { title: "N�Ti dung", dataIndex: "content", key: "content", scopedSlots: { customRender: "content" }, ellipsis: true },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
       ];
     },
     pagination() {
@@ -101,7 +101,7 @@ export default {
           this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
         }
       } catch {
-        this.$message.error("Không thể tải danh sách testimonial!");
+        this.$message.error("Không th�f tải danh sách testimonial!");
       } finally {
         this.loading = false;
       }
@@ -133,7 +133,7 @@ export default {
     confirmDelete(record) {
       this.$confirm({
         title: "Xác nhận xóa",
-        content: `Xóa đánh giá của "${record.name}"?`,
+        content: `Xóa �'ánh giá của "${record.name}"?`,
         okText: "Xóa",
         okType: "danger",
         cancelText: "Hủy",

@@ -4,7 +4,7 @@
     :footer="null"
     :width="800"
     centered
-    :title="isDraft ? '📝 Xem trước bản nháp' : '📰 Xem trước tin tức'"
+    :title="isDraft ? 'Xem trước bản nháp' : 'Xem trước tin tức'"
     @cancel="$emit('close')"
   >
     <div class="preview-wrapper">
@@ -114,7 +114,7 @@ export default {
   text-decoration: underline;
 }
 
-/* Cuộn mượt */
+/* Cuon muot */
 .preview-wrapper::-webkit-scrollbar {
   width: 6px;
 }

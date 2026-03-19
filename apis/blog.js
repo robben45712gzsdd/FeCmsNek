@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 
 export function getListPost(params) {
   return new Promise((resolve, reject) => {
@@ -75,17 +75,10 @@ export function changeApprovalStatus(req) {
   });
 }
 
-<<<<<<< HEAD
 export function generateBlog(prompt) {
   return new Promise((resolve, reject) => {
     axios
       .post("/api/Service/GenerateBlog", { prompt })
-=======
-export function generateBlog() {
-  return new Promise((resolve, reject) => {
-    axios
-      .post("/api/Service")
->>>>>>> feature_khuong_dev
       .then((res) => resolve(res.data))
       .catch((err) => reject(err));
   });

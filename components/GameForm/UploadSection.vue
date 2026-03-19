@@ -12,7 +12,7 @@
         <small>({{ $t("acceptFormats") }})</small>
       </div>
 
-      <!-- Nếu đã có ảnh -->
+      <!-- Nếu �'ã có ảnh -->
       <div v-else class="upload-preview">
         <img :src="previewUrl" class="upload-preview-img" />
         <div class="upload-overlay">

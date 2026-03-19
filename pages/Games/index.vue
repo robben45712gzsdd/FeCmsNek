@@ -30,14 +30,14 @@
       <template #bannerUrl="text">
         <div class="video-cell">
           <video v-if="text" :src="toFullUrl(text)" class="game-video" muted />
-          <span v-else class="no-img">—</span>
+          <span v-else class="no-img">�?"</span>
         </div>
       </template>
 
       <template #logoUrl="text">
         <div class="img-cell logo-cell">
           <img v-if="text" :src="toFullUrl(text)" alt="logo" class="game-img" @error="(e) => (e.target.style.display = 'none')" />
-          <span v-else class="no-img">—</span>
+          <span v-else class="no-img">�?"</span>
         </div>
       </template>
 
@@ -55,7 +55,7 @@
 
       <template #action="record">
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+          <a class="ant-dropdown-link" @click.prevent>Hành Động <a-icon type="down" /></a>
           <a-menu slot="overlay">
             <a-menu-item @click="openEdit(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
             <a-menu-item @click="confirmDelete(record)"><a-icon type="delete" style="color:#ff4d4f" /><span style="color:#ff4d4f"> Xóa</span></a-menu-item>
@@ -98,7 +98,7 @@ export default {
         { title: "Loại game", dataIndex: "gameType", key: "gameType", scopedSlots: { customRender: "gameType" }, width: 120 },
         { title: "Ra mắt", dataIndex: "isComming", key: "isComming", scopedSlots: { customRender: "isComming" }, width: 130 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
       ];
     },
     pagination() {
@@ -124,7 +124,7 @@ export default {
           this.total = res.data.totalRecord || 0;
           this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
         }
-      } catch { this.$message.error("Không thể tải danh sách game!"); }
+      } catch { this.$message.error("Không th�f tải danh sách game!"); }
       finally { this.loading = false; }
     },
     applySearch() { this.page = 1; this.fetchList(); },

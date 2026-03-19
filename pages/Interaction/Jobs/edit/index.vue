@@ -28,7 +28,7 @@
               </a-form-model-item>
             </a-col>
             <a-col :span="8">
-              <a-form-model-item label="Vị trí *" prop="position">
+              <a-form-model-item label="vị trí *" prop="position">
                 <a-input v-model="form.position" placeholder="VD: Frontend Developer" />
               </a-form-model-item>
             </a-col>
@@ -42,8 +42,8 @@
               </a-form-model-item>
             </a-col>
             <a-col :span="8">
-              <a-form-model-item label="Địa điểm" prop="location">
-                <a-input v-model="form.location" placeholder="VD: Hà Nội" />
+              <a-form-model-item label="Đại điểm" prop="location">
+                <a-input v-model="form.location" placeholder="VD: Hà N�Ti" />
               </a-form-model-item>
             </a-col>
             <a-col :span="8">
@@ -111,7 +111,7 @@
               </div>
               <div v-if="isEdit && form.content && !jdFileName" class="file-name-tag existing">
                 <a-icon type="file-text" style="color:#2f54eb" />
-                <span style="flex:1;font-size:12px;color:#2f54eb;">File JD hiện tại</span>
+                <span style="flex:1;font-size:12px;color:#2f54eb;">File JD hi�?n tại</span>
                 <a-button size="small" type="link" @click="previewCurrentJd">Xem</a-button>
               </div>
             </div>
@@ -121,7 +121,7 @@
               <RichTextEditor v-model="jdEditorContent" :height="700" placeholder="Soạn mô tả công việc..." />
               <div v-if="isEdit && form.content && !jdEditorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Tin đã có file JD. Soạn nội dung mới sẽ thay thế file cũ.
+                Tin �'ã có file JD. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-model-item>
@@ -233,7 +233,7 @@ export default {
           if (r.logoUrl) {
             this.logoPreview = this.toFullUrl(r.logoUrl);
           }
-          // Fetch nội dung JD HTML hiện tại vào editor
+          // Fetch n�Ti dung JD HTML hi�?n tại vào editor
           if (r.content) {
             try {
               const url = this.toFullUrl(r.content);
@@ -248,7 +248,7 @@ export default {
           }
         }
       } catch {
-        this.$message.error("Không thể tải dữ liệu tin tuyển dụng!");
+        this.$message.error("Không th�f tải dữ li�?u tin tuyển dụng!");
       } finally {
         this.loadingDetail = false;
       }
@@ -344,7 +344,7 @@ ${this.jdEditorContent}
         window.open(blobUrl, "_blank");
         setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
       } catch {
-        this.$message.error("Không thể tải file JD!");
+        this.$message.error("Không th�f tải file JD!");
       }
     },
     handleSave() {
@@ -360,7 +360,7 @@ ${this.jdEditorContent}
 
         if (!this.isEdit && !finalJdFile) {
           this.$message.warning(
-            "Vui lòng tạo nội dung JD (upload file hoặc soạn trực tiếp)!"
+            "Vui lòng tạo n�Ti dung JD (upload file hoặc soạn trực tiếp)!"
           );
           return;
         }
@@ -404,7 +404,7 @@ ${this.jdEditorContent}
           }
           this.goBack();
         } catch {
-          this.$message.error("Có lỗi, vui lòng thử lại!");
+          this.$message.error("Có l�-i, vui lòng thử lại!");
         } finally {
           this.saving = false;
         }

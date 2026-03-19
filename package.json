@@ -1,5 +1,5 @@
 {
-  "name": "MyBaseCMS",
+  "name": "mybasecms",
   "version": "1.0.0",
   "description": "My exquisite Nuxt.js project",
   "author": "khuong09072004",
@@ -17,10 +17,7 @@
     "@nuxtjs/composition-api": "^0.34.0",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/vuetify": "^1.12.3",
-<<<<<<< HEAD
     "@tinymce/tinymce-vue": "^3",
-=======
->>>>>>> feature_khuong_dev
     "ant-design-vue": "^1.1.10",
     "apexcharts": "3.35.0",
     "axios": "^1.12.2",
@@ -41,10 +38,6 @@
     "sass": "^1.92.1",
     "sass-loader": "10",
     "typescript": "^5.9.2"
-<<<<<<< HEAD
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
-=======
-  }
->>>>>>> feature_khuong_dev
 }

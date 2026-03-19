@@ -48,11 +48,7 @@
             <a-select-option value="vi">Tiếng Việt</a-select-option>
             <a-select-option value="us">English</a-select-option>
           </a-select>
-<<<<<<< HEAD
           <a-button type="primary" icon="robot" @click="openAIModal">Tạo bài AI</a-button>
-=======
-          <a-button type="primary" :loading="generatingAI" icon="robot" @click="handleGenerateBlog">Tạo bài AI</a-button>
->>>>>>> feature_khuong_dev
         </div>
         <a-table :columns="genColumns" :data-source="genList" :loading="genLoading" :pagination="genPagination" row-key="postId" @change="onGenTableChange">
           <template #imageUrl="text">
@@ -81,7 +77,6 @@
           </template>
         </a-table>
       </a-tab-pane>
-<<<<<<< HEAD
 
       <a-tab-pane key="prompts" tab="Quản lý Prompt AI">
         <div class="filter-bar">
@@ -137,7 +132,7 @@
       :mask-closable="false"
       @cancel="closeAIModal"
     >
-      <!-- Bước 1: Chọn / nhập prompt -->
+      <!-- Buoc 1: Chon / nhap prompt -->
       <div v-if="!aiResult">
         <a-form layout="vertical">
           <a-form-item label="Chọn Prompt có sẵn">
@@ -169,7 +164,7 @@
         </a-form>
       </div>
 
-      <!-- Bước 2: Preview kết quả -->
+      <!-- Buoc 2: Preview ket qua -->
       <div v-else>
         <div class="ai-result-label">Kết quả AI tạo:</div>
         <div class="ai-result-preview" v-html="aiResult"></div>
@@ -177,18 +172,6 @@
     </a-modal>
 
 
-=======
-    </a-tabs>
-
-    <BlogForm
-      :visible="showForm"
-      :is-edit="isEdit"
-      :record="selectedRecord"
-      :language-code="langCode"
-      @close="showForm = false"
-      @saved="activeTab === 'generated' ? fetchGenerated() : fetchList()"
-    />
->>>>>>> feature_khuong_dev
 
     <a-modal :visible="!!previewRecord" title="Xem nội dung bài viết" width="900px" :footer="null" @cancel="previewRecord = null">
       <iframe v-if="previewRecord && previewRecord.contentUrl" :src="previewRecord.contentUrl" style="width:100%;height:70vh;border:none;border-radius:6px;" />
@@ -198,29 +181,19 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
 import { getListPromptCms, createPrompt, updatePrompt, deletePrompt, getDetailPrompt } from "../../apis/prompt";
-=======
-import BlogForm from "./components/BlogForm.vue";
-import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
->>>>>>> feature_khuong_dev
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
 export default {
   layout: "adminLayout",
   middleware: "auth",
-<<<<<<< HEAD
-=======
-  components: { BlogForm },
->>>>>>> feature_khuong_dev
   data() {
     return {
       activeTab: "posts",
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
       genList: [], genLoading: false, genKeyword: "", genLangCode: "vi", genPage: 1, genPageSize: 10, genTotal: 0,
-<<<<<<< HEAD
       previewRecord: null,
       // AI Modal
       aiModalVisible: false,
@@ -234,10 +207,6 @@ export default {
       promptList: [], promptLoading: false, promptPage: 1, promptPageSize: 10, promptTotal: 0,
       promptModalVisible: false, promptIsEdit: false, promptSaving: false,
       promptForm: { contentPromptId: null, prompt: "", status: 1 },
-=======
-      showForm: false, isEdit: false, selectedRecord: null, previewRecord: null,
-      generatingAI: false,
->>>>>>> feature_khuong_dev
     };
   },
   computed: {
@@ -246,7 +215,7 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Ảnh", dataIndex: "imageUrl", key: "imageUrl", scopedSlots: { customRender: "imageUrl" }, width: 90 },
         { title: "Tiêu đề", dataIndex: "title", key: "title", ellipsis: true },
-        { title: "Nổi bật", dataIndex: "isFeatured", key: "isFeatured", scopedSlots: { customRender: "isFeatured" }, width: 110 },
+        { title: "N�.i bật", dataIndex: "isFeatured", key: "isFeatured", scopedSlots: { customRender: "isFeatured" }, width: 110 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 120 },
         { title: "Ngày tạo", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 120 },
         { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
@@ -264,7 +233,6 @@ export default {
     },
     pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
     genPagination() { return { current: this.genPage, pageSize: this.genPageSize, total: this.genTotal, showSizeChanger: false }; },
-<<<<<<< HEAD
     promptColumns() {
       return [
         { title: "#", key: "ord", scopedSlots: { customRender: "ord" }, width: 55 },
@@ -274,8 +242,6 @@ export default {
       ];
     },
     promptPagination() { return { current: this.promptPage, pageSize: this.promptPageSize, total: this.promptTotal, showSizeChanger: false }; },
-=======
->>>>>>> feature_khuong_dev
   },
   mounted() { this.fetchList(); },
   methods: {
@@ -283,14 +249,10 @@ export default {
       if (!url) return "";
       return /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
     },
-<<<<<<< HEAD
     onTabChange(tab) {
       if (tab === "generated" && !this.genList.length) this.fetchGenerated();
       if (tab === "prompts" && !this.promptList.length) this.fetchPrompts();
     },
-=======
-    onTabChange(tab) { if (tab === "generated" && !this.genList.length) this.fetchGenerated(); },
->>>>>>> feature_khuong_dev
     async fetchList() {
       this.loading = true;
       try {
@@ -304,21 +266,11 @@ export default {
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },
-<<<<<<< HEAD
     openAdd() {
       this.$router.push({ path: '/Blog/edit', query: { lang: this.langCode } });
     },
     openEdit(record) {
       this.$router.push({ path: '/Blog/edit', query: { id: record.postId, lang: this.langCode } });
-=======
-    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
-    async openEdit(record) {
-      try {
-        const res = await getPostDetail(record.postId, this.langCode);
-        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
->>>>>>> feature_khuong_dev
     },
     async fetchGenerated() {
       this.genLoading = true;
@@ -333,17 +285,8 @@ export default {
       finally { this.genLoading = false; }
     },
     onGenTableChange(pag) { this.genPage = pag.current; this.fetchGenerated(); },
-<<<<<<< HEAD
     openEditGen(record) {
       this.$router.push({ path: '/Blog/edit', query: { id: record.postId, lang: this.genLangCode } });
-=======
-    async openEditGen(record) {
-      try {
-        const res = await getPostDetail(record.postId, this.genLangCode);
-        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
->>>>>>> feature_khuong_dev
     },
     async approvePost(record, isAccepted) {
       try {
@@ -376,7 +319,6 @@ export default {
         },
       });
     },
-<<<<<<< HEAD
     // === AI Modal ===
     async openAIModal() {
       this.aiModalVisible = true;
@@ -499,20 +441,6 @@ export default {
           } catch { this.$message.error("Xóa prompt thất bại!"); }
         },
       });
-=======
-    async handleGenerateBlog() {
-      this.generatingAI = true;
-      try {
-        const res = await generateBlog();
-        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
-          this.$message.success("Tạo bài AI thành công!");
-        } else {
-          this.$message.success("Tạo bài AI thành công!");
-        }
-        this.fetchGenerated();
-      } catch { this.$message.error("Tạo bài AI thất bại, vui lòng thử lại!"); }
-      finally { this.generatingAI = false; }
->>>>>>> feature_khuong_dev
     },
     formatDate(dateStr) {
       if (!dateStr) return "";
@@ -524,7 +452,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .blog-page { padding: 0; }
 .blog-header {
   display: flex;
@@ -582,13 +509,4 @@ export default {
 .ai-result-preview h1, .ai-result-preview h2, .ai-result-preview h3 { color: #0f172a; margin: 16px 0 8px; }
 .ai-result-preview p { margin: 8px 0; }
 .ai-result-preview img { max-width: 100%; border-radius: 8px; }
-=======
-.blog-page { padding: 24px; }
-.blog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.title { font-size: 22px; font-weight: 600; color: #1e293b; margin: 0; }
-.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-.img-cell { width: 72px; height: 48px; overflow: hidden; border-radius: 6px; background: #f0f0f0; }
-.post-img { width: 100%; height: 100%; object-fit: cover; }
-.no-img { color: #aaa; font-size: 12px; display: flex; align-items: center; justify-content: center; height: 100%; }
->>>>>>> feature_khuong_dev
 </style>

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <a-modal
     :visible="visible"
     :title="isEdit ? 'Chỉnh sửa game' : 'Thêm game'"
@@ -42,12 +42,12 @@
       <a-form-model-item label="Sắp ra mắt" prop="isComming">
         <a-select v-model="form.isComming">
           <a-select-option :value="1">Sắp ra mắt</a-select-option>
-          <a-select-option :value="0">Đã ra mắt</a-select-option>
+          <a-select-option :value="0">D� ra m?t</a-select-option>
         </a-select>
       </a-form-model-item>
 
-      <!-- Trạng thái -->
-      <a-form-model-item label="Trạng thái" prop="status">
+      <!-- Tr?ng th�i -->
+      <a-form-model-item label="Tr?ng th�i" prop="status">
         <a-select v-model="form.status">
           <a-select-option :value="1">Hiển thị</a-select-option>
           <a-select-option :value="0">Ẩn</a-select-option>
@@ -71,7 +71,6 @@
 
       <!-- Mô tả -->
       <a-form-model-item label="Mô tả" prop="description">
-<<<<<<< HEAD
         <client-only>
           <editor
             v-model="form.description"
@@ -82,9 +81,6 @@
             <a-spin tip="Đang tải editor..." />
           </div>
         </client-only>
-=======
-        <a-textarea v-model="form.description" :rows="3" placeholder="Nhập mô tả game" />
->>>>>>> feature_khuong_dev
       </a-form-model-item>
 
       <!-- Banner (video) -->
@@ -137,15 +133,12 @@ function defaultForm(languageCode) {
 }
 
 export default {
-<<<<<<< HEAD
   components: {
     editor: () =>
       process.client
         ? import("@tinymce/tinymce-vue").then((m) => m.default)
         : Promise.resolve({ render: () => {} }),
   },
-=======
->>>>>>> feature_khuong_dev
   props: {
     languageCode: { type: String, default: "vi" },
   },
@@ -159,7 +152,6 @@ export default {
       logoFile: null,
       bannerPreview: null,
       logoPreview: null,
-<<<<<<< HEAD
       tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
       editorInit: {
         height: 250,
@@ -176,8 +168,6 @@ export default {
         content_style:
           "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.6; padding: 10px; }",
       },
-=======
->>>>>>> feature_khuong_dev
       rules: {
         name: [{ required: true, message: "Nhập tên game!", trigger: "blur" }],
         gameType: [{ required: true, message: "Chọn loại game!", trigger: "change" }],
@@ -304,7 +294,6 @@ export default {
 .img-preview { width: 100px; height: 64px; border-radius: 6px; overflow: hidden; border: 1px solid #e8e8e8; background: #f5f5f5; }
 .img-preview img { width: 100%; height: 100%; object-fit: cover; }
 .logo-preview { width: 64px; height: 64px; border-radius: 50%; }
-<<<<<<< HEAD
 .editor-placeholder {
   min-height: 250px;
   display: flex;
@@ -314,6 +303,4 @@ export default {
   border-radius: 10px;
   border: 1px solid #e2e8f0;
 }
-=======
->>>>>>> feature_khuong_dev
 </style>

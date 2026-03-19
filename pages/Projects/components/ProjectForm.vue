@@ -29,7 +29,7 @@
       </a-row>
 
       <!-- Thumbnail (optional) -->
-      <a-form-item label="Thumbnail — ảnh bìa (tùy chọn)">
+      <a-form-item label="Thumbnail �?" ảnh bìa (tùy chọn)">
         <label class="upload-btn">
           <a-icon type="upload" /> Chọn ảnh thumbnail
           <input ref="thumbnailInput" type="file" accept="image/*" class="file-input-hidden" @change="onThumbnailChange" />
@@ -40,7 +40,7 @@
         </div>
       </a-form-item>
 
-      <!-- Image (required khi tạo mới) -->
+      <!-- Image (required khi tạo m�>i) -->
       <a-form-item :label="'Ảnh chính' + (isEdit ? ' (tùy chọn)' : ' *')">
         <label class="upload-btn">
           <a-icon type="picture" /> Chọn ảnh chính
@@ -54,7 +54,7 @@
       </a-form-item>
 
       <!-- ProjectBody (optional HTML file) -->
-      <a-form-item label="Nội dung — file HTML (tùy chọn)">
+      <a-form-item label="N�Ti dung �?" file HTML (tùy chọn)">
         <label class="upload-btn">
           <a-icon type="file-text" /> Chọn file HTML
           <input ref="bodyInput" type="file" accept=".html,.htm" class="file-input-hidden" @change="onBodyChange" />
@@ -63,23 +63,23 @@
           <a-icon type="file-text" /> {{ bodyFileName }}
           <a-button size="small" type="link" style="color:#ff4d4f" @click="clearBody">Xóa</a-button>
         </div>
-        <!-- Hiển thị file hiện tại nếu đã có và chưa chọn file mới -->
+        <!-- Hiển thị file hi�?n tại nếu �'ã có và chưa chọn file m�>i -->
         <div v-if="bodyPreviewUrl && !bodyFileName" class="file-name-tag" style="background:#f0f5ff;border-color:#adc6ff;">
           <a-icon type="file-text" style="color:#2f54eb" />
-          <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
+          <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hi�?n tại</span>
           <a-button size="small" type="link" @click="openBodyPreview">&#128065; Xem</a-button>
-          <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">&#128279; Mở tab</a-button>
+          <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">&#128279; M�Y tab</a-button>
         </div>
         <div class="hint">
           <a-icon type="info-circle" style="color:#6366f1;margin-right:4px;" />
-          Dùng <nuxt-link to="/CaseStudyEditor" target="_blank">Case Study Editor</nuxt-link> để xuất HTML rồi upload.
+          Dùng <nuxt-link to="/CaseStudyEditor" target="_blank">Case Study Editor</nuxt-link> và xuất HTML r�"i upload.
         </div>
       </a-form-item>
 
       <!-- Modal preview HTML -->
       <a-modal
         :visible="showBodyPreview"
-        title="Xem nội dung HTML"
+        title="Xem n�Ti dung HTML"
         width="900px"
         :footer="null"
         @cancel="showBodyPreview = false"
@@ -91,7 +91,7 @@
         />
       </a-modal>
 
-      <!-- Trạng thái (chỉ hiển thị khi edit) -->
+      <!-- Trạng thái (ch�? Hiển thị khi edit) -->
       <a-form-item v-if="isEdit" label="Trạng thái">
         <a-switch
           v-model="form.isActive"
@@ -132,9 +132,9 @@
             {{ tag.tagName }}
           </a-select-option>
         </a-select>
-        <!-- Tạo tag mới inline -->
+        <!-- Tạo tag m�>i inline -->
         <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag mới</a-button>
+          <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag m�>i</a-button>
           <a-button type="dashed" size="small" icon="setting" @click="showManageTags = !showManageTags; showNewTagRow = false">Quản lý tags</a-button>
         </div>
         <div v-if="showNewTagRow" style="display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap">
@@ -146,7 +146,7 @@
             @pressEnter="handleCreateTag"
           />
           <a-select v-model="newTagType" size="small" style="width:160px">
-            <a-select-option :value="1">Trí tuệ nhân tạo</a-select-option>
+            <a-select-option :value="1">Trí tu�? nhân tạo</a-select-option>
             <a-select-option :value="2">Domain</a-select-option>
             <a-select-option :value="3">Technologies</a-select-option>
           </a-select>
@@ -229,12 +229,12 @@ export default {
       if (val) {
         this.errors = {};
         this.clearAllFiles();
-        // Đảm bảo tagOptions đã load trước khi set selectedTagIds
+        // Đảm bảo tagOptions �'ã load trư�>c khi set selectedTagIds
         if (!this.tagOptions.length) {
           await this.fetchTags();
         }
         if (this.isEdit && this.record) {
-          this.form = this.defaultForm(); // reset trước để watcher languageCode không trigger lại
+          this.form = this.defaultForm(); // reset trư�>c và watcher languageCode không trigger lại
           await this.loadDetail(this.record.projectId, this.record.languageCode || "vi");
         } else {
           this.form = this.defaultForm();
@@ -281,7 +281,7 @@ export default {
         this.thumbnailFile = null;
         this.imageFile = null;
       } catch {
-        this.$message.error("Không thể tải chi tiết dự án!");
+        this.$message.error("Không th�f tải chi tiết dự án!");
       } finally {
         this.loading = false;
       }
@@ -308,7 +308,7 @@ export default {
         this.tagsLoading = false;
       }
     },
-    /* ── file handlers ── */
+    /* �"?�"? file handlers �"?�"? */
     onThumbnailChange(e) {
       const f = e.target.files[0];
       if (!f) return;
@@ -359,7 +359,7 @@ export default {
           this.$message.error(res?.message || "Xóa tag thất bại!");
         }
       } catch {
-        this.$message.error("Có lỗi, vui lòng thử lại!");
+        this.$message.error("Có l�-i, vui lòng thử lại!");
       } finally {
         this.deletingTagId = null;
       }
@@ -384,7 +384,7 @@ export default {
           this.$message.error(res?.message || "Tạo tag thất bại!");
         }
       } catch {
-        this.$message.error("Có lỗi, vui lòng thử lại!");
+        this.$message.error("Có l�-i, vui lòng thử lại!");
       } finally {
         this.newTagLoading = false;
       }
@@ -394,7 +394,7 @@ export default {
       this.clearImage();
       this.clearBody();
     },
-    /* ── validation ── */
+    /* �"?�"? validation �"?�"? */
     validate() {
       this.errors = {};
       if (!this.form.projectName || !this.form.projectName.trim())
@@ -403,7 +403,7 @@ export default {
         this.errors.image = "Vui lòng chọn ảnh chính";
       return Object.keys(this.errors).length === 0;
     },
-    /* ── build FormData for create ── */
+    /* �"?�"? build FormData for create �"?�"? */
     buildFormData() {
       const fd = new FormData();
       fd.append("LanguageCode", this.form.languageCode || "vi");
@@ -414,7 +414,7 @@ export default {
       if (this.bodyFile) fd.append("ProjectBody", this.bodyFile);
       return fd;
     },
-    /* ── submit ── */
+    /* �"?�"? submit �"?�"? */
     async handleSubmit() {
       if (!this.validate()) return;
       this.loading = true;
@@ -434,12 +434,12 @@ export default {
           this.$message.success("Cập nhật thành công!");
         } else {
           await addProject(this.buildFormData());
-          this.$message.success("Thêm mới thành công!");
+          this.$message.success("Thêm m�>i thành công!");
         }
         this.$emit("saved");
         this.$emit("close");
       } catch {
-        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
+        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
       } finally {
         this.loading = false;
       }
@@ -456,7 +456,6 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-<<<<<<< HEAD
   padding: 8px 18px;
   border: 1px dashed #c7d2fe;
   border-radius: 10px;
@@ -470,22 +469,6 @@ export default {
 .upload-btn:hover {
   background: #eef2ff;
   border-color: #6366f1;
-=======
-  padding: 6px 16px;
-  border: 1px dashed #6366f1;
-  border-radius: 6px;
-  color: #6366f1;
-  background: #f5f3ff;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.upload-btn:hover {
-  background: #ede9fe;
-  border-color: #4f46e5;
-  color: #4f46e5;
->>>>>>> feature_khuong_dev
 }
 .file-input-hidden {
   position: absolute;
@@ -505,23 +488,15 @@ export default {
   color: #333 !important;
 }
 .preview-wrap {
-<<<<<<< HEAD
   margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
-=======
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
->>>>>>> feature_khuong_dev
 }
 .preview-img {
   width: 120px;
   height: 72px;
   object-fit: cover;
-<<<<<<< HEAD
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -545,29 +520,6 @@ export default {
 }
 .err {
   color: #ef4444;
-=======
-  border-radius: 6px;
-  border: 1px solid #e8e8e8;
-}
-.file-name-tag {
-  margin-top: 6px;
-  padding: 4px 10px;
-  background: #f0f4ff;
-  border-radius: 4px;
-  font-size: 13px;
-  color: #4b5563;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.hint {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #9ca3af;
-}
-.err {
-  color: #ff4d4f;
->>>>>>> feature_khuong_dev
   font-size: 12px;
   margin-top: 4px;
 }

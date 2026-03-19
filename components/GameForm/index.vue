@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <a-modal
     :visible="visible"
     :title="isEdit ? $t('editGame') : $t('addGame')"
@@ -24,57 +24,6 @@
         </a-col>
       </a-row>
 
-<<<<<<< HEAD
-=======
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-form-item :label="$t('gameTypeId')">
-            <a-select
-              :key="visible ? 'gameType-' + Math.random() : 'gameType'"
-              v-model="form.gameTypeId"
-              :placeholder="$t('selectGameType')"
-              style="width: 100%"
-              allowClear
-              show-search
-              option-filter-prop="children"
-              class="form-select"
-            >
-              <a-select-option
-                v-for="item in gameTypeOptions"
-                :key="item.gameTypeId"
-                :value="item.gameTypeId"
-              >
-                {{ item.gameTypeName }}
-              </a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-
-        <a-col :span="12">
-          <a-form-item :label="$t('typeLiveId')">
-            <a-select
-              :key="visible ? 'typeLive-' + Math.random() : 'typeLive'"
-              v-model="form.typeLiveId"
-              :placeholder="$t('selectTypeLive')"
-              style="width: 100%"
-              allowClear
-              show-search
-              option-filter-prop="children"
-              class="form-select"
-            >
-              <a-select-option
-                v-for="item in typeLiveOptions"
-                :key="item.typeLiveId"
-                :value="item.typeLiveId"
-              >
-                {{ item.typeLiveName }}
-              </a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-      </a-row>
-
->>>>>>> feature_khuong_dev
       <div class="container-button">
         <a-form-item :label="$t('thumbnail')">
           <div class="image-picker">
@@ -174,11 +123,6 @@ import {
   addGameWithImageId,
   updateGameInfo,
   updateGameImage,
-<<<<<<< HEAD
-=======
-  getGameType,
-  getTypeLive,
->>>>>>> feature_khuong_dev
   getPartnerType
 } from "../../apis/games";
 
@@ -194,11 +138,6 @@ export default {
       loading: false,
       showImagePicker: false,
       selectedImageRefId: null,
-<<<<<<< HEAD
-=======
-      gameTypeOptions: [],
-      typeLiveOptions: [],
->>>>>>> feature_khuong_dev
       partnerTypeOptions: [],
       form: {
         gameName: "",
@@ -209,11 +148,6 @@ export default {
         partnerTableId: "",
         partnerType: 0,
         url: "",
-<<<<<<< HEAD
-=======
-        gameTypeId: undefined,
-        typeLiveId: undefined,
->>>>>>> feature_khuong_dev
         urlClient: "",
         status: true,
       },
@@ -240,11 +174,6 @@ export default {
         partnerTableId: this.record.partnerTableId,
         partnerType: this.record.partnerType,
         url: this.record.url,
-<<<<<<< HEAD
-=======
-        gameTypeId: this.record.gameTypeId,
-        typeLiveId: this.record.typeLiveId,
->>>>>>> feature_khuong_dev
         urlClient: this.record.urlClient,
         status: this.record.status,
       });
@@ -259,11 +188,6 @@ export default {
         partnerTableId: "",
         partnerType: undefined,
         url: "",
-<<<<<<< HEAD
-=======
-        gameTypeId: undefined,
-        typeLiveId: undefined,
->>>>>>> feature_khuong_dev
         urlClient: "",
         status: true,
       };
@@ -294,11 +218,6 @@ export default {
       fd.append("PartnerTableId", f.partnerTableId || "");
       fd.append("PartnerType", f.partnerType || 0);
       fd.append("Url", f.url || "");
-<<<<<<< HEAD
-=======
-      fd.append("GameTypeId", f.gameTypeId);
-      fd.append("TypeLiveId", f.typeLiveId);
->>>>>>> feature_khuong_dev
       fd.append("UrlClient", f.urlClient || "");
       fd.append("Status", f.status);
       return fd;
@@ -322,11 +241,6 @@ export default {
           gameId: this.record.gameId,
           gameName: this.form.gameName,
           alt: this.form.alt,
-<<<<<<< HEAD
-=======
-          gameTypeId: this.form.gameTypeId,
-          typeLiveId: this.form.typeLiveId,
->>>>>>> feature_khuong_dev
           partnerGameId: this.form.partnerGameId,
           partnerGameType: this.form.partnerGameType,
           partnerTableId: this.form.partnerTableId,
@@ -387,23 +301,9 @@ export default {
     },
     fetchDropdownData() {
       Promise.all([
-<<<<<<< HEAD
         getPartnerType({ currentPage: 1, recordPerPage: 100 }),
       ])
         .then(([partnerTypeRes]) => {
-=======
-        getGameType({ currentPage: 1, recordPerPage: 100 }),
-        getTypeLive({ currentPage: 1, recordPerPage: 100 }),
-        getPartnerType({ currentPage: 1, recordPerPage: 100 }),
-      ])
-        .then(([gameTypeRes, typeLiveRes,partnerTypeRes]) => {
-          if (gameTypeRes.responseCode === 1) {
-            this.gameTypeOptions = gameTypeRes.data.records || [];
-          }
-          if (typeLiveRes.responseCode === 1) {
-            this.typeLiveOptions = typeLiveRes.data.records || [];
-          }
->>>>>>> feature_khuong_dev
           if (partnerTypeRes.responseCode === 1) {
             this.partnerTypeOptions = partnerTypeRes.data.records || [];
           }

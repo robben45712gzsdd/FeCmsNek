@@ -15,7 +15,7 @@
       <template #logoUrl="text">
         <div class="img-cell">
           <img v-if="text" :src="toFullUrl(text)" alt="logo" class="post-img" @error="(e) => e.target.style.display='none'" />
-          <span v-else class="no-img">—</span>
+          <span v-else class="no-img">�?"</span>
         </div>
       </template>
       <template #status="val">
@@ -23,7 +23,7 @@
       </template>
       <template #action="record">
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+          <a class="ant-dropdown-link" @click.prevent>Hành Động <a-icon type="down" /></a>
           <a-menu slot="overlay">
             <a-menu-item @click="openEdit(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
             <a-menu-item @click="openPreview(record)"><a-icon type="file-text" /> Xem JD</a-menu-item>
@@ -33,18 +33,7 @@
       </template>
     </a-table>
 
-<<<<<<< HEAD
 
-=======
-    <JobForm
-      :visible="showForm"
-      :is-edit="isEdit"
-      :record="selectedRecord"
-      :language-code="langCode"
-      @close="showForm = false"
-      @saved="fetchList"
-    />
->>>>>>> feature_khuong_dev
 
     <a-modal
       :visible="!!previewHtml"
@@ -65,10 +54,6 @@
 
 <script>
 import axios from "axios";
-<<<<<<< HEAD
-=======
-import JobForm from "./components/JobForm.vue";
->>>>>>> feature_khuong_dev
 import { getJobCms, getJobDetailCms, deleteJob } from "../../../apis/interaction";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
@@ -76,18 +61,10 @@ const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 export default {
   layout: "adminLayout",
   middleware: "auth",
-<<<<<<< HEAD
   data() {
     return {
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
       previewHtml: null,
-=======
-  components: { JobForm },
-  data() {
-    return {
-      list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
-      showForm: false, isEdit: false, selectedRecord: null, previewHtml: null,
->>>>>>> feature_khuong_dev
     };
   },
   computed: {
@@ -95,17 +72,13 @@ export default {
       return [
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Logo", dataIndex: "logoUrl", key: "logoUrl", scopedSlots: { customRender: "logoUrl" }, width: 80 },
-        { title: "Vị trí", dataIndex: "position", key: "position", ellipsis: true },
-        { title: "Địa điểm", dataIndex: "location", key: "location" },
+        { title: "vị trí", dataIndex: "position", key: "position", ellipsis: true },
+        { title: "Đại điểm", dataIndex: "location", key: "location" },
         { title: "Lương", dataIndex: "salary", key: "salary" },
-<<<<<<< HEAD
         { title: "Kinh nghiệm", dataIndex: "YearOfExperience", key: "YearOfExperience", width: 130 },
-=======
-        { title: "Kinh nghiệm", dataIndex: "yearsOfExperience", key: "yearsOfExperience", width: 130 },
->>>>>>> feature_khuong_dev
         { title: "Ngày", dataIndex: "date", key: "date", width: 100 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
       ];
     },
     pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
@@ -125,25 +98,15 @@ export default {
           this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
           this.total = res.data.totalRecord || 0;
         } else { this.list = []; this.total = 0; }
-      } catch { this.$message.error("Không thể tải dữ liệu!"); }
+      } catch { this.$message.error("Không th�f tải dữ li�?u!"); }
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },
-<<<<<<< HEAD
     openAdd() {
       this.$router.push({ path: '/Interaction/Jobs/edit', query: { lang: this.langCode } });
     },
     openEdit(record) {
       this.$router.push({ path: '/Interaction/Jobs/edit', query: { id: record.jobId, lang: this.langCode } });
-=======
-    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
-    async openEdit(record) {
-      try {
-        const res = await getJobDetailCms(this.langCode, record.jobId);
-        this.selectedRecord = res && res.data ? { ...res.data, jobId: record.jobId } : record;
-      } catch { this.selectedRecord = record; }
-      this.isEdit = true; this.showForm = true;
->>>>>>> feature_khuong_dev
     },
     async openPreview(record) {
       try {
@@ -153,13 +116,13 @@ export default {
         const url = this.toFullUrl(contentPath);
         const resp = await axios.get(url, { responseType: "text" });
         let html = resp.data;
-        // Inject charset nếu chưa có để đảm bảo UTF-8
+        // Inject charset nếu chưa có và �'ảm bảo UTF-8
         if (!/<meta[^>]+charset/i.test(html)) {
           html = html.replace(/<head[^>]*>/i, (m) => m + '<meta charset="utf-8">');
           if (!/<head/i.test(html)) html = '<meta charset="utf-8">' + html;
         }
         this.previewHtml = html;
-      } catch { this.$message.error("Không thể tải file JD!"); }
+      } catch { this.$message.error("Không th�f tải file JD!"); }
     },
     confirmDelete(record) {
       this.$confirm({

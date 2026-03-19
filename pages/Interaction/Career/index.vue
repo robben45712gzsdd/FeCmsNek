@@ -1,12 +1,11 @@
 <template>
-<<<<<<< HEAD
   <div class="career-page">
-    <!-- ═══════════════ VIEW 1: Danh sách vị trí ═══════════════ -->
+    <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� VIEW 1: Danh sách vị trí �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <template v-if="!activeJob">
       <div class="page-header">
         <div>
           <h2 class="title">Đơn ứng tuyển</h2>
-          <p class="subtitle">Chọn vị trí tuyển dụng để xem danh sách ứng viên</p>
+          <p class="subtitle">Chọn vị trí tuyển dụng và xem danh sách ứng viên</p>
         </div>
         <a-select v-model="langCode" style="width:140px" @change="loadJobs">
           <a-select-option value="vi">Tiếng Việt</a-select-option>
@@ -67,7 +66,7 @@
       </div>
     </template>
 
-    <!-- ═══════════════ VIEW 2: Danh sách CV cho 1 vị trí ═══════════════ -->
+    <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� VIEW 2: Danh sách CV cho 1 vị trí �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <template v-else>
       <div class="page-header">
         <div class="breadcrumb-header">
@@ -132,7 +131,7 @@
 
         <template #phoneNumber="text">
           <span v-if="text" class="phone-text"><a-icon type="phone" style="margin-right:4px;color:#94a3b8" />{{ text }}</span>
-          <span v-else class="no-cv">—</span>
+          <span v-else class="no-cv">�?"</span>
         </template>
 
         <template #createdDate="text">
@@ -144,12 +143,12 @@
             <span class="message-snippet">{{ text }}</span>
             <a class="message-more">Xem thêm</a>
           </div>
-          <span v-else class="no-cv">—</span>
+          <span v-else class="no-cv">�?"</span>
         </template>
 
         <template #action="record">
           <a-popconfirm
-            title="Xóa đơn ứng tuyển này?"
+            title="Xóa �'ơn ứng tuyển này?"
             ok-text="Xóa"
             ok-type="danger"
             cancel-text="Hủy"
@@ -161,7 +160,7 @@
       </a-table>
     </template>
 
-    <!-- ═══════════════ CV Preview Modal ═══════════════ -->
+    <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� CV Preview Modal �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <a-modal
       :visible="!!cvPreview"
       :title="false"
@@ -178,7 +177,7 @@
             </a-avatar>
             <div>
               <div class="cv-preview-name">{{ cvPreview.fullName }}</div>
-              <div class="cv-preview-pos">{{ cvPreview.position || activeJob.position || '—' }}</div>
+              <div class="cv-preview-pos">{{ cvPreview.position || activeJob.position || '�?"' }}</div>
             </div>
           </div>
           <div class="cv-header-actions">
@@ -199,19 +198,19 @@
           </div>
           <div v-else class="cv-fallback">
             <a-icon type="file-unknown" style="font-size:56px;color:#c7d2fe;" />
-            <p style="margin:12px 0 0;font-size:15px;">Không thể xem trước định dạng này</p>
+            <p style="margin:12px 0 0;font-size:15px;">Không th�f xem trư�>c �'�<nh dạng này</p>
             <a :href="toFullUrl(cvPreview.cvUrl)" target="_blank">
-              <a-button type="primary" style="margin-top:16px"><a-icon type="download" /> Tải về để xem</a-button>
+              <a-button type="primary" style="margin-top:16px"><a-icon type="download" /> Tải về và xem</a-button>
             </a>
           </div>
         </div>
       </div>
     </a-modal>
 
-    <!-- ═══════════════ Message Detail Modal ═══════════════ -->
+    <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� Message Detail Modal �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <a-modal
       :visible="!!messageDetail"
-      title="Giới thiệu bản thân"
+      title="Gi�>i thi�?u bản thân"
       width="560px"
       :footer="null"
       @cancel="messageDetail = null"
@@ -223,45 +222,17 @@
           </a-avatar>
           <div>
             <div class="msg-detail-name">{{ messageDetail.fullName }}</div>
-            <div class="msg-detail-sub">{{ messageDetail.email }} · {{ messageDetail.phoneNumber || '—' }}</div>
+            <div class="msg-detail-sub">{{ messageDetail.email }} · {{ messageDetail.phoneNumber || '�?"' }}</div>
           </div>
         </div>
         <div class="msg-detail-body">{{ messageDetail.message }}</div>
       </div>
     </a-modal>
-=======
-  <div class="page-wrap">
-    <div class="page-header">
-      <h2 class="title">Đơn ứng tuyển</h2>
-    </div>
-    <div class="filter-bar">
-      <a-input-search v-model="keyword" placeholder="Tìm kiếm..." style="width:280px" @search="fetchList" allow-clear />
-      <a-select v-model="langCode" style="width:130px" @change="() => { page = 1; fetchList(); }">
-        <a-select-option value="vi">Tiếng Việt</a-select-option>
-        <a-select-option value="us">English</a-select-option>
-      </a-select>
-    </div>
-    <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" row-key="applicantId" @change="onTableChange">
-      <template #cvUrl="text">
-        <a v-if="text" :href="toFullUrl(text)" target="_blank"><a-icon type="file-pdf" /> Xem CV</a>
-        <span v-else>—</span>
-      </template>
-      <template #action="record">
-        <a-popconfirm title="Xóa đơn ứng tuyển này?" ok-text="Xóa" ok-type="danger" cancel-text="Hủy" @confirm="remove(record)">
-          <a-button type="link" style="color:#ff4d4f"><a-icon type="delete" /> Xóa</a-button>
-        </a-popconfirm>
-      </template>
-    </a-table>
->>>>>>> feature_khuong_dev
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 import { getListSendMailCareer, deleteMailCareer, getJobCms } from "../../../apis/interaction";
-=======
-import { getListSendMailCareer, deleteMailCareer } from "../../../apis/interaction";
->>>>>>> feature_khuong_dev
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 
@@ -270,13 +241,12 @@ export default {
   middleware: "auth",
   data() {
     return {
-<<<<<<< HEAD
-      /* ── View 1: Jobs ── */
+      /* �"?�"? View 1: Jobs �"?�"? */
       langCode: "vi",
       jobs: [],
       loadingJobs: false,
       jobSearch: "",
-      /* ── View 2: Applicants ── */
+      /* �"?�"? View 2: Applicants �"?�"? */
       activeJob: null,
       list: [],
       loading: false,
@@ -284,9 +254,9 @@ export default {
       page: 1,
       pageSize: 10,
       total: 0,
-      /* ── CV Preview ── */
+      /* �"?�"? CV Preview �"?�"? */
       cvPreview: null,
-      /* ── Message Detail ── */
+      /* �"?�"? Message Detail �"?�"? */
       messageDetail: null,
     };
   },
@@ -305,9 +275,9 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55, align: "center" },
         { title: "Ứng viên", dataIndex: "fullName", key: "fullName", scopedSlots: { customRender: "fullName" } },
         { title: "SĐT", dataIndex: "phoneNumber", key: "phoneNumber", scopedSlots: { customRender: "phoneNumber" }, width: 150 },
-        { title: "Giới thiệu", dataIndex: "message", key: "message", scopedSlots: { customRender: "message" }, width: 220 },
+        { title: "Gi�>i thi�?u", dataIndex: "message", key: "message", scopedSlots: { customRender: "message" }, width: 220 },
         { title: "CV", dataIndex: "cvUrl", key: "cvUrl", scopedSlots: { customRender: "cvUrl" }, width: 140 },
-        { title: "Ngày nộp", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 110 },
+        { title: "Ngày n�Tp", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 110 },
         { title: "", key: "action", scopedSlots: { customRender: "action" }, width: 50 },
       ];
     },
@@ -318,47 +288,25 @@ export default {
         total: this.total,
         showSizeChanger: true,
         pageSizeOptions: ["10", "20", "50"],
-        showTotal: (t) => `Tổng ${t} ứng viên`,
+        showTotal: (t) => `T�.ng ${t} ứng viên`,
       };
     },
   },
   mounted() {
     this.loadJobs();
   },
-=======
-      list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
-    };
-  },
-  computed: {
-    columns() {
-      return [
-        { title: "#", dataIndex: "ord", key: "ord", width: 55 },
-        { title: "Họ tên", dataIndex: "fullName", key: "fullName" },
-        { title: "Vị trí", dataIndex: "position", key: "position" },
-        { title: "Email", dataIndex: "email", key: "email" },
-        { title: "SĐT", dataIndex: "phoneNumber", key: "phoneNumber", width: 130 },
-        { title: "Nội dung", dataIndex: "message", key: "message", ellipsis: true },
-        { title: "CV", dataIndex: "cvUrl", key: "cvUrl", scopedSlots: { customRender: "cvUrl" }, width: 100 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
-      ];
-    },
-    pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
-  },
-  mounted() { this.fetchList(); },
->>>>>>> feature_khuong_dev
   methods: {
     toFullUrl(url) {
       if (!url) return "";
       return /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
     },
-<<<<<<< HEAD
     formatDate(dateStr) {
       if (!dateStr) return "";
       const d = new Date(dateStr);
       return isNaN(d) ? dateStr : d.toLocaleDateString("vi-VN");
     },
 
-    /* ── View 1 ── */
+    /* �"?�"? View 1 �"?�"? */
     async loadJobs() {
       this.loadingJobs = true;
       try {
@@ -370,7 +318,7 @@ export default {
         this.jobs = res && res.data ? res.data.records || [] : [];
       } catch {
         this.jobs = [];
-        this.$message.error("Không thể tải danh sách vị trí!");
+        this.$message.error("Không th�f tải danh sách vị trí!");
       } finally {
         this.loadingJobs = false;
       }
@@ -389,7 +337,7 @@ export default {
       this.total = 0;
     },
 
-    /* ── View 2 ── */
+    /* �"?�"? View 2 �"?�"? */
     async fetchList() {
       this.loading = true;
       try {
@@ -413,7 +361,7 @@ export default {
           this.total = 0;
         }
       } catch {
-        this.$message.error("Không thể tải dữ liệu!");
+        this.$message.error("Không th�f tải dữ li�?u!");
       } finally {
         this.loading = false;
       }
@@ -428,38 +376,22 @@ export default {
       this.fetchList();
     },
 
-=======
-    async fetchList() {
-      this.loading = true;
-      try {
-        const res = await getListSendMailCareer({ languageCode: this.langCode, keyWord: this.keyword || undefined, currentPage: this.page, recordPerPage: this.pageSize });
-        if (res && res.data) {
-          const records = res.data.records || [];
-          this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
-          this.total = res.data.totalRecord || 0;
-        } else { this.list = []; this.total = 0; }
-      } catch { this.$message.error("Không thể tải dữ liệu!"); }
-      finally { this.loading = false; }
-    },
-    onTableChange(pag) { this.page = pag.current; this.fetchList(); },
->>>>>>> feature_khuong_dev
     async remove(record) {
       try {
         await deleteMailCareer(record.applicantId);
         this.$message.success("Đã xóa!");
         this.fetchList();
-<<<<<<< HEAD
       } catch {
         this.$message.error("Xóa thất bại!");
       }
     },
 
-    /* ── Message Detail ── */
+    /* �"?�"? Message Detail �"?�"? */
     showMessage(record) {
       this.messageDetail = record;
     },
 
-    /* ── CV Preview ── */
+    /* �"?�"? CV Preview �"?�"? */
     previewCv(record) {
       this.cvPreview = record;
     },
@@ -468,19 +400,15 @@ export default {
     },
     isCvImage(url) {
       return /\.(jpe?g|png|gif|webp|bmp)$/i.test(url || "");
-=======
-      } catch { this.$message.error("Xóa thất bại!"); }
->>>>>>> feature_khuong_dev
     },
   },
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .career-page { padding: 24px; }
 
-/* ── Header ── */
+/* �"?�"? Header �"?�"? */
 .page-header { margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start; }
 .title { font-size: 24px; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.02em; }
 .subtitle { font-size: 13px; color: #94a3b8; margin: 4px 0 0; }
@@ -488,7 +416,7 @@ export default {
 
 .loading-center { display: flex; justify-content: center; padding: 80px 0; }
 
-/* ── Job cards grid ── */
+/* �"?�"? Job cards grid �"?�"? */
 .job-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -563,7 +491,7 @@ export default {
 .job-date { font-size: 12px; color: #94a3b8; }
 .view-cv-btn { margin-left: auto; font-weight: 600; padding: 0; }
 
-/* ── Breadcrumb header (View 2) ── */
+/* �"?�"? Breadcrumb header (View 2) �"?�"? */
 .breadcrumb-header { display: flex; flex-direction: column; }
 .back-link {
   font-size: 13px;
@@ -593,7 +521,7 @@ export default {
   border: 1px solid #e0e7ff;
 }
 
-/* ── Applicant table custom cells ── */
+/* �"?�"? Applicant table custom cells �"?�"? */
 .applicant-name {
   display: flex;
   align-items: center;
@@ -644,7 +572,7 @@ export default {
 .cv-download:hover { background: #6366f1; color: #fff; }
 .no-cv { color: #cbd5e1; font-size: 12px; }
 
-/* ── CV Preview Modal ── */
+/* �"?�"? CV Preview Modal �"?�"? */
 .cv-preview-container { display: flex; flex-direction: column; height: 85vh; }
 .cv-preview-header {
   display: flex;
@@ -672,7 +600,7 @@ export default {
   color: #94a3b8;
 }
 
-/* ── Message Detail Modal ── */
+/* �"?�"? Message Detail Modal �"?�"? */
 .msg-detail-header {
   display: flex;
   align-items: center;
@@ -696,10 +624,4 @@ export default {
 @media (max-width: 768px) {
   .job-grid { grid-template-columns: 1fr; }
 }
-=======
-.page-wrap { padding: 24px; }
-.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.title { font-size: 22px; font-weight: 600; color: #1e293b; margin: 0; }
-.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
->>>>>>> feature_khuong_dev
 </style>

@@ -92,17 +92,17 @@
           <template #requestAction="record">
             <a-dropdown>
               <a class="ant-dropdown-link" @click.prevent>
-                Hành động <a-icon type="down" />
+                Hành Động <a-icon type="down" />
               </a>
               <a-menu slot="overlay">
                 <a-menu-item @click="openRequestDetail(record)">
                   <a-icon type="eye" /> Chi tiết
                 </a-menu-item>
                 <a-menu-item @click="openApprove(record)">
-                  <a-icon type="check" /> Duyệt
+                  <a-icon type="check" /> Duy�?t
                 </a-menu-item>
                 <a-menu-item @click="openReject(record)">
-                  <a-icon type="close" /> Từ chối
+                  <a-icon type="close" /> Từ ch�'i
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -169,8 +169,8 @@
 
     <a-modal
       :visible="approveVisible"
-      title="Duyệt yêu cầu API Key"
-      ok-text="Duyệt"
+      title="Duy�?t yêu cầu API Key"
+      ok-text="Duy�?t"
       cancel-text="Hủy"
       :confirm-loading="approveLoading"
       @ok="submitApprove"
@@ -190,19 +190,19 @@
 
     <a-modal
       :visible="rejectVisible"
-      title="Từ chối yêu cầu API Key"
-      ok-text="Từ chối"
+      title="Từ ch�'i yêu cầu API Key"
+      ok-text="Từ ch�'i"
       cancel-text="Hủy"
       :confirm-loading="rejectLoading"
       @ok="submitReject"
       @cancel="rejectVisible = false"
     >
       <a-form-model layout="vertical">
-        <a-form-model-item label="Lý do từ chối">
+        <a-form-model-item label="Lý do từ ch�'i">
           <a-textarea
             v-model="rejectForm.reason"
             :rows="3"
-            placeholder="Nhập lý do từ chối"
+            placeholder="Nhập lý do từ ch�'i"
           />
         </a-form-model-item>
       </a-form-model>
@@ -286,7 +286,7 @@ export default {
         { title: "ExpiredAt", dataIndex: "expiredAt", key: "expiredAt", scopedSlots: { customRender: "date" }, width: 160 },
         { title: "LastUsedAt", dataIndex: "lastUsedAt", key: "lastUsedAt", scopedSlots: { customRender: "date" }, width: 160 },
         { title: "CreatedAt", dataIndex: "createdAt", key: "createdAt", scopedSlots: { customRender: "date" }, width: 160 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
       ];
     },
     keyPagination() {
@@ -307,7 +307,7 @@ export default {
         { title: "Phone", dataIndex: "phoneNumber", key: "phoneNumber", width: 140 },
         { title: "Status", dataIndex: "status", key: "status", scopedSlots: { customRender: "requestStatus" }, width: 120 },
         { title: "CreatedAt", dataIndex: "createdAt", key: "createdAt", scopedSlots: { customRender: "date" }, width: 160 },
-        { title: "Hành động", key: "requestAction", scopedSlots: { customRender: "requestAction" }, width: 140 },
+        { title: "Hành Động", key: "requestAction", scopedSlots: { customRender: "requestAction" }, width: 140 },
       ];
     },
     requestPagination() {
@@ -352,9 +352,9 @@ export default {
     },
     requestStatusText(status) {
       const map = {
-        0: "Chờ duyệt",
-        1: "Đã duyệt",
-        2: "Từ chối",
+        0: "Chờ duy�?t",
+        1: "Đã duy�?t",
+        2: "Từ ch�'i",
       };
       return map[Number(status)] || `Status ${status}`;
     },
@@ -378,7 +378,7 @@ export default {
         await navigator.clipboard.writeText(text);
         this.$message.success("Đã copy API key");
       } catch (error) {
-        this.$message.error("Không thể copy API key");
+        this.$message.error("Không th�f copy API key");
       }
     },
 
@@ -411,7 +411,7 @@ export default {
           ord: (this.keyPage - 1) * this.keyPageSize + index + 1,
         }));
       } catch (error) {
-        this.$message.error("Không thể tải danh sách API key");
+        this.$message.error("Không th�f tải danh sách API key");
       } finally {
         this.keyLoading = false;
       }
@@ -452,7 +452,7 @@ export default {
         this.apiKeyDetail = res?.data || { ...record };
       } catch (error) {
         this.apiKeyDetail = { ...record };
-        this.$message.error("Không thể tải chi tiết API key");
+        this.$message.error("Không th�f tải chi tiết API key");
       } finally {
         this.apiKeyDetailLoading = false;
       }
@@ -474,7 +474,7 @@ export default {
           ord: (this.requestPage - 1) * this.requestPageSize + index + 1,
         }));
       } catch (error) {
-        this.$message.error("Không thể tải danh sách yêu cầu API key");
+        this.$message.error("Không th�f tải danh sách yêu cầu API key");
       } finally {
         this.requestLoading = false;
       }
@@ -500,7 +500,7 @@ export default {
         this.requestDetail = res?.data || { ...record };
       } catch (error) {
         this.requestDetail = { ...record };
-        this.$message.error("Không thể tải chi tiết yêu cầu");
+        this.$message.error("Không th�f tải chi tiết yêu cầu");
       } finally {
         this.requestDetailLoading = false;
       }
@@ -520,12 +520,12 @@ export default {
           expiredAt: this.formatDateForRequest(this.approveForm.expiredAt),
         };
         await approveApiKeyRequest(body);
-        this.$message.success("Duyệt yêu cầu thành công");
+        this.$message.success("Duy�?t yêu cầu thành công");
         this.approveVisible = false;
         this.fetchRequestList();
         if (this.activeTab === "keys") this.fetchApiKeyList();
       } catch (error) {
-        this.$message.error("Duyệt yêu cầu thất bại");
+        this.$message.error("Duy�?t yêu cầu thất bại");
       } finally {
         this.approveLoading = false;
       }
@@ -545,11 +545,11 @@ export default {
           rejectReason: this.rejectForm.reason || "",
         };
         await rejectApiKeyRequest(body);
-        this.$message.success("Từ chối yêu cầu thành công");
+        this.$message.success("Từ ch�'i yêu cầu thành công");
         this.rejectVisible = false;
         this.fetchRequestList();
       } catch (error) {
-        this.$message.error("Từ chối yêu cầu thất bại");
+        this.$message.error("Từ ch�'i yêu cầu thất bại");
       } finally {
         this.rejectLoading = false;
       }

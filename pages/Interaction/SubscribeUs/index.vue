@@ -32,7 +32,7 @@ export default {
       return [
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Email", dataIndex: "email", key: "email" },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
       ];
     },
     pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
@@ -48,7 +48,7 @@ export default {
           this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
           this.total = res.data.totalRecord || 0;
         } else { this.list = []; this.total = 0; }
-      } catch { this.$message.error("Không thể tải dữ liệu!"); }
+      } catch { this.$message.error("Không th�f tải dữ li�?u!"); }
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },

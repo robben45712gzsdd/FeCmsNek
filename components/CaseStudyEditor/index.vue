@@ -3,7 +3,7 @@
     <!-- LEFT PANEL -->
     <div id="left-panel">
       <div id="panel-header">
-        <div class="logo">✦</div>
+        <div class="logo">�o�</div>
         <div>
           <div class="title">Case Study Editor</div>
           <div class="subtitle">Block Builder · {{ blocks.length }} block{{ blocks.length !== 1 ? 's' : '' }}</div>
@@ -15,7 +15,7 @@
           <div class="section-title"><span class="bar" /> About Project</div>
           <div class="field-group">
             <div>
-              <label class="field-label">Văn bản giới thiệu (dùng {{text}} để bôi màu)</label>
+              <label class="field-label">V�fn bản gi�>i thi�?u (dùng {{text}} và bôi màu)</label>
               <textarea
                 v-model="meta.aboutText"
                 rows="3"
@@ -32,16 +32,16 @@
             <div>
               <label class="field-label">Font chữ toàn trang</label>
               <select class="meta-select" v-model="meta.globalFont">
-                <option value="">── Default (Inter) ──</option>
+                <option value="">�"?�"? Default (Inter) �"?�"?</option>
                 <template v-for="f in fontFamilies">
                   <option v-if="f.value" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </template>
               </select>
             </div>
             <div class="typo-section" style="margin-top:4px">
-              <div class="typo-section-header">Kiểu chữ — About</div>
+              <div class="typo-section-header">Ki�fu chữ �?" About</div>
               <div class="typo-row">
-                <span class="typo-row-label">Tiêu đề</span>
+                <span class="typo-row-label">Tiêu �'ề</span>
                 <select class="typo-select" v-model="meta.aboutTitleTypo.fontFamily">
                   <option v-for="f in fontFamilies" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </select>
@@ -51,7 +51,7 @@
                 <button class="typo-btn typo-italic" :class="{ active: meta.aboutTitleTypo.italic }" type="button" @click="meta.aboutTitleTypo.italic = !meta.aboutTitleTypo.italic">I</button>
               </div>
               <div class="typo-row">
-                <span class="typo-row-label">Nội dung</span>
+                <span class="typo-row-label">N�Ti dung</span>
                 <select class="typo-select" v-model="meta.aboutBodyTypo.fontFamily">
                   <option v-for="f in fontFamilies" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </select>
@@ -64,16 +64,16 @@
           </div>
         </div>
 
-        <div class="blocks-label">— Blocks —</div>
+        <div class="blocks-label">�?" Blocks �?"</div>
         <BlockList :blocks="blocks" @change-blocks="blocks = $event" />
       </div>
 
       <div id="panel-footer">
         <input ref="loadFileInput" type="file" accept=".html,.htm" style="display:none" @change="onLoadFileChange" />
-        <button class="btn-load" @click="loadFromFile">📂 Load HTML</button>
-        <button class="btn-primary" @click="download">⬇ Tải HTML</button>
+        <button class="btn-load" @click="loadFromFile">ðŸ“‚ Load HTML</button>
+        <button class="btn-primary" @click="download">�? Tải HTML</button>
         <button class="btn-copy" :class="{ copied }" @click="copyCode">
-          {{ copied ? '✓ Copied' : 'Copy' }}
+          {{ copied ? '�o" Copied' : 'Copy' }}
         </button>
       </div>
     </div>
@@ -134,21 +134,21 @@ async function deletePendingUrl(url) {
 let _id = 100;
 const uid = () => ++_id;
 
-// Forward reference – assigned after BlockList is defined (for circular use in SolutionEditor)
+// Forward reference �?" assigned after BlockList is defined (for circular use in SolutionEditor)
 let _BlockList;
 
 const BLOCK_TYPES = [
-  { type: "challenge", icon: "⚡", label: "Challenge / Text với bullet list" },
-  { type: "solution", icon: "🧩", label: "Solution (sidebar feature + content)" },
-  { type: "text-section", icon: "📝", label: "Text Section (tiêu đề + nội dung)" },
-  { type: "image", icon: "🖼", label: "Hình ảnh" }
+  { type: "challenge", icon: "*", label: "Challenge / Text voi bullet list" },
+  { type: "solution", icon: "S", label: "Solution (sidebar feature + content)" },
+  { type: "text-section", icon: "T", label: "Text Section (tieu de + noi dung)" },
+  { type: "image", icon: "I", label: "Hinh anh" }
 ];
 
 const TYPE_META = {
-  challenge: { icon: "⚡", color: "#f59e0b", label: "Challenge" },
-  solution: { icon: "🧩", color: "#6366f1", label: "Solution" },
-  "text-section": { icon: "📝", color: "#10b981", label: "Text Section" },
-  image: { icon: "🖼", color: "#3b82f6", label: "Image" }
+  challenge: { icon: "�s�", color: "#f59e0b", label: "Challenge" },
+  solution: { icon: "ðŸ§©", color: "#6366f1", label: "Solution" },
+  "text-section": { icon: "ðŸ“", color: "#10b981", label: "Text Section" },
+  image: { icon: "ðŸ–¼", color: "#3b82f6", label: "Image" }
 };
 
 const DEFAULT_BLOCKS = [
@@ -229,12 +229,11 @@ const Txa = {
   }
 };
 
-<<<<<<< HEAD
 /** Rich text editor (contenteditable) for body fields */
 const RichTxa = {
   props: {
     value: { type: String, default: "" },
-    placeholder: { type: String, default: "Nhập nội dung..." },
+    placeholder: { type: String, default: "Nhập n�Ti dung..." },
   },
   data() {
     return { focused: false };
@@ -280,10 +279,10 @@ const RichTxa = {
         h("button", { attrs: { type: "button", title: "Italic" }, class: "rtb rtb-italic", on: { click: () => this.exec("italic") } }, ["I"]),
         h("button", { attrs: { type: "button", title: "Underline" }, class: "rtb", on: { click: () => this.exec("underline") } }, ["U"]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Bullet list" }, class: "rtb", on: { click: () => this.exec("insertUnorderedList") } }, ["•"]),
+        h("button", { attrs: { type: "button", title: "Bullet list" }, class: "rtb", on: { click: () => this.exec("insertUnorderedList") } }, ["�?�"]),
         h("button", { attrs: { type: "button", title: "Numbered list" }, class: "rtb", on: { click: () => this.exec("insertOrderedList") } }, ["1."]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Link" }, class: "rtb", on: { click: this.insertLink } }, ["🔗"]),
+        h("button", { attrs: { type: "button", title: "Link" }, class: "rtb", on: { click: this.insertLink } }, ["ðŸ”—"]),
         h("div", { class: "rtb-color-wrap" }, [
           h("button", { attrs: { type: "button", title: "Màu chữ" }, class: "rtb", on: { click: this.setColor } }, ["A"]),
           h("input", {
@@ -294,7 +293,7 @@ const RichTxa = {
           }),
         ]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Xóa format" }, class: "rtb", on: { click: () => this.exec("removeFormat") } }, ["✕"]),
+        h("button", { attrs: { type: "button", title: "Xóa format" }, class: "rtb", on: { click: () => this.exec("removeFormat") } }, ["�o."]),
       ]),
       h("div", {
         ref: "editor",
@@ -321,8 +320,6 @@ const RichTxa = {
   },
 };
 
-=======
->>>>>>> feature_khuong_dev
 const ListEditor = {
   props: {
     items: { type: Array, default: () => [] }
@@ -359,25 +356,25 @@ const ListEditor = {
               h(
                 "button",
                 { on: { click: () => this.move(i, -1) } },
-                "▲"
+                "�-�"
               ),
               h(
                 "button",
                 { on: { click: () => this.move(i, 1) } },
-                "▼"
+                "�-�"
               )
             ]),
-            h("span", { class: "list-bullet" }, "•"),
+            h("span", { class: "list-bullet" }, "�?�"),
             h("input", {
               class: "item-input",
-              attrs: { type: "text", placeholder: "Nhập nội dung..." },
+              attrs: { type: "text", placeholder: "Nhập n�Ti dung..." },
               domProps: { value: item },
               on: { input: (e) => this.updateItem(i, e.target.value) }
             }),
             h(
               "button",
               { class: "list-remove-btn", on: { click: () => this.remove(i) } },
-              "×"
+              "�-"
             )
           ]
         )
@@ -391,9 +388,9 @@ const ListEditor = {
   }
 };
 
-/* ── Typography helpers ── */
+/* Typography helpers */
 const FONT_FAMILIES = [
-  { value: "", label: "── Default ──", group: "" },
+  { value: "", label: "Default", group: "" },
   // Sans-serif
   { value: "Inter", label: "Inter", group: "Sans-serif" },
   { value: "Roboto", label: "Roboto", group: "Sans-serif" },
@@ -440,7 +437,7 @@ function renderTypoRow(h, label, typo, onChange) {
     h("input", {
       class: "typo-size",
       attrs: { type: "number", min: 8, max: 96, step: 1 },
-      domProps: { value: t.fontSize || (label === "Tiêu đề" ? 32 : 16) },
+      domProps: { value: t.fontSize || (label === "Tiêu �'ề" ? 32 : 16) },
       on: { input: (e) => onChange({ ...t, fontSize: Number(e.target.value) || 16 }) }
     }),
     h("span", { class: "typo-unit" }, ["px"]),
@@ -487,17 +484,13 @@ const ChallengeEditor = {
   render(h) {
     const b = this.block;
     return h("div", { class: "block-body" }, [
-      h("div", [h(Label, null, ["Tiêu đề"]), h(Inp, { props: { value: b.title, placeholder: "Challenge" }, on: { "input-value": (v) => this.up("title", v) } })]),
-<<<<<<< HEAD
+      h("div", [h(Label, null, ["Tiêu �'ề"]), h(Inp, { props: { value: b.title, placeholder: "Challenge" }, on: { "input-value": (v) => this.up("title", v) } })]),
       h("div", [h(Label, null, ["Đoạn intro (tuỳ chọn)"]), h(RichTxa, { props: { value: b.intro, placeholder: "Nhập mô tả..." }, on: { "input-value": (v) => this.up("intro", v) } })]),
-=======
-      h("div", [h(Label, null, ["Đoạn intro (tuỳ chọn)"]), h(Txa, { props: { value: b.intro, rows: 2, placeholder: "Nhập mô tả..." }, on: { "input-value": (v) => this.up("intro", v) } })]),
->>>>>>> feature_khuong_dev
       h("div", [h(Label, null, ["Danh sách bullet"]), h(ListEditor, { props: { items: b.items || [] }, on: { "update-items": (items) => this.up("items", items) } })]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
-        renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
-        renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
+        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        renderTypoRow(h, "Tiêu �'ề", b.titleTypo, (v) => this.up("titleTypo", v)),
+        renderTypoRow(h, "N�Ti dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
     ]);
   }
@@ -513,16 +506,12 @@ const TextSectionEditor = {
   render(h) {
     const b = this.block;
     return h("div", { class: "block-body" }, [
-      h("div", [h(Label, null, ["Tiêu đề"]), h(Inp, { props: { value: b.title, placeholder: "Tiêu đề..." }, on: { "input-value": (v) => this.up("title", v) } })]),
-<<<<<<< HEAD
-      h("div", [h(Label, null, ["Nội dung"]), h(RichTxa, { props: { value: b.body, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
-=======
-      h("div", [h(Label, null, ["Nội dung"]), h(Txa, { props: { value: b.body, rows: 3, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
->>>>>>> feature_khuong_dev
+      h("div", [h(Label, null, ["Tiêu �'ề"]), h(Inp, { props: { value: b.title, placeholder: "Tiêu �'ề..." }, on: { "input-value": (v) => this.up("title", v) } })]),
+      h("div", [h(Label, null, ["N�Ti dung"]), h(RichTxa, { props: { value: b.body, placeholder: "N�Ti dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
-        renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
-        renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
+        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        renderTypoRow(h, "Tiêu �'ề", b.titleTypo, (v) => this.up("titleTypo", v)),
+        renderTypoRow(h, "N�Ti dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
     ]);
   }
@@ -564,7 +553,7 @@ const ImageEditor = {
           this.$message.error(res?.message || "Tải ảnh thất bại!");
         }
       } catch (err) {
-        this.$message.error("Lỗi khi tải ảnh!");
+        this.$message.error("L�-i khi tải ảnh!");
       } finally {
         this.uploading = false;
         e.target.value = "";
@@ -587,7 +576,7 @@ const ImageEditor = {
             class: "btn-upload-img",
             attrs: { type: "button", disabled: this.uploading },
             on: { click: this.triggerUpload }
-          }, [this.uploading ? "⏳ Đang tải..." : "📁 Chọn ảnh"]),
+          }, [this.uploading ? "Dang tai..." : "Chon anh"]),
           b.url
             ? h("span", { style: { fontSize: "11px", color: "#6b7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "160px", display: "inline-block" } }, [b.url])
             : h("span", { style: { fontSize: "11px", color: "#9ca3af" } }, ["Chưa chọn ảnh"]),
@@ -596,7 +585,7 @@ const ImageEditor = {
                 class: "btn-clear-img",
                 attrs: { type: "button", title: "Xóa ảnh" },
                 on: { click: this.clearImage }
-              }, ["× Xóa"])
+              }, ["�- Xóa"])
             : null
         ])
       ]),
@@ -604,7 +593,7 @@ const ImageEditor = {
       // Size controls
       h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "6px" } }, [
         h("div", [
-          h(Label, null, ["Cỡ rộng (" + (b.width || 100) + "%]"]),
+          h(Label, null, ["Cỡ r�Tng (" + (b.width || 100) + "%]"]),
           h("input", {
             attrs: { type: "range", min: 10, max: 100, step: 5, value: b.width || 100 },
             style: { width: "100%", accentColor: "#6366f1", cursor: "pointer" },
@@ -621,9 +610,9 @@ const ImageEditor = {
         ])
       ]),
       h("div", { style: { marginTop: "6px" } }, [
-        h(Label, null, ["Căn lề"]),
+        h(Label, null, ["Can le"]),
         h("div", { style: { display: "flex", gap: "6px", marginTop: "4px" } },
-          [["left", "⇤ Trái"], ["center", "— Giữa"], ["right", "Phải ⇥"]].map(([val, label]) =>
+          [["left", "Trai"], ["center", "Giua"], ["right", "Phai"]].map(([val, label]) =>
             h("button", {
               class: "btn-align" + (b.align === val || (!b.align && val === "center") ? " active" : ""),
               attrs: { type: "button" },
@@ -639,7 +628,7 @@ const ImageEditor = {
   }
 };
 
-// ── SolutionEditor: defined outside BlockList, uses _BlockList forward ref ──
+// �"?�"? SolutionEditor: defined outside BlockList, uses _BlockList forward ref �"?�"?
 const SolutionEditor = {
   props: { block: Object },
   methods: {
@@ -655,24 +644,20 @@ const SolutionEditor = {
         h(ListEditor, { props: { items: b.featureItems || [] }, on: { "update-items": (items) => this.up("featureItems", items) } })
       ]),
       h("div", [
-        h(Label, null, ["Tiêu đề solution"]),
+        h(Label, null, ["Tiêu �'ề solution"]),
         h(Inp, { props: { value: b.solutionTitle, placeholder: "Solution" }, on: { "input-value": (v) => this.up("solutionTitle", v) } })
       ]),
       h("div", [
-        h(Label, null, ["Nội dung solution"]),
-<<<<<<< HEAD
-        h(RichTxa, { props: { value: b.solutionText, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
-=======
-        h(Txa, { props: { value: b.solutionText, rows: 3, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
->>>>>>> feature_khuong_dev
+        h(Label, null, ["N�Ti dung solution"]),
+        h(RichTxa, { props: { value: b.solutionText, placeholder: "N�Ti dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
       ]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
-        renderTypoRow(h, "Tiêu đề", b.solutionTitleTypo, (v) => this.up("solutionTitleTypo", v)),
-        renderTypoRow(h, "Nội dung", b.solutionBodyTypo, (v) => this.up("solutionBodyTypo", v)),
+        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        renderTypoRow(h, "Tiêu �'ề", b.solutionTitleTypo, (v) => this.up("solutionTitleTypo", v)),
+        renderTypoRow(h, "N�Ti dung", b.solutionBodyTypo, (v) => this.up("solutionBodyTypo", v)),
       ]),
       h("div", { class: "subblock-divider" }, [
-        h("div", { class: "subblock-title" }, "Nội dung bên trong solution"),
+        h("div", { class: "subblock-title" }, "N�Ti dung bên trong solution"),
         h(_BlockList, {
           props: { blocks: b.subBlocks || [], allowedTypes: ["image", "text-section", "challenge"], nested: true },
           on: { "change-blocks": (subs) => this.$emit("change-block", { ...b, subBlocks: subs }) }
@@ -682,14 +667,14 @@ const SolutionEditor = {
   }
 };
 
-// ── BlockCard: defined outside BlockList for stable component identity ──
+// �"?�"? BlockCard: defined outside BlockList for stable component identity �"?�"?
 const BlockCard = {
   props: { block: Object, canMoveUp: Boolean, canMoveDown: Boolean, nested: Boolean },
   data() {
     return { open: true };
   },
   render(h) {
-    const meta = TYPE_META[this.block.type] || { icon: "◻", color: "#94a3b8", label: this.block.type };
+    const meta = TYPE_META[this.block.type] || { icon: "�-�", color: "#94a3b8", label: this.block.type };
     const subtitle = this.block.title || this.block.solutionTitle || "";
     return h("div", {
       class: ["block-card", this.nested ? "nested" : ""],
@@ -699,19 +684,19 @@ const BlockCard = {
         h("span", { class: "block-icon" }, meta.icon),
         h("span", { class: "block-label", style: { color: meta.color } }, [
           meta.label,
-          subtitle ? h("span", { class: "block-subtitle" }, `— ${subtitle}`) : null
+          subtitle ? h("span", { class: "block-subtitle" }, `- ${subtitle}`) : null
         ]),
         !this.nested
           ? h("div", { class: "block-move-btns", on: { click: (e) => e.stopPropagation() } }, [
-              h("button", { attrs: { disabled: !this.canMoveUp }, on: { click: () => this.$emit("move", -1) } }, "↑"),
-              h("button", { attrs: { disabled: !this.canMoveDown }, on: { click: () => this.$emit("move", 1) } }, "↓")
+              h("button", { attrs: { disabled: !this.canMoveUp }, on: { click: () => this.$emit("move", -1) } }, "Up"),
+              h("button", { attrs: { disabled: !this.canMoveDown }, on: { click: () => this.$emit("move", 1) } }, "Down")
             ])
           : null,
         h("button", {
           class: "block-delete-btn",
           on: { click: (e) => { e.stopPropagation(); this.$emit("delete"); } }
-        }, "×"),
-        h("span", { class: "block-toggle" }, this.open ? "▲" : "▼")
+        }, "�-"),
+        h("span", { class: "block-toggle" }, this.open ? "�-�" : "�-�")
       ]),
       this.open
         ? h("div", null, [
@@ -751,7 +736,7 @@ const BlockList = {
     addBlock(type) {
       const defaults = {
         challenge: { title: "New Section", intro: "", items: [""] },
-        "text-section": { title: "Tiêu đề", body: "" },
+        "text-section": { title: "Tiêu �'ề", body: "" },
         image: { url: "", alt: "" },
         solution: { featureItems: ["Feature 1"], solutionTitle: "Solution", solutionText: "", subBlocks: [] }
       };
@@ -849,7 +834,6 @@ function blockToHTML(block, indent) {
   }
   if (block.type === "challenge") {
     const listHTML = (block.items || []).filter(Boolean).map((x) => `${i}    <li${typoStyle(block.bodyTypo)}>${esc(x)}</li>`).join("\n");
-<<<<<<< HEAD
     const introContent = block.intro || "";
     // intro may contain rich HTML from RichTxa, pass it through
     return `${i}<div class="challenge-section">\n${i}  <h2${typoStyle(block.titleTypo)}>${esc(block.title)}</h2>\n${introContent ? `${i}  <div${typoStyle(block.bodyTypo)}>${introContent}</div>\n` : ""}${listHTML ? `${i}  <ul class="challenge-list">\n${listHTML}\n${i}  </ul>` : ""}\n${i}</div>`;
@@ -857,22 +841,12 @@ function blockToHTML(block, indent) {
   if (block.type === "text-section") {
     const bodyContent = block.body || "";
     return `${i}<div class="text-section">\n${i}  <h2${typoStyle(block.titleTypo)}>${esc(block.title)}</h2>\n${i}  <div${typoStyle(block.bodyTypo)}>${bodyContent}</div>\n${i}</div>`;
-=======
-    return `${i}<div class="challenge-section">\n${i}  <h2${typoStyle(block.titleTypo)}>${esc(block.title)}</h2>\n${block.intro ? `${i}  <p${typoStyle(block.bodyTypo)}>${esc(block.intro)}</p>\n` : ""}${listHTML ? `${i}  <ul class="challenge-list">\n${listHTML}\n${i}  </ul>` : ""}\n${i}</div>`;
-  }
-  if (block.type === "text-section") {
-    return `${i}<div class="text-section">\n${i}  <h2${typoStyle(block.titleTypo)}>${esc(block.title)}</h2>\n${i}  <p${typoStyle(block.bodyTypo)}>${esc(block.body)}</p>\n${i}</div>`;
->>>>>>> feature_khuong_dev
   }
   if (block.type === "solution") {
     const features = (block.featureItems || []).map((f) => `      <div class="feature-item">${esc(f)}</div>`).join("\n");
     const subHTML = (block.subBlocks || []).map((sb) => blockToHTML(sb, "      ")).join("\n");
-<<<<<<< HEAD
     const solutionContent = block.solutionText || "";
     return `${i}<div class="solution-container">\n${i}  <div class="feature-sidebar">\n${features}\n${i}  </div>\n${i}  <div class="solution-content">\n${i}    <h2${typoStyle(block.solutionTitleTypo)}>${esc(block.solutionTitle)}</h2>\n${i}    <div${typoStyle(block.solutionBodyTypo)}>${solutionContent}</div>\n${subHTML}\n${i}  </div>\n${i}</div>`;
-=======
-    return `${i}<div class="solution-container">\n${i}  <div class="feature-sidebar">\n${features}\n${i}  </div>\n${i}  <div class="solution-content">\n${i}    <h2${typoStyle(block.solutionTitleTypo)}>${esc(block.solutionTitle)}</h2>\n${i}    <p${typoStyle(block.solutionBodyTypo)}>${esc(block.solutionText)}</p>\n${subHTML}\n${i}  </div>\n${i}</div>`;
->>>>>>> feature_khuong_dev
   }
   return "";
 }
@@ -916,15 +890,11 @@ ${fontLink}  <style>
     .challenge-section { margin-bottom: 50px; }
     .text-section { margin-bottom: 40px; }
     .challenge-section h2, .text-section h2 { font-weight: 700; font-size: 32px; line-height: 40px; color: #000; margin-bottom: 16px; }
-<<<<<<< HEAD
     .challenge-section p, .challenge-section div, .text-section p, .text-section div { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; margin-bottom: 12px; }
     .challenge-section a, .text-section a, .solution-content a { color: #6366f1; text-decoration: underline; }
-=======
-    .challenge-section p, .text-section p { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; margin-bottom: 12px; }
->>>>>>> feature_khuong_dev
     .challenge-list { list-style: none; padding: 0; margin: 16px 0 0 0; }
     .challenge-list li { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; padding-left: 16px; position: relative; margin-bottom: 6px; }
-    .challenge-list li::before { content: '•'; position: absolute; left: 0; color: #525252; }
+    .challenge-list li::before { content: '�?�'; position: absolute; left: 0; color: #525252; }
     .content-image { margin: 50px 0; }
     .content-image img { height: auto; }
     .solution-container { display: flex; gap: 60px; margin-bottom: 50px; align-items: flex-start; }
@@ -934,11 +904,7 @@ ${fontLink}  <style>
     .feature-item { font-weight: 500; font-size: 14px; line-height: 20px; color: #525252; margin-bottom: 8px; }
     .solution-content { flex: 1; }
     .solution-content h2 { font-weight: 700; font-size: 32px; line-height: 40px; color: #000; margin-bottom: 16px; }
-<<<<<<< HEAD
     .solution-content p, .solution-content > div { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; margin-bottom: 20px; }
-=======
-    .solution-content p { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; margin-bottom: 20px; }
->>>>>>> feature_khuong_dev
     .solution-content .text-section h2 { font-size: 20px; line-height: 51px; margin-bottom: 8px; }
     .solution-content .challenge-section h2 { font-size: 24px; }
     @media (max-width: 768px) { .solution-container { flex-direction: column; } }
@@ -962,7 +928,7 @@ ${bodyHTML}
 
 function previewBlockHTML(block, hl) {
   if (block.type === "image") {
-    if (!block.url) return "<div class=\"pv-image\"><div class=\"pv-image-placeholder\">🖼 Image placeholder</div></div>";
+    if (!block.url) return "<div class=\"pv-image\"><div class=\"pv-image-placeholder\">ðŸ–¼ Image placeholder</div></div>";
     const w = block.width || 100;
     const align = block.align || "center";
     const br = block.borderRadius !== undefined ? block.borderRadius : 8;
@@ -973,22 +939,14 @@ function previewBlockHTML(block, hl) {
     const listItems = (block.items || []).filter(Boolean).map((x) => `<li${typoStyle(block.bodyTypo)}>${esc(x)}</li>`).join("");
     return `<div class="pv-challenge">
       <div class="pv-challenge-title"${typoStyle(block.titleTypo)}>${esc(block.title)}</div>
-<<<<<<< HEAD
       ${block.intro ? `<div class="pv-challenge-intro"${typoStyle(block.bodyTypo)}>${block.intro}</div>` : ""}
-=======
-      ${block.intro ? `<p class="pv-challenge-intro"${typoStyle(block.bodyTypo)}>${esc(block.intro)}</p>` : ""}
->>>>>>> feature_khuong_dev
       ${listItems ? `<ul class="pv-list">${listItems}</ul>` : ""}
     </div>`;
   }
   if (block.type === "text-section") {
     return `<div class="pv-text-section">
       <div class="pv-text-title"${typoStyle(block.titleTypo)}>${esc(block.title)}</div>
-<<<<<<< HEAD
       <div class="pv-text-body"${typoStyle(block.bodyTypo)}>${block.body || ""}</div>
-=======
-      <p class="pv-text-body"${typoStyle(block.bodyTypo)}>${esc(block.body)}</p>
->>>>>>> feature_khuong_dev
     </div>`;
   }
   if (block.type === "solution") {
@@ -998,11 +956,7 @@ function previewBlockHTML(block, hl) {
       <div class="pv-sidebar">${featureItems}</div>
       <div class="pv-solution-content">
         <div class="pv-solution-title"${typoStyle(block.solutionTitleTypo)}>${esc(block.solutionTitle)}</div>
-<<<<<<< HEAD
         <div class="pv-solution-text"${typoStyle(block.solutionBodyTypo)}>${block.solutionText || ""}</div>
-=======
-        <p class="pv-solution-text"${typoStyle(block.solutionBodyTypo)}>${esc(block.solutionText)}</p>
->>>>>>> feature_khuong_dev
         ${subHTML}
       </div>
     </div>`;
@@ -1028,7 +982,7 @@ export default {
       tab: "preview",
       copied: false,
       tabs: [
-        { id: "preview", label: "👁 Preview" },
+        { id: "preview", label: "ðŸ‘ Preview" },
         { id: "code", label: "</> HTML" }
       ]
     };
@@ -1104,7 +1058,7 @@ export default {
         const text = ev.target.result;
         const match = text.match(/<!--\s*EDITOR_DATA:(.*?)\s*-->\s*$/s);
         if (!match) {
-          this.$message ? this.$message.error("File HTML này không có dữ liệu editor!") : alert("File HTML này không có dữ liệu editor (thiếu EDITOR_DATA)!");
+          this.$message ? this.$message.error("File HTML này không có dữ li�?u editor!") : alert("File HTML này không có dữ li�?u editor (thiếu EDITOR_DATA)!");
           return;
         }
         try {
@@ -1115,9 +1069,9 @@ export default {
             const reassign = (b) => ({ ...b, id: uid(), subBlocks: b.subBlocks ? b.subBlocks.map(reassign) : undefined });
             this.blocks = data.blocks.map(reassign);
           }
-          this.$message ? this.$message.success("Đã load dữ liệu từ file HTML!") : alert("Đã load xong!");
+          this.$message ? this.$message.success("Đã load dữ li�?u từ file HTML!") : alert("Đã load xong!");
         } catch {
-          this.$message ? this.$message.error("Parse dữ liệu thất bại!") : alert("Lỗi parse JSON!");
+          this.$message ? this.$message.error("Parse dữ li�?u thất bại!") : alert("L�-i parse JSON!");
         }
       };
       reader.readAsText(file);
@@ -1142,15 +1096,9 @@ export default {
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 .case-study-root {
-<<<<<<< HEAD
   font-family: 'Inter', system-ui, sans-serif;
   background: #f8fafc;
   color: #334155;
-=======
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: #060b14;
-  color: #e2e8f0;
->>>>>>> feature_khuong_dev
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -1159,13 +1107,8 @@ export default {
 #left-panel {
   width: 400px;
   min-width: 320px;
-<<<<<<< HEAD
   background: #fff;
   border-right: 1px solid #e2e8f0;
-=======
-  background: #06090f;
-  border-right: 1px solid #0f172a;
->>>>>>> feature_khuong_dev
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1173,18 +1116,12 @@ export default {
 }
 
 #panel-header {
-<<<<<<< HEAD
   padding: 14px 16px;
   border-bottom: 1px solid #f1f5f9;
-=======
-  padding: 13px 16px;
-  border-bottom: 1px solid #0f172a;
->>>>>>> feature_khuong_dev
   display: flex;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-<<<<<<< HEAD
   background: linear-gradient(135deg, #faf5ff, #eef2ff);
 }
 
@@ -1192,60 +1129,34 @@ export default {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-=======
-}
-
-#panel-header .logo {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
->>>>>>> feature_khuong_dev
   background: linear-gradient(135deg,#6366f1,#8b5cf6);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
   flex-shrink: 0;
-<<<<<<< HEAD
   color: #fff;
   box-shadow: 0 2px 8px rgba(99,102,241,.3);
 }
 
 #panel-header .title { font-size: 13px; font-weight: 700; color: #1e293b; }
 #panel-header .subtitle { font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; }
-=======
-}
-
-#panel-header .title { font-size: 12.5px; font-weight: 700; color: #f1f5f9; }
-#panel-header .subtitle { font-size: 10px; color: #334155; text-transform: uppercase; letter-spacing: .06em; }
->>>>>>> feature_khuong_dev
 
 #panel-scroll {
   flex: 1;
   overflow-y: auto;
   padding: 14px;
   scrollbar-width: thin;
-<<<<<<< HEAD
   scrollbar-color: #e2e8f0 transparent;
-=======
-  scrollbar-color: #1e293b transparent;
->>>>>>> feature_khuong_dev
 }
 
 #panel-footer {
   padding: 12px 14px;
-<<<<<<< HEAD
   border-top: 1px solid #f1f5f9;
   display: flex;
   gap: 8px;
   flex-shrink: 0;
   background: #fafbfc;
-=======
-  border-top: 1px solid #0f172a;
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
->>>>>>> feature_khuong_dev
 }
 
 #right-panel {
@@ -1253,21 +1164,13 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-<<<<<<< HEAD
   background: #fafbfc;
-=======
->>>>>>> feature_khuong_dev
 }
 
 #tab-bar {
   padding: 8px 14px;
-<<<<<<< HEAD
   border-bottom: 1px solid #e2e8f0;
   background: #fff;
-=======
-  border-bottom: 1px solid #0f172a;
-  background: #06090f;
->>>>>>> feature_khuong_dev
   display: flex;
   gap: 4px;
   align-items: center;
@@ -1277,12 +1180,8 @@ export default {
 #tab-bar span {
   margin-left: auto;
   font-size: 10.5px;
-<<<<<<< HEAD
   color: #c7d2fe;
   font-weight: 500;
-=======
-  color: #1e293b;
->>>>>>> feature_khuong_dev
 }
 
 #right-content { flex: 1; overflow: auto; }
@@ -1300,13 +1199,8 @@ export default {
   padding: 24px;
   font-size: 11px;
   line-height: 1.75;
-<<<<<<< HEAD
   color: #64748b;
   background: #f8fafc;
-=======
-  color: #94a3b8;
-  background: #060b14;
->>>>>>> feature_khuong_dev
   font-family: 'Fira Code', 'Cascadia Code', monospace;
   white-space: pre-wrap;
   word-break: break-word;
@@ -1320,47 +1214,29 @@ label.field-label {
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #94a3b8;
   margin-bottom: 5px;
   font-family: 'Inter', system-ui, sans-serif;
-=======
-  color: #64748b;
-  margin-bottom: 5px;
-  font-family: 'DM Sans', system-ui, sans-serif;
->>>>>>> feature_khuong_dev
 }
 
 .meta-select {
   width: 100%;
   padding: 7px 10px;
-<<<<<<< HEAD
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   background: #fff;
   color: #334155;
-=======
-  border-radius: 7px;
-  border: 1px solid #1e293b;
-  background: #0b1120;
-  color: #e2e8f0;
->>>>>>> feature_khuong_dev
   font-size: 12.5px;
   font-family: inherit;
   cursor: pointer;
   outline: none;
   transition: border-color .2s;
 }
-<<<<<<< HEAD
 .meta-select:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.08); }
-=======
-.meta-select:focus { border-color: #6366f1; }
->>>>>>> feature_khuong_dev
 
 input[type="text"], textarea {
   width: 100%;
   padding: 8px 11px;
-<<<<<<< HEAD
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   background: #fff;
@@ -1372,33 +1248,14 @@ input[type="text"], textarea {
   box-sizing: border-box;
 }
 input[type="text"]:focus, textarea:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.08); }
-=======
-  border-radius: 7px;
-  border: 1px solid #1e293b;
-  background: #0b1120;
-  color: #e2e8f0;
-  font-size: 12.5px;
-  outline: none;
-  font-family: inherit;
-  transition: border-color .2s;
-  box-sizing: border-box;
-}
-input[type="text"]:focus, textarea:focus { border-color: #6366f1; }
->>>>>>> feature_khuong_dev
 textarea { resize: vertical; line-height: 1.6; display: block; }
 
 .meta-box {
   margin-bottom: 14px;
   padding: 14px;
-<<<<<<< HEAD
   background: linear-gradient(135deg, #faf5ff 0%, #eef2ff 100%);
   border-radius: 12px;
   border: 1px solid #e0e7ff;
-=======
-  background: #0a1022;
-  border-radius: 10px;
-  border: 1px solid #1e293b;
->>>>>>> feature_khuong_dev
 }
 
 .meta-box .section-title {
@@ -1416,11 +1273,7 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .meta-box .section-title .bar {
   width: 3px;
   height: 12px;
-<<<<<<< HEAD
   background: linear-gradient(180deg, #6366f1, #8b5cf6);
-=======
-  background: #6366f1;
->>>>>>> feature_khuong_dev
   border-radius: 2px;
   display: inline-block;
 }
@@ -1433,17 +1286,12 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #c7d2fe;
-=======
-  color: #1e293b;
->>>>>>> feature_khuong_dev
   margin-bottom: 10px;
   padding-left: 2px;
 }
 
 .block-card {
-<<<<<<< HEAD
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   background: #fff;
@@ -1453,22 +1301,11 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 }
 .block-card:hover { box-shadow: 0 2px 8px rgba(99,102,241,.06); }
 .block-card.nested { background: #f8fafc; margin-bottom: 8px; }
-=======
-  border-radius: 10px;
-  border: 1px solid #1e293b;
-  background: #0a1022;
-  margin-bottom: 10px;
-  overflow: hidden;
-  transition: border-color .2s;
-}
-.block-card.nested { background: #060b14; margin-bottom: 8px; }
->>>>>>> feature_khuong_dev
 
 .block-header {
   display: flex;
   align-items: center;
   gap: 8px;
-<<<<<<< HEAD
   padding: 10px 12px;
   background: #fafbfc;
   cursor: pointer;
@@ -1476,14 +1313,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   border-bottom: 1px solid #f1f5f9;
 }
 .block-card.nested .block-header { background: #f1f5f9; }
-=======
-  padding: 9px 12px;
-  background: #0d1526;
-  cursor: pointer;
-  user-select: none;
-}
-.block-card.nested .block-header { background: #080e1e; }
->>>>>>> feature_khuong_dev
 
 .block-icon { font-size: 14px; }
 .block-label {
@@ -1493,40 +1322,24 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   letter-spacing: .07em;
   flex: 1;
 }
-<<<<<<< HEAD
 .block-subtitle { color: #94a3b8; font-weight: 400; text-transform: none; margin-left: 6px; }
-=======
-.block-subtitle { color: #475569; font-weight: 400; text-transform: none; margin-left: 6px; }
->>>>>>> feature_khuong_dev
 
 .block-move-btns { display: flex; gap: 2px; }
 .block-move-btns button {
   background: none;
   border: none;
-<<<<<<< HEAD
   color: #94a3b8;
-=======
-  color: #475569;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 13px;
   padding: 0 3px;
   line-height: 1;
 }
-<<<<<<< HEAD
 .block-move-btns button:disabled { color: #e2e8f0; cursor: default; }
-=======
-.block-move-btns button:disabled { color: #1e293b; cursor: default; }
->>>>>>> feature_khuong_dev
 
 .block-delete-btn {
   background: none;
   border: none;
-<<<<<<< HEAD
   color: #fca5a5;
-=======
-  color: #ef444488;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
@@ -1534,93 +1347,54 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 }
 .block-delete-btn:hover { color: #ef4444; }
 
-<<<<<<< HEAD
 .block-toggle { color: #c7d2fe; font-size: 11px; }
-=======
-.block-toggle { color: #334155; font-size: 11px; }
->>>>>>> feature_khuong_dev
 
 .block-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
 .block-body.hidden { display: none; }
 
 .btn {
   padding: 6px 12px;
-<<<<<<< HEAD
   border-radius: 8px;
-=======
-  border-radius: 6px;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
   font-family: inherit;
-<<<<<<< HEAD
   border: 1px dashed #c7d2fe;
   background: none;
   color: #6366f1;
   transition: all .15s;
 }
 .btn:hover { border-color: #6366f1; background: #eef2ff; }
-=======
-  border: 1px dashed #1e293b;
-  background: none;
-  color: #475569;
-  transition: border-color .15s, color .15s;
-}
-.btn:hover { border-color: #334155; color: #94a3b8; }
->>>>>>> feature_khuong_dev
 .btn-cancel { width: 100%; margin-top: 8px; }
 
 .btn-align {
   flex: 1;
   padding: 4px 6px;
-<<<<<<< HEAD
   border-radius: 6px;
   border: 1px solid #e2e8f0;
   cursor: pointer;
   background: #fff;
-=======
-  border-radius: 4px;
-  border: 1px solid #1e293b;
-  cursor: pointer;
-  background: #0f172a;
->>>>>>> feature_khuong_dev
   color: #64748b;
   font-size: 11px;
   font-family: inherit;
   transition: all .15s;
 }
-<<<<<<< HEAD
 .btn-align.active { border-color: #6366f1; color: #6366f1; background: #eef2ff; }
 .btn-align:hover:not(.active) { border-color: #c7d2fe; color: #6366f1; }
-=======
-.btn-align.active { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
-.btn-align:hover:not(.active) { border-color: #334155; color: #94a3b8; }
->>>>>>> feature_khuong_dev
 
 .typo-section {
   margin-top: 10px;
   padding: 8px 10px;
-<<<<<<< HEAD
   background: #f8fafc;
   border: 1px solid #f1f5f9;
   border-radius: 8px;
-=======
-  background: #080e1a;
-  border: 1px solid #0f172a;
-  border-radius: 6px;
->>>>>>> feature_khuong_dev
 }
 .typo-section-header {
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .05em;
-<<<<<<< HEAD
   color: #94a3b8;
-=======
-  color: #475569;
->>>>>>> feature_khuong_dev
   margin-bottom: 6px;
 }
 .typo-row {
@@ -1632,27 +1406,16 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .typo-row:last-child { margin-bottom: 0; }
 .typo-row-label {
   font-size: 10px;
-<<<<<<< HEAD
   color: #94a3b8;
-=======
-  color: #64748b;
->>>>>>> feature_khuong_dev
   min-width: 46px;
   flex-shrink: 0;
 }
 .typo-select {
   flex: 1;
-<<<<<<< HEAD
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   color: #475569;
-=======
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 4px;
-  color: #94a3b8;
->>>>>>> feature_khuong_dev
   font-size: 11px;
   padding: 3px 4px;
   font-family: inherit;
@@ -1661,7 +1424,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .typo-select:focus { outline: none; border-color: #6366f1; }
 .typo-size {
   width: 44px;
-<<<<<<< HEAD
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -1670,20 +1432,10 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   padding: 3px 5px;
   font-family: inherit;
   appearance: textfield;
-=======
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 4px;
-  color: #94a3b8;
-  font-size: 11px;
-  padding: 3px 5px;
-  font-family: inherit;
->>>>>>> feature_khuong_dev
   -moz-appearance: textfield;
 }
 .typo-size::-webkit-inner-spin-button { display: none; }
 .typo-size:focus { outline: none; border-color: #6366f1; }
-<<<<<<< HEAD
 .typo-unit { font-size: 10px; color: #94a3b8; flex-shrink: 0; }
 .typo-btn {
   width: 26px;
@@ -1692,16 +1444,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   border: 1px solid #e2e8f0;
   background: #fff;
   color: #94a3b8;
-=======
-.typo-unit { font-size: 10px; color: #475569; flex-shrink: 0; }
-.typo-btn {
-  width: 26px;
-  height: 24px;
-  border-radius: 4px;
-  border: 1px solid #1e293b;
-  background: #0f172a;
-  color: #64748b;
->>>>>>> feature_khuong_dev
   font-size: 12px;
   font-family: inherit;
   cursor: pointer;
@@ -1710,19 +1452,13 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   transition: all .15s;
 }
 .typo-btn.typo-italic { font-style: italic; }
-<<<<<<< HEAD
 .typo-btn.active { border-color: #6366f1; color: #6366f1; background: #eef2ff; }
 .typo-btn:hover:not(.active) { border-color: #c7d2fe; color: #6366f1; }
-=======
-.typo-btn.active { border-color: #6366f1; color: #a5b4fc; background: #1e1b4b; }
-.typo-btn:hover:not(.active) { border-color: #334155; color: #94a3b8; }
->>>>>>> feature_khuong_dev
 
 .btn-clear-img {
   display: inline-flex;
   align-items: center;
   padding: 4px 8px;
-<<<<<<< HEAD
   border-radius: 6px;
   border: 1px solid #fecaca;
   cursor: pointer;
@@ -1734,26 +1470,12 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   transition: all .15s;
 }
 .btn-clear-img:hover { border-color: #ef4444; background: #fee2e2; }
-=======
-  border-radius: 4px;
-  border: 1px solid #3f1f1f;
-  cursor: pointer;
-  background: #1a0a0a;
-  color: #f87171;
-  font-size: 11px;
-  font-family: inherit;
-  white-space: nowrap;
-  transition: border-color .15s, color .15s;
-}
-.btn-clear-img:hover { border-color: #ef4444; color: #fca5a5; }
->>>>>>> feature_khuong_dev
 
 .btn-upload-img {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 6px 12px;
-<<<<<<< HEAD
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   cursor: pointer;
@@ -1765,24 +1487,10 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   transition: all .15s;
 }
 .btn-upload-img:hover:not(:disabled) { border-color: #6366f1; color: #6366f1; }
-=======
-  border-radius: 6px;
-  border: 1px solid #334155;
-  cursor: pointer;
-  background: #1e293b;
-  color: #94a3b8;
-  font-size: 12px;
-  font-family: inherit;
-  white-space: nowrap;
-  transition: border-color .15s, color .15s;
-}
-.btn-upload-img:hover:not(:disabled) { border-color: #6366f1; color: #a5b4fc; }
->>>>>>> feature_khuong_dev
 .btn-upload-img:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn-load {
   padding: 10px 14px;
-<<<<<<< HEAD
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   cursor: pointer;
@@ -1794,28 +1502,11 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   transition: all .2s;
 }
 .btn-load:hover { background: #eef2ff; border-color: #c7d2fe; }
-=======
-  border-radius: 8px;
-  border: 1px solid #334155;
-  cursor: pointer;
-  background: #0f1829;
-  color: #7dd3fc;
-  font-weight: 600;
-  font-size: 12.5px;
-  font-family: inherit;
-  transition: background .2s;
-}
-.btn-load:hover { background: #1e293b; }
->>>>>>> feature_khuong_dev
 
 .btn-primary {
   flex: 1;
   padding: 10px;
-<<<<<<< HEAD
   border-radius: 10px;
-=======
-  border-radius: 8px;
->>>>>>> feature_khuong_dev
   border: none;
   cursor: pointer;
   background: linear-gradient(135deg,#6366f1,#8b5cf6);
@@ -1823,7 +1514,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   font-weight: 700;
   font-size: 12.5px;
   font-family: inherit;
-<<<<<<< HEAD
   box-shadow: 0 2px 8px rgba(99,102,241,.25);
   transition: all .2s;
 }
@@ -1847,65 +1537,29 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .btn-tab {
   padding: 6px 14px;
   border-radius: 8px;
-=======
-}
-
-.btn-copy {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #1e293b;
-  cursor: pointer;
-  background: #0b1120;
-  color: #94a3b8;
-  font-weight: 600;
-  font-size: 12.5px;
-  font-family: inherit;
-  transition: color .2s;
-}
-.btn-copy.copied { color: #4ade80; }
-
-.btn-tab {
-  padding: 6px 14px;
-  border-radius: 6px;
->>>>>>> feature_khuong_dev
   border: none;
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
   font-family: inherit;
   background: none;
-<<<<<<< HEAD
   color: #94a3b8;
   transition: all .2s;
 }
 .btn-tab.active { background: linear-gradient(135deg, #eef2ff, #f5f3ff); color: #6366f1; }
 .btn-tab:hover:not(.active) { color: #6366f1; }
-=======
-  color: #475569;
-  transition: all .2s;
-}
-.btn-tab.active { background: #1e293b; color: #e2e8f0; }
->>>>>>> feature_khuong_dev
 
 .add-block-btn {
   width: 100%;
   padding: 8px;
-<<<<<<< HEAD
   border-radius: 10px;
   border: 1px dashed #c7d2fe;
   background: none;
   color: #6366f1;
-=======
-  border-radius: 8px;
-  border: 1px dashed #1e293b;
-  background: none;
-  color: #334155;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 12px;
   font-family: inherit;
   margin-top: 0;
-<<<<<<< HEAD
   transition: all .15s;
 }
 .add-block-btn:hover { border-color: #6366f1; background: #eef2ff; }
@@ -1914,26 +1568,12 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-=======
-  transition: border-color .15s, color .15s;
-}
-.add-block-btn:hover { border-color: #475569; color: #64748b; }
-
-.block-picker {
-  background: #0b1526;
-  border: 1px solid #1e293b;
-  border-radius: 10px;
->>>>>>> feature_khuong_dev
   padding: 12px;
   margin-top: 0;
 }
 .block-picker-title {
   font-size: 10.5px;
-<<<<<<< HEAD
   color: #94a3b8;
-=======
-  color: #475569;
->>>>>>> feature_khuong_dev
   margin-bottom: 8px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -1945,7 +1585,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-<<<<<<< HEAD
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   background: #fff;
@@ -1957,19 +1596,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   transition: all .15s;
 }
 .picker-option:hover { border-color: #6366f1; background: #eef2ff; color: #6366f1; }
-=======
-  border-radius: 7px;
-  border: 1px solid #1e293b;
-  background: #0a1022;
-  cursor: pointer;
-  color: #e2e8f0;
-  font-size: 12.5px;
-  font-family: inherit;
-  text-align: left;
-  transition: border-color .15s;
-}
-.picker-option:hover { border-color: #6366f1; }
->>>>>>> feature_khuong_dev
 .picker-option .picker-icon { font-size: 16px; }
 
 .list-editor { display: flex; flex-direction: column; gap: 6px; }
@@ -1978,46 +1604,28 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .list-move-col button {
   background: none;
   border: none;
-<<<<<<< HEAD
   color: #c7d2fe;
-=======
-  color: #334155;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 9px;
   line-height: 1;
   padding: 1px 3px;
 }
-<<<<<<< HEAD
 .list-move-col button:hover { color: #6366f1; }
 .list-bullet { color: #6366f1; font-size: 11px; min-width: 10px; }
-=======
-.list-bullet { color: #4f46e5; font-size: 11px; min-width: 10px; }
->>>>>>> feature_khuong_dev
 .list-item-row .item-input { flex: 1; }
 .list-remove-btn {
   background: none;
   border: none;
-<<<<<<< HEAD
   color: #fca5a5;
-=======
-  color: #ef4444;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
   padding: 0 3px;
 }
-<<<<<<< HEAD
 .list-remove-btn:hover { color: #ef4444; }
 
 .subblock-divider {
   border-top: 1px solid #f1f5f9;
-=======
-
-.subblock-divider {
-  border-top: 1px solid #1e293b;
->>>>>>> feature_khuong_dev
   padding-top: 12px;
   margin-top: 2px;
 }
@@ -2026,35 +1634,22 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #94a3b8;
-=======
-  color: #64748b;
->>>>>>> feature_khuong_dev
   margin-bottom: 8px;
 }
 
 .pv-about { margin-bottom: 28px; }
-<<<<<<< HEAD
 .pv-about-title { font-weight: 700; font-size: 16px; line-height: 44px; color: #0f172a; font-family: sans-serif; }
 .pv-about-text { font-size: 13px; line-height: 22px; font-family: sans-serif; }
 
 .pv-challenge { margin-bottom: 24px; }
 .pv-challenge-title { font-weight: 700; font-size: 20px; color: #0f172a; margin-bottom: 8px; }
-=======
-.pv-about-title { font-weight: 700; font-size: 16px; line-height: 44px; color: #000; font-family: sans-serif; }
-.pv-about-text { font-size: 13px; line-height: 22px; font-family: sans-serif; }
-
-.pv-challenge { margin-bottom: 24px; }
-.pv-challenge-title { font-weight: 700; font-size: 20px; color: #000; margin-bottom: 8px; }
->>>>>>> feature_khuong_dev
 .pv-challenge-intro { font-size: 13px; line-height: 22px; color: #525252; margin-bottom: 8px; }
 .pv-list { list-style: none; padding: 0; margin: 0; }
 .pv-list li { font-size: 13px; line-height: 22px; color: #525252; padding-left: 14px; position: relative; margin-bottom: 4px; }
-.pv-list li::before { content: '•'; position: absolute; left: 0; }
+.pv-list li::before { content: '�?�'; position: absolute; left: 0; }
 
 .pv-text-section { margin-bottom: 16px; }
-<<<<<<< HEAD
 .pv-text-title { font-weight: 700; font-size: 15px; line-height: 40px; color: #0f172a; }
 .pv-text-body { font-size: 13px; line-height: 22px; color: #525252; }
 
@@ -2070,23 +1665,6 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   background: #faf5ff;
   font-size: 11px;
   color: #a78bfa;
-=======
-.pv-text-title { font-weight: 700; font-size: 15px; line-height: 40px; color: #000; }
-.pv-text-body { font-size: 13px; line-height: 22px; color: #525252; }
-
-.pv-image { margin: 16px 0; }
-.pv-image img { width: 100%; border-radius: 8px; display: block; }
-.pv-image-placeholder {
-  height: 56px;
-  border-radius: 8px;
-  border: 1px dashed #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fafafa;
-  font-size: 11px;
-  color: #cbd5e1;
->>>>>>> feature_khuong_dev
 }
 
 .pv-solution { display: flex; gap: 24px; margin-bottom: 24px; }
@@ -2098,11 +1676,7 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   top: 0;
   bottom: 0;
   width: 2px;
-<<<<<<< HEAD
   background: #e2e8f0;
-=======
-  background: #d9d9d9;
->>>>>>> feature_khuong_dev
   border-radius: 7px;
 }
 .pv-sidebar::after {
@@ -2112,40 +1686,26 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
   top: 0;
   width: 2px;
   height: 14px;
-<<<<<<< HEAD
   background: #6366f1;
-=======
-  background: #000;
->>>>>>> feature_khuong_dev
   border-radius: 7px;
 }
 .pv-sidebar-item { font-size: 12px; color: #525252; margin-bottom: 6px; }
 .pv-solution-content { flex: 1; }
-<<<<<<< HEAD
 .pv-solution-title { font-weight: 700; font-size: 20px; color: #0f172a; margin-bottom: 8px; }
-=======
-.pv-solution-title { font-weight: 700; font-size: 20px; color: #000; margin-bottom: 8px; }
->>>>>>> feature_khuong_dev
 .pv-solution-text { font-size: 13px; line-height: 22px; color: #525252; margin-bottom: 12px; }
 
 input[type="color"] {
   width: 32px;
   height: 32px;
-<<<<<<< HEAD
   border: 2px solid #e2e8f0;
   border-radius: 8px;
-=======
-  border: none;
-  border-radius: 6px;
->>>>>>> feature_khuong_dev
   cursor: pointer;
   background: none;
   padding: 2px;
   flex-shrink: 0;
 }
-<<<<<<< HEAD
 
-/* ── Rich Text Editor (RichTxa) ── */
+/* �"?�"? Rich Text Editor (RichTxa) �"?�"? */
 .rich-txa-wrap {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -2226,6 +1786,4 @@ input[type="color"] {
 .pv-challenge-intro a, .pv-text-body a, .pv-solution-text a { color: #6366f1; text-decoration: underline; }
 .pv-challenge-intro ul, .pv-text-body ul, .pv-solution-text ul,
 .pv-challenge-intro ol, .pv-text-body ol, .pv-solution-text ol { padding-left: 20px; margin: 4px 0; }
-=======
->>>>>>> feature_khuong_dev
 </style>

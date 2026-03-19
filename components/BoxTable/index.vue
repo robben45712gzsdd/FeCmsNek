@@ -1,11 +1,6 @@
-<template>
-<<<<<<< HEAD
+﻿<template>
   <div class="box-table-wrap">
     <h3 v-if="title" class="table-title">{{ title }}</h3>
-=======
-  <div class="logs-table card">
-    <h3 v-if="title">{{ title }}</h3>
->>>>>>> feature_khuong_dev
     <div class="table-container">
       <a-spin :spinning="loading" :tip="$t('loadingData')">
         <table class="table">
@@ -102,7 +97,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .box-table-wrap {
   background: #ffffff;
   border-radius: 14px;
@@ -119,20 +113,11 @@ export default {
   padding: 16px 20px 12px;
   margin: 0;
   border-bottom: 1px solid #f1f5f9;
-=======
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e5eaf0;
-  padding: 1rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
->>>>>>> feature_khuong_dev
 }
 
 .table-container {
   width: 100%;
   overflow-x: auto;
-<<<<<<< HEAD
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
 }
@@ -146,31 +131,11 @@ export default {
 }
 .table-container::-webkit-scrollbar-track {
   background: transparent;
-=======
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background-color: #fafafa;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f8fafc;
-}
-
-.table-container::-webkit-scrollbar {
-  height: 8px;
-}
-.table-container::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 4px;
-}
-.table-container::-webkit-scrollbar-track {
-  background: #f8fafc;
->>>>>>> feature_khuong_dev
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-<<<<<<< HEAD
   min-width: 900px;
   table-layout: auto;
   font-size: 14px;
@@ -186,20 +151,6 @@ export default {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-=======
-  min-width: 1100px;
-  table-layout: auto;
-  font-size: 0.9rem;
-}
-
-.table thead th {
-  text-align: center;
-  background: linear-gradient(180deg, #f9fafb, #f1f5f9);
-  padding: 10px 12px;
-  border-bottom: 2px solid #e2e8f0;
-  color: #334155;
-  font-weight: 700;
->>>>>>> feature_khuong_dev
   white-space: nowrap;
   position: sticky;
   top: 0;
@@ -207,7 +158,6 @@ export default {
 }
 
 .table tbody td {
-<<<<<<< HEAD
   padding: 14px 16px;
   border-bottom: 1px solid #f1f5f9;
   text-align: left;
@@ -219,24 +169,6 @@ export default {
 
 .table tbody tr:hover > td {
   background: #f8faff;
-=======
-  padding: 10px 12px;
-  border-bottom: 1px solid #f1f5f9;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  transition: background 0.15s ease;
-}
-
-.table tbody tr:nth-child(odd) {
-  background-color: #f9fbfd;
-}
-.table tbody tr:nth-child(even) {
-  background-color: #ffffff;
-}
-.table tbody tr:hover {
-  background-color: #e2e8f0;
->>>>>>> feature_khuong_dev
 }
 
 .positive {
@@ -250,7 +182,6 @@ export default {
 
 .empty {
   text-align: center;
-<<<<<<< HEAD
   padding: 40px 0 !important;
   color: #94a3b8;
   font-size: 13px;
@@ -260,32 +191,12 @@ export default {
   padding: 14px 20px;
   text-align: right;
   border-top: 1px solid #f1f5f9;
-=======
-  padding: 28px;
-  color: #6b7280;
-}
-
-.pagination {
-  margin-top: 16px;
-  text-align: right;
->>>>>>> feature_khuong_dev
 }
 
 @media (max-width: 1024px) {
   .table {
-<<<<<<< HEAD
     min-width: 700px;
     font-size: 13px;
-=======
-    min-width: 900px;
-    font-size: 0.85rem;
-  }
-}
-@media (max-width: 768px) {
-  .table {
-    min-width: 700px;
-    font-size: 0.8rem;
->>>>>>> feature_khuong_dev
   }
 }
 </style>

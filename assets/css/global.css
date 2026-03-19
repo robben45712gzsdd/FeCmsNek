@@ -1,14 +1,13 @@
-<<<<<<< HEAD
-/* ══════════════════════════════════════════════════════
-   Design System — Light Mode · Clean & Modern
-   ══════════════════════════════════════════════════════ */
+/* �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.�
+   Design System �?" Light Mode · Clean & Modern
+   �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ── Reset ── */
+/* �"?�"? Reset �"?�"? */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ── Base ── */
+/* �"?�"? Base �"?�"? */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fef3f2 100%);
@@ -18,34 +17,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Typography ── */
+/* �"?�"? Typography �"?�"? */
 h1 { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
 h2 { font-size: 22px; font-weight: 700; color: #1e293b; letter-spacing: -0.01em; }
 h3 { font-size: 18px; font-weight: 600; color: #334155; }
 h4, h5 { font-weight: 600; color: #475569; }
 p, span, label { font-size: 14px; }
 
-/* ── Ant Design overrides for light mode ── */
-=======
-/* assets/css/global.css */
-
-/* Import font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-
-/* Reset cơ bản */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Fix Tailwind preflight overriding Ant Design input colors */
->>>>>>> feature_khuong_dev
+/* �"?�"? Ant Design overrides for light mode �"?�"? */
 .ant-input,
 .ant-select-selection,
 .ant-select-selector {
   background-color: #fff !important;
-<<<<<<< HEAD
   color: #1e293b !important;
   border-color: #e2e8f0 !important;
   border-radius: 10px !important;
@@ -66,7 +49,7 @@ input, textarea, select {
   color: #1e293b;
 }
 
-/* ── Buttons ── */
+/* �"?�"? Buttons �"?�"? */
 .ant-btn {
   border-radius: 10px !important;
   font-weight: 500 !important;
@@ -80,7 +63,7 @@ input, textarea, select {
   margin: 0 5px;
 }
 
-/* ── Tables ── */
+/* �"?�"? Tables �"?�"? */
 .ant-table {
   border-radius: 12px !important;
   overflow: hidden;
@@ -104,7 +87,7 @@ input, textarea, select {
   background: #f8faff !important;
 }
 
-/* ── Tags ── */
+/* �"?�"? Tags �"?�"? */
 .ant-tag {
   border-radius: 6px !important;
   font-weight: 500 !important;
@@ -113,7 +96,7 @@ input, textarea, select {
   border: none !important;
 }
 
-/* ── Tabs ── */
+/* �"?�"? Tabs �"?�"? */
 .ant-tabs-tab {
   font-weight: 500 !important;
   color: #94a3b8 !important;
@@ -128,7 +111,7 @@ input, textarea, select {
   border-radius: 3px !important;
 }
 
-/* ── Modal ── */
+/* �"?�"? Modal �"?�"? */
 .ant-modal-content {
   border-radius: 16px !important;
   overflow: hidden;
@@ -149,7 +132,7 @@ input, textarea, select {
   padding: 14px 24px !important;
 }
 
-/* ── Dropdown ── */
+/* �"?�"? Dropdown �"?�"? */
 .ant-dropdown-menu {
   border-radius: 12px !important;
   padding: 6px !important;
@@ -164,7 +147,7 @@ input, textarea, select {
   background: #f0f4ff !important;
 }
 
-/* ── Pagination ── */
+/* �"?�"? Pagination �"?�"? */
 .ant-pagination-item {
   border-radius: 8px !important;
   border-color: #e2e8f0 !important;
@@ -177,7 +160,7 @@ input, textarea, select {
   color: #fff !important;
 }
 
-/* ── Cards helper ── */
+/* �"?�"? Cards helper �"?�"? */
 .card-glass {
   background: rgba(255,255,255,.85);
   backdrop-filter: blur(12px);
@@ -186,31 +169,31 @@ input, textarea, select {
   box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(99,102,241,.06);
 }
 
-/* ── Message / Notification ── */
+/* �"?�"? Message / Notification �"?�"? */
 .ant-message-notice-content {
   border-radius: 12px !important;
   box-shadow: 0 6px 24px rgba(0,0,0,.1) !important;
 }
 
-/* ── Custom scrollbar ── */
+/* �"?�"? Custom scrollbar �"?�"? */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-/* ── Form labels ── */
+/* �"?�"? Form labels �"?�"? */
 .ant-form-item-label > label {
   font-weight: 500 !important;
   color: #475569 !important;
   font-size: 13px !important;
 }
 
-/* ── Switch ── */
+/* �"?�"? Switch �"?�"? */
 .ant-switch-checked {
   background: #6366f1 !important;
 }
 
-/* ── Legacy form elements — unified styling ── */
+/* �"?�"? Legacy form elements �?" unified styling �"?�"? */
 .tiny-input,
 select.tiny-input {
   height: 36px;
@@ -256,7 +239,7 @@ select.tiny-input {
   letter-spacing: 0.04em;
 }
 
-/* ── Page layout helpers ── */
+/* �"?�"? Page layout helpers �"?�"? */
 .page-wrap {
   padding: 24px;
 }
@@ -281,7 +264,7 @@ h2.title {
   flex-wrap: wrap;
 }
 
-/* ── Status badges ── */
+/* �"?�"? Status badges �"?�"? */
 .status {
   display: inline-block;
   padding: 4px 14px;
@@ -300,7 +283,7 @@ h2.title {
   background: linear-gradient(135deg, #ef4444, #f87171);
 }
 
-/* ── Toggle buttons (maintenance) ── */
+/* �"?�"? Toggle buttons (maintenance) �"?�"? */
 .toggle-btn {
   border: none;
   outline: none;
@@ -332,12 +315,12 @@ h2.title {
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
-/* ── Popconfirm ── */
+/* �"?�"? Popconfirm �"?�"? */
 .ant-popover-inner {
   border-radius: 12px !important;
 }
 
-/* ── Descriptions ── */
+/* �"?�"? Descriptions �"?�"? */
 .ant-descriptions-bordered .ant-descriptions-item-label {
   background: #f8fafc !important;
   font-weight: 600 !important;
@@ -345,34 +328,7 @@ h2.title {
   font-size: 13px !important;
 }
 
-/* ── Alert ── */
+/* �"?�"? Alert �"?�"? */
 .ant-alert {
   border-radius: 10px !important;
-=======
-  color: #333 !important;
-}
-
-input,
-textarea,
-select {
-  background-color: #fff;
-  color: #333;
-}
-
-/* Font chữ mặc định */
-body {
-  font-family:  sans-serif;
-  background: #f6f5f7;
-  color: #333;
-}
-
-/* Heading */
-h1, h2, h3, h4, h5 {
-  font-weight: 700;
-}
-
-/* Text nhỏ */
-p, span, label, input, button {
-  font-size: 14px;
->>>>>>> feature_khuong_dev
 }

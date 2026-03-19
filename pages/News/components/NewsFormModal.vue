@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :visible="visible"
-    :title="isEdit ? '✏️ Chỉnh sửa tin tức' : '📰 Thêm tin tức'"
+    :title="isEdit ? 'Chỉnh sửa tin tức' : 'Thêm tin tức'"
     :width="700"
     :confirmLoading="loading"
     @cancel="$emit('close')"
@@ -35,7 +35,6 @@
       </a-form-item>
 
       <a-form-item label="Nội dung chi tiết">
-<<<<<<< HEAD
         <client-only>
           <editor
             v-model="form.content"
@@ -46,13 +45,6 @@
             <a-spin tip="Đang tải editor..." />
           </div>
         </client-only>
-=======
-        <a-textarea
-          v-model="form.content"
-          :auto-size="{ minRows: 6, maxRows: 12 }"
-          placeholder="Nhập nội dung bài viết (hỗ trợ HTML nhẹ)"
-        />
->>>>>>> feature_khuong_dev
       </a-form-item>
     </a-form>
 
@@ -71,15 +63,12 @@
 
 <script>
 export default {
-<<<<<<< HEAD
   components: {
     editor: () =>
       process.client
         ? import("@tinymce/tinymce-vue").then((m) => m.default)
         : Promise.resolve({ render: () => {} }),
   },
-=======
->>>>>>> feature_khuong_dev
   props: {
     visible: Boolean,
     item: Object,
@@ -94,7 +83,6 @@ export default {
         content: "",
       },
       loading: false,
-<<<<<<< HEAD
       tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
       editorInit: {
         height: 350,
@@ -111,8 +99,6 @@ export default {
         content_style:
           "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.7; padding: 12px; }",
       },
-=======
->>>>>>> feature_khuong_dev
     };
   },
   computed: {
@@ -165,30 +151,18 @@ export default {
   flex-direction: column;
   gap: 8px;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> feature_khuong_dev
 .preview-thumb {
   width: 100%;
   max-height: 180px;
   object-fit: cover;
-<<<<<<< HEAD
   border-radius: 12px;
   border: 1px solid #e2e8f0;
 }
-=======
-  border-radius: 8px;
-  border: 1px solid #eee;
-}
-
->>>>>>> feature_khuong_dev
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
-<<<<<<< HEAD
 .editor-placeholder {
   display: flex;
   align-items: center;
@@ -197,19 +171,5 @@ export default {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
-=======
-
-/* Giao diện input */
-:deep(.ant-input),
-:deep(.ant-input-textarea) {
-  border-radius: 6px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .modal-footer {
-    flex-direction: column;
-  }
->>>>>>> feature_khuong_dev
 }
 </style>

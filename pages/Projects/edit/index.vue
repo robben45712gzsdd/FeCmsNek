@@ -36,7 +36,7 @@
           <!-- Thumbnail -->
           <a-row :gutter="20">
             <a-col :span="12">
-              <a-form-item label="Thumbnail — ảnh bìa (tùy chọn)">
+              <a-form-item label="Thumbnail �?" ảnh bìa (tùy chọn)">
                 <label class="upload-btn">
                   <a-icon type="upload" /> Chọn ảnh thumbnail
                   <input ref="thumbnailInput" type="file" accept="image/*" class="file-input-hidden" @change="onThumbnailChange" />
@@ -83,13 +83,13 @@
               </a-select-option>
             </a-select>
             <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
-              <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag mới</a-button>
+              <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag m�>i</a-button>
               <a-button type="dashed" size="small" icon="setting" @click="showManageTags = !showManageTags; showNewTagRow = false">Quản lý tags</a-button>
             </div>
             <div v-if="showNewTagRow" style="display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap">
               <a-input v-model="newTagName" placeholder="Tên tag..." size="small" style="flex:1;min-width:100px" @pressEnter="handleCreateTag" />
               <a-select v-model="newTagType" size="small" style="width:160px">
-                <a-select-option :value="1">Trí tuệ nhân tạo</a-select-option>
+                <a-select-option :value="1">Trí tu�? nhân tạo</a-select-option>
                 <a-select-option :value="2">Domain</a-select-option>
                 <a-select-option :value="3">Technologies</a-select-option>
               </a-select>
@@ -108,11 +108,11 @@
             </div>
           </a-form-item>
 
-          <!-- Nội dung: chọn chế độ -->
+          <!-- N�Ti dung: chọn chế �'�T -->
           <a-form-item>
             <template #label>
               <div class="content-label-row">
-                <span>Nội dung Case Study</span>
+                <span>N�Ti dung Case Study</span>
                 <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
                   <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
                   <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -132,17 +132,17 @@
               </div>
               <div v-if="bodyPreviewUrl && !bodyFileName" class="file-name-tag existing">
                 <a-icon type="file-text" style="color:#2f54eb" />
-                <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
-                <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">Mở tab</a-button>
+                <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hi�?n tại</span>
+                <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">M�Y tab</a-button>
               </div>
             </div>
 
             <!-- MODE: Rich text editor -->
             <div v-else>
-              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn nội dung case study..." />
+              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn n�Ti dung case study..." />
               <div v-if="isEdit && bodyPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Case Study đã có file HTML. Soạn nội dung mới sẽ thay thế file cũ.
+                Case Study �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-item>
@@ -270,7 +270,7 @@ export default {
           this.imagePreview = toFull(d.imageUrl) || null;
           this.bodyPreviewUrl = toFull(d.projectBody) || null;
 
-          // Fetch nội dung HTML hiện tại vào editor
+          // Fetch n�Ti dung HTML hi�?n tại vào editor
           if (this.bodyPreviewUrl) {
             try {
               const resp = await axios.get(this.bodyPreviewUrl, { responseType: "text" });
@@ -284,7 +284,7 @@ export default {
           }
         }
       } catch {
-        this.$message.error("Không thể tải dữ liệu Case Study!");
+        this.$message.error("Không th�f tải dữ li�?u Case Study!");
       } finally {
         this.loadingDetail = false;
       }
@@ -294,7 +294,7 @@ export default {
         this.fetchDetail();
       }
     },
-    /* ── Tags ── */
+    /* �"?�"? Tags �"?�"? */
     tagNameById(id) {
       const tag = this.tagOptions.find((t) => t.tagId === id);
       return tag ? tag.tagName : id;
@@ -342,7 +342,7 @@ export default {
           this.$message.error(res?.message || "Tạo tag thất bại!");
         }
       } catch {
-        this.$message.error("Có lỗi, vui lòng thử lại!");
+        this.$message.error("Có l�-i, vui lòng thử lại!");
       } finally {
         this.newTagLoading = false;
       }
@@ -359,12 +359,12 @@ export default {
           this.$message.error(res?.message || "Xóa tag thất bại!");
         }
       } catch {
-        this.$message.error("Có lỗi, vui lòng thử lại!");
+        this.$message.error("Có l�-i, vui lòng thử lại!");
       } finally {
         this.deletingTagId = null;
       }
     },
-    /* ── File handlers ── */
+    /* �"?�"? File handlers �"?�"? */
     onThumbnailChange(e) {
       const f = e.target.files[0];
       if (!f) return;
@@ -399,7 +399,7 @@ export default {
       this.bodyFileName = null;
       if (this.$refs.bodyInput) this.$refs.bodyInput.value = "";
     },
-    /* ── Editor to File ── */
+    /* �"?�"? Editor to File �"?�"? */
     editorToFile() {
       if (!this.editorContent || !this.editorContent.trim()) return null;
       const html = `<!DOCTYPE html>
@@ -432,7 +432,7 @@ ${this.editorContent}
         { type: "text/html" }
       );
     },
-    /* ── Validate ── */
+    /* �"?�"? Validate �"?�"? */
     validate() {
       this.errors = {};
       if (!this.form.projectName || !this.form.projectName.trim())
@@ -441,7 +441,7 @@ ${this.editorContent}
         this.errors.image = "Vui lòng chọn ảnh chính";
       return Object.keys(this.errors).length === 0;
     },
-    /* ── Submit ── */
+    /* �"?�"? Submit �"?�"? */
     async handleSubmit() {
       if (!this.validate()) return;
 
@@ -483,7 +483,7 @@ ${this.editorContent}
           this.goBack();
         }
       } catch {
-        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
+        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
       } finally {
         this.saving = false;
       }

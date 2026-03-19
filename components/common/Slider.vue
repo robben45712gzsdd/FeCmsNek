@@ -9,27 +9,10 @@
     <div class="logo" :class="{ collapsed }">
       <div class="brand">
         <a-avatar style="background-color: #4dabf7" icon="user" />
-<<<<<<< HEAD
         <span v-if="!collapsed" class="brand-title">{{ 'Admin' }}</span>
       </div>
     </div>
  
-=======
-        <span v-if="!collapsed" class="brand-title">{{ accountName }}</span>
-      </div>
-    </div>
-    <div class="balance-container">
-      <p class="balance" :class="{ collapsed }">
-        {{ $t("balance") }}: {{ formattedBalance }}
-        <a-icon
-          type="sync"
-          class="reload-icon"
-          :class="{ spinning: isReloading }"
-          @click="reloadBalance"
-        />
-      </p>
-    </div>
->>>>>>> feature_khuong_dev
 
     <a-menu
       theme="light"
@@ -37,15 +20,6 @@
       :selectedKeys="localSelectedKeys"
       @select="onSelect"
     >
-<<<<<<< HEAD
-=======
-      <a-menu-item key="8">
-        <nuxt-link to="/case-study-editor">
-          <a-icon type="file-text" />
-          <span>{{ $t("caseStudyEditor") }}</span>
-        </nuxt-link>
-      </a-menu-item>
->>>>>>> feature_khuong_dev
       <a-menu-item key="9">
         <nuxt-link to="/Projects">
           <a-icon type="project" />
@@ -64,6 +38,12 @@
           <span>Games</span>
         </nuxt-link>
       </a-menu-item>
+      <a-menu-item key="18">
+        <nuxt-link to="/Ai">
+          <a-icon type="robot" />
+          <span>AI</span>
+        </nuxt-link>
+      </a-menu-item>
       <a-menu-item key="100">
         <nuxt-link to="/ImageUploadTool">
           <a-icon type="picture" />
@@ -71,31 +51,6 @@
         </nuxt-link>
       </a-menu-item>
 
-<<<<<<< HEAD
-=======
-      <a-sub-menu key="ai-demo">
-        <span slot="title"><a-icon type="robot" /><span>AI-Demo</span></span>
-        <a-menu-item key="101">
-          <nuxt-link to="/Ai">
-            <a-icon type="bulb" />
-            <span>AI</span>
-          </nuxt-link>
-        </a-menu-item>
-        <a-menu-item key="102">
-          <nuxt-link to="/Ai/api-key">
-            <a-icon type="key" />
-            <span>api-key</span>
-          </nuxt-link>
-        </a-menu-item>
-        <a-menu-item key="103">
-          <nuxt-link to="/Ai/label">
-            <a-icon type="tags" />
-            <span>label</span>
-          </nuxt-link>
-        </a-menu-item>
-      </a-sub-menu>
-
->>>>>>> feature_khuong_dev
       <a-sub-menu key="general">
         <span slot="title"><a-icon type="appstore" /><span>Chung</span></span>
         <a-menu-item key="16">
@@ -144,11 +99,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
-import { getAccountDetail } from "../../apis/account";
-
->>>>>>> feature_khuong_dev
 export default {
   name: "Sider",
   props: {
@@ -158,20 +108,10 @@ export default {
   data() {
     return {
       localSelectedKeys: this.selectedKeys,
-<<<<<<< HEAD
       accountName: "Admin",
     };
   },
   mounted() {
-=======
-      accountName: "Loading...",
-      balance: 0,
-      isReloading: false,
-    };
-  },
-  mounted() {
-    this.loadAccountDetail();
->>>>>>> feature_khuong_dev
   },
   watch: {
     selectedKeys(newVal) {
@@ -179,41 +119,9 @@ export default {
     },
   },
   methods: {
-<<<<<<< HEAD
   
 
  
-=======
-    loadAccountDetail() {
-      return getAccountDetail()
-        .then((res) => {
-          if (res && res.data) {
-            this.accountName =
-              res.data.displayName || res.data.customerName || "Admin";
-            this.balance = res.data.wallet || 0;
-          } else {
-            this.accountName = "Admin Portal";
-          }
-        })
-        .catch(() => {
-          this.accountName = "Admin Portal";
-          this.$message.error(this.$t("errorOccurred"));
-        });
-    },
-
-    reloadBalance() {
-      if (this.isReloading) return; 
-      this.isReloading = true;
-
-      this.loadAccountDetail().finally(() => {
-        
-        setTimeout(() => {
-          this.isReloading = false;
-        }, 2000);
-      });
-    },
-
->>>>>>> feature_khuong_dev
     onSelect({ key }) {
       this.localSelectedKeys = [key];
       this.$emit("update:selectedKeys", [key]);
@@ -224,21 +132,11 @@ export default {
       localStorage.setItem("selectedLanguage", lang);
     },
   },
-<<<<<<< HEAD
-=======
-
-  computed: {
-    formattedBalance() {
-      return this.balance.toLocaleString();
-    },
-  },
->>>>>>> feature_khuong_dev
 };
 </script>
 
 <style scoped>
 .custom-sider {
-<<<<<<< HEAD
   background: rgba(255,255,255,.9) !important;
   backdrop-filter: blur(12px);
   border-radius: 20px !important;
@@ -250,15 +148,6 @@ export default {
 .logo {
   height: 60px;
   margin: 14px 16px 0 16px;
-=======
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 2px 6px #2553b91a;
-}
-.logo {
-  height: 64px;
-  margin: 16px 16px 0px 16px;
->>>>>>> feature_khuong_dev
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -266,52 +155,13 @@ export default {
   transition: all 0.3s ease;
 }
 .logo.collapsed {
-<<<<<<< HEAD
   justify-content: center;
 }
-=======
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.balance {
-  padding: 0px 20px 0px 20px;
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.balance.collapsed {
-  display: none;
-}
-.reload-icon {
-  cursor: pointer;
-
-  transition: transform 0.3s ease;
-}
-
-/* Xoay đúng 5 vòng trong 2s */
-.spinning {
-  animation: spin 1s linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(600deg); /* 360 * 5 */
-  }
-}
->>>>>>> feature_khuong_dev
 
 .brand {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-<<<<<<< HEAD
   gap: 12px;
   padding: 0 4px;
   font-weight: 800;
@@ -367,15 +217,5 @@ export default {
 }
 .custom-sider >>> .ant-menu-item .anticon {
   font-size: 16px !important;
-=======
-  gap: 10px;
-  padding: 0 5px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #2553b9;
-}
-.brand-title {
-  color: #2553b9;
->>>>>>> feature_khuong_dev
 }
 </style>

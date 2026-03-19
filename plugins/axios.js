@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 import Cookies from "js-cookie";
 import Vue from "vue";
 import { Modal } from "ant-design-vue";
@@ -9,15 +9,9 @@ export default ({ app }, inject) => {
   axios.defaults.headers["Content-Type"] = "application/json";
 
   axios.interceptors.request.use((config) => {
-<<<<<<< HEAD
     const accessToken = Cookies.get("accessToken");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
-=======
-    const token = Cookies.get("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
->>>>>>> feature_khuong_dev
     }
     return config;
   });
@@ -46,12 +40,8 @@ export default ({ app }, inject) => {
           centered: true,
           maskClosable: false,
           onOk() {
-<<<<<<< HEAD
             Cookies.remove("accessToken");
             Cookies.remove("refreshToken");
-=======
-            Cookies.remove("token");
->>>>>>> feature_khuong_dev
             Cookies.remove("displayName");
             Vue.prototype.$isSessionExpired = false;
             window.location.href = "/login";

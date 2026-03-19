@@ -3,21 +3,15 @@
     :visible="visible"
     :title="isEdit ? 'Chỉnh sửa bài viết' : 'Thêm bài viết'"
     :confirm-loading="loading"
-<<<<<<< HEAD
     :width="contentMode === 'editor' ? 960 : 680"
     ok-text="Lưu"
     cancel-text="Hủy"
     :body-style="{ maxHeight: '78vh', overflowY: 'auto' }"
-=======
-    width="680px"
-    ok-text="Lưu"
-    cancel-text="Hủy"
->>>>>>> feature_khuong_dev
     @ok="handleSubmit"
     @cancel="$emit('close')"
   >
     <a-form layout="vertical">
-      <!-- Ngôn ngữ + Tiêu đề -->
+      <!-- Ngôn ngữ + Tiêu �'ề -->
       <a-row :gutter="16">
         <a-col :span="8">
           <a-form-item label="Ngôn ngữ">
@@ -28,14 +22,14 @@
           </a-form-item>
         </a-col>
         <a-col :span="16">
-          <a-form-item label="Tiêu đề *">
-            <a-input v-model="form.title" placeholder="Nhập tiêu đề..." />
+          <a-form-item label="Tiêu �'ề *">
+            <a-input v-model="form.title" placeholder="Nhập tiêu �'ề..." />
             <div v-if="errors.title" class="err">{{ errors.title }}</div>
           </a-form-item>
         </a-col>
       </a-row>
 
-      <!-- Loại bài / Nổi bật -->
+      <!-- Loại bài / N�.i bật -->
       <a-row :gutter="16">
         <a-col :span="8">
           <a-form-item label="Loại bài viết">
@@ -47,10 +41,10 @@
           </a-form-item>
         </a-col>
         <a-col :span="8">
-          <a-form-item label="Nổi bật">
+          <a-form-item label="N�.i bật">
             <a-select v-model="form.isFeatured" style="width:100%">
               <a-select-option :value="0">Thường</a-select-option>
-              <a-select-option :value="1">Nổi bật</a-select-option>
+              <a-select-option :value="1">N�.i bật</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -76,12 +70,11 @@
         </div>
       </a-form-item>
 
-<<<<<<< HEAD
-      <!-- Nội dung: chọn chế độ -->
+      <!-- N�Ti dung: chọn chế �'�T -->
       <a-form-item>
         <template #label>
           <div class="content-label-row">
-            <span>Nội dung bài viết</span>
+            <span>N�Ti dung bài viết</span>
             <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
               <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
               <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -101,53 +94,31 @@
           </div>
           <div v-if="contentPreviewUrl && !contentFileName" class="file-name-tag existing">
             <a-icon type="file-text" style="color:#2f54eb" />
-            <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
+            <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hi�?n tại</span>
             <a-button size="small" type="link" @click="showContentPreview = true">Xem</a-button>
-            <a-button size="small" type="link" :href="contentPreviewUrl" target="_blank">Mở tab</a-button>
+            <a-button size="small" type="link" :href="contentPreviewUrl" target="_blank">M�Y tab</a-button>
           </div>
           <div class="hint">
             <a-icon type="info-circle" style="color:#6366f1;margin-right:4px;" />
-            Dùng <nuxt-link to="/CaseStudyEditor" target="_blank">Case Study Editor</nuxt-link> để xuất HTML rồi upload.
+            Dùng <nuxt-link to="/CaseStudyEditor" target="_blank">Case Study Editor</nuxt-link> và xuất HTML r�"i upload.
           </div>
         </div>
 
         <!-- MODE: Rich text editor -->
         <div v-else>
-          <RichTextEditor v-model="editorContent" :height="380" placeholder="Soạn nội dung bài viết..." />
+          <RichTextEditor v-model="editorContent" :height="380" placeholder="Soạn n�Ti dung bài viết..." />
           <div v-if="isEdit && contentPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Bài viết đã có file HTML. Soạn nội dung mới sẽ thay thế file cũ.
+            Bài viết �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
           </div>
-=======
-      <!-- File HTML nội dung -->
-      <a-form-item label="Nội dung — file HTML">
-        <label class="upload-btn">
-          <a-icon type="file-text" /> Chọn file HTML
-          <input ref="contentInput" type="file" accept=".html,.htm" class="file-input-hidden" @change="onContentChange" />
-        </label>
-        <div v-if="contentFileName" class="file-name-tag">
-          <a-icon type="file-text" /> {{ contentFileName }}
-          <a-button size="small" type="link" style="color:#ff4d4f" @click="clearContent">Xóa</a-button>
-        </div>
-        <!-- File HTML hiện tại (khi edit, chưa chọn file mới) -->
-        <div v-if="contentPreviewUrl && !contentFileName" class="file-name-tag" style="background:#f0f5ff;border-color:#adc6ff;">
-          <a-icon type="file-text" style="color:#2f54eb" />
-          <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
-          <a-button size="small" type="link" @click="showContentPreview = true">👁 Xem</a-button>
-          <a-button size="small" type="link" :href="contentPreviewUrl" target="_blank">🔗 Mở tab</a-button>
-        </div>
-        <div class="hint">
-          <a-icon type="info-circle" style="color:#6366f1;margin-right:4px;" />
-          Dùng <nuxt-link to="/CaseStudyEditor" target="_blank">Case Study Editor</nuxt-link> để xuất HTML rồi upload.
->>>>>>> feature_khuong_dev
         </div>
       </a-form-item>
     </a-form>
 
-    <!-- Modal preview nội dung HTML -->
+    <!-- Modal preview n�Ti dung HTML -->
     <a-modal
       :visible="showContentPreview"
-      title="Xem nội dung HTML"
+      title="Xem n�Ti dung HTML"
       width="900px"
       :footer="null"
       @cancel="showContentPreview = false"
@@ -163,20 +134,14 @@
 
 <script>
 import { createPost, updatePost } from "../../../apis/blog";
-<<<<<<< HEAD
 import RichTextEditor from "@/components/RichTextEditor/index.vue";
-=======
->>>>>>> feature_khuong_dev
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 const toFull = (url) => !url ? null : /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
 
 export default {
   name: "BlogForm",
-<<<<<<< HEAD
   components: { RichTextEditor },
-=======
->>>>>>> feature_khuong_dev
   props: {
     visible: { type: Boolean, default: false },
     isEdit: { type: Boolean, default: false },
@@ -194,11 +159,8 @@ export default {
       contentFileName: null,
       contentPreviewUrl: null,
       showContentPreview: false,
-<<<<<<< HEAD
       contentMode: "file",
       editorContent: "",
-=======
->>>>>>> feature_khuong_dev
     };
   },
   watch: {
@@ -207,11 +169,8 @@ export default {
         this.errors = {};
         this.clearImage();
         this.clearContent();
-<<<<<<< HEAD
         this.editorContent = "";
         this.contentMode = "file";
-=======
->>>>>>> feature_khuong_dev
         if (this.isEdit && this.record) {
           this.form = {
             postId: this.record.postId,
@@ -256,7 +215,6 @@ export default {
       this.contentFileName = null;
       if (this.$refs.contentInput) this.$refs.contentInput.value = "";
     },
-<<<<<<< HEAD
     /** Convert editor HTML to a File for upload */
     editorToFile() {
       if (!this.editorContent || !this.editorContent.trim()) return null;
@@ -283,24 +241,19 @@ ${this.editorContent}
       const blob = new Blob([html], { type: "text/html;charset=utf-8" });
       return new File([blob], `${(this.form.title || "post").replace(/[^a-zA-Z0-9]/g, "-").toLowerCase()}.html`, { type: "text/html" });
     },
-=======
->>>>>>> feature_khuong_dev
     validate() {
       this.errors = {};
-      if (!this.form.title || !this.form.title.trim()) this.errors.title = "Vui lòng nhập tiêu đề";
+      if (!this.form.title || !this.form.title.trim()) this.errors.title = "Vui lòng nhập tiêu �'ề";
       return Object.keys(this.errors).length === 0;
     },
     async handleSubmit() {
       if (!this.validate()) return;
-<<<<<<< HEAD
       let finalContentFile = null;
       if (this.contentMode === "editor") {
         finalContentFile = this.editorToFile();
       } else {
         finalContentFile = this.contentFile || null;
       }
-=======
->>>>>>> feature_khuong_dev
       this.loading = true;
       try {
         if (this.isEdit) {
@@ -313,11 +266,7 @@ ${this.editorContent}
               isFeatured: this.form.isFeatured,
               status: this.form.status,
             },
-<<<<<<< HEAD
             finalContentFile,
-=======
-            this.contentFile || null,
->>>>>>> feature_khuong_dev
             this.imageFile || null
           );
           if (res && (res.responseCode === 200 || res.responseCode === 1)) {
@@ -334,11 +283,7 @@ ${this.editorContent}
               postType: this.form.postType,
               isFeatured: this.form.isFeatured,
             },
-<<<<<<< HEAD
             finalContentFile,
-=======
-            this.contentFile || null,
->>>>>>> feature_khuong_dev
             this.imageFile || null
           );
           if (res && (res.responseCode === 200 || res.responseCode === 1)) {
@@ -351,7 +296,7 @@ ${this.editorContent}
         this.$emit("saved");
         this.$emit("close");
       } catch {
-        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
+        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
       } finally {
         this.loading = false;
       }
@@ -361,7 +306,6 @@ ${this.editorContent}
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 .content-label-row {
   display: flex;
   align-items: center;
@@ -371,13 +315,10 @@ ${this.editorContent}
 .mode-switch {
   margin-left: auto;
 }
-=======
->>>>>>> feature_khuong_dev
 .upload-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-<<<<<<< HEAD
   padding: 8px 18px;
   border: 1px dashed #c7d2fe;
   border-radius: 10px;
@@ -392,26 +333,11 @@ ${this.editorContent}
 .file-input-hidden { display: none; }
 .preview-wrap { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
 .preview-img { width: 80px; height: 56px; object-fit: cover; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-=======
-  padding: 6px 16px;
-  border: 1px dashed #6366f1;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #6366f1;
-  font-size: 13px;
-  transition: background 0.2s;
-}
-.upload-btn:hover { background: #f5f3ff; }
-.file-input-hidden { display: none; }
-.preview-wrap { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-.preview-img { width: 80px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
->>>>>>> feature_khuong_dev
 .file-name-tag {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 8px;
-<<<<<<< HEAD
   padding: 6px 12px;
   background: linear-gradient(135deg, #eef2ff, #f5f3ff);
   border: 1px solid #e0e7ff;
@@ -425,15 +351,4 @@ ${this.editorContent}
 }
 .hint { margin-top: 6px; font-size: 12px; color: #94a3b8; }
 .err { color: #ef4444; font-size: 12px; margin-top: 2px; }
-=======
-  padding: 4px 10px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 13px;
-  color: #475569;
-}
-.hint { margin-top: 6px; font-size: 12px; color: #94a3b8; }
-.err { color: #ff4d4f; font-size: 12px; margin-top: 2px; }
->>>>>>> feature_khuong_dev
 </style>

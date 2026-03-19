@@ -32,7 +32,6 @@
       </a-form-model-item>
 
       <a-form-model-item label="Nội dung" prop="content">
-<<<<<<< HEAD
         <client-only>
           <editor
             v-model="form.content"
@@ -43,9 +42,6 @@
             <a-spin tip="Đang tải editor..." />
           </div>
         </client-only>
-=======
-        <a-textarea v-model="form.content" :rows="4" placeholder="Nhập nội dung đánh giá" />
->>>>>>> feature_khuong_dev
       </a-form-model-item>
 
       <a-form-model-item label="Trạng thái" prop="status">
@@ -73,15 +69,12 @@ function defaultForm(languageCode) {
 }
 
 export default {
-<<<<<<< HEAD
   components: {
     editor: () =>
       process.client
         ? import("@tinymce/tinymce-vue").then((m) => m.default)
         : Promise.resolve({ render: () => {} }),
   },
-=======
->>>>>>> feature_khuong_dev
   props: {
     languageCode: { type: String, default: "vi" },
   },
@@ -91,7 +84,6 @@ export default {
       isEdit: false,
       form: defaultForm(this.languageCode),
       saving: false,
-<<<<<<< HEAD
       tinymceApiKey: process.env.NUXT_ENV_TINYMCE_API_KEY || "no-api-key",
       editorInit: {
         height: 250,
@@ -108,8 +100,6 @@ export default {
         content_style:
           "body { font-family: 'Inter', sans-serif; font-size: 14px; color: #334155; line-height: 1.6; padding: 10px; }",
       },
-=======
->>>>>>> feature_khuong_dev
       rules: {
         name: [{ required: true, message: "Nhập họ tên!", trigger: "blur" }],
         content: [{ required: true, message: "Nhập nội dung đánh giá!", trigger: "blur" }],
@@ -174,7 +164,6 @@ export default {
   },
 };
 </script>
-<<<<<<< HEAD
 
 <style scoped>
 .editor-placeholder {
@@ -187,5 +176,3 @@ export default {
   border: 1px solid #e2e8f0;
 }
 </style>
-=======
->>>>>>> feature_khuong_dev

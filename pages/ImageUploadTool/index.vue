@@ -5,7 +5,7 @@
     <div class="container">
       <!-- Upload Section -->
       <div class="upload-section">
-        <h3>Chọn ảnh để upload</h3>
+        <h3>Chọn ảnh và upload</h3>
         
         <!-- Drag & Drop Area -->
         <div
@@ -25,7 +25,7 @@
           
           <div class="drop-content">
             <a-icon type="inbox" style="font-size: 48px; color: #1890ff" />
-            <p class="drop-text">Kéo thả ảnh vào đây hoặc</p>
+            <p class="drop-text">Kéo thả ảnh vào �'ây hoặc</p>
             <a-button type="primary" @click="$refs.fileInput.click()">
               Chọn ảnh từ máy
             </a-button>
@@ -39,7 +39,7 @@
             <span class="value">{{ selectedFile.name }}</span>
           </div>
           <div class="info-row">
-            <span class="label">Kích thước:</span>
+            <span class="label">Kích thư�>c:</span>
             <span class="value">{{ formatFileSize(selectedFile.size) }}</span>
           </div>
         </div>
@@ -85,7 +85,7 @@
 
         <div v-if="uploadResult.success" class="success-content">
           <div class="link-box">
-            <h4>Link ảnh đã tải:</h4>
+            <h4>Link ảnh �'ã tải:</h4>
             <div class="link-display">
               <input
                 type="text"
@@ -102,7 +102,7 @@
               </a-button>
             </div>
             <p class="copy-hint" v-if="copySuccess">
-              ✓ Đã copy vào clipboard!
+              �o" Đã copy vào clipboard!
             </p>
           </div>
 
@@ -118,13 +118,13 @@
         </div>
 
         <div v-else class="error-content">
-          <p>{{ uploadResult.error || 'Có lỗi trong quá trình upload' }}</p>
+          <p>{{ uploadResult.error || 'Có l�-i trong quá trình upload' }}</p>
         </div>
       </div>
 
       <!-- Upload History -->
       <div v-if="uploadHistory.length" class="history-section">
-        <h3>Lịch sử upload (phiên này)</h3>
+        <h3>L�<ch sử upload (phiên này)</h3>
         <div class="history-list">
           <div
             v-for="(item, idx) in uploadHistory"
@@ -241,7 +241,7 @@ export default {
       } catch (err) {
         this.uploadResult = {
           success: false,
-          error: err.message || "Có lỗi khi upload ảnh!",
+          error: err.message || "Có l�-i khi upload ảnh!",
         };
       } finally {
         this.uploading = false;
@@ -255,7 +255,7 @@ export default {
           this.copySuccess = false;
         }, 2000);
       }).catch(() => {
-        this.$message.error("Không thể copy!");
+        this.$message.error("Không th�f copy!");
       });
     },
     formatFileSize(bytes) {

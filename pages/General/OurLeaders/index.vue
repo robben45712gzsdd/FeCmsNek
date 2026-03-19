@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap">
     <div class="page-header">
-      <h2 class="title">Quản lý Lãnh đạo</h2>
-      <a-button type="primary" @click="openAdd">+ Thêm lãnh đạo</a-button>
+      <h2 class="title">Quản lý Lãnh �'ạo</h2>
+      <a-button type="primary" @click="openAdd">+ Thêm lãnh �'ạo</a-button>
     </div>
 
     <div class="filter-bar">
@@ -36,7 +36,7 @@
 
       <template #action="record">
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+          <a class="ant-dropdown-link" @click.prevent>Hành Động <a-icon type="down" /></a>
           <a-menu slot="overlay">
             <a-menu-item @click="openEdit(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
             <a-menu-item @click="confirmDelete(record)">
@@ -80,7 +80,7 @@ export default {
         { title: "Họ tên", dataIndex: "name", key: "name" },
         { title: "Chức vụ", dataIndex: "position", key: "position" },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
-        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+        { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
       ];
     },
     pagination() {
@@ -105,7 +105,7 @@ export default {
           this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
         }
       } catch {
-        this.$message.error("Không thể tải danh sách lãnh đạo!");
+        this.$message.error("Không th�f tải danh sách lãnh �'ạo!");
       } finally {
         this.loading = false;
       }
@@ -133,7 +133,7 @@ export default {
     confirmDelete(record) {
       this.$confirm({
         title: "Xác nhận xóa",
-        content: `Xóa lãnh đạo "${record.name}"?`,
+        content: `Xóa lãnh �'ạo "${record.name}"?`,
         okText: "Xóa",
         okType: "danger",
         cancelText: "Hủy",

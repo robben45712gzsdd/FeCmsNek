@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// ── Send Mail ──────────────────────────────────────────────
+// �"?�"? Send Mail �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 export function getListSendMail(params) {
   return new Promise((resolve, reject) => {
     axios
@@ -19,7 +19,7 @@ export function deleteSendMail(mailId) {
   });
 }
 
-// ── Subscribe Us ───────────────────────────────────────────
+// �"?�"? Subscribe Us �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 export function getListSendSubcribeUs(params) {
   return new Promise((resolve, reject) => {
     axios
@@ -38,7 +38,7 @@ export function deleteSendMailSubscribeUs(mailId) {
   });
 }
 
-// ── Career / Send Mail Career ──────────────────────────────
+// �"?�"? Career / Send Mail Career �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 export function getListSendMailCareer(params) {
   return new Promise((resolve, reject) => {
     axios
@@ -66,7 +66,7 @@ export function getCareerCategoryList(languageCode) {
   });
 }
 
-// ── Jobs ───────────────────────────────────────────────────
+// �"?�"? Jobs �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 export function getJobCms(params) {
   return new Promise((resolve, reject) => {
     axios
@@ -87,11 +87,7 @@ export function getJobDetailCms(languageCode, jobId) {
 
 /**
  * CreateJob
-<<<<<<< HEAD
  * params: { languageCode, categoryId, position, YearOfExperience, location, salary, startDate, endDate }
-=======
- * params: { languageCode, categoryId, position, yearsOfExperience, location, salary, startDate, endDate }
->>>>>>> feature_khuong_dev
  * jdFile: IFormFile JD (required)
  */
 export function createJob(params, jdFile) {
@@ -110,11 +106,7 @@ export function createJob(params, jdFile) {
 
 /**
  * UpdateJob
-<<<<<<< HEAD
  * params: { languageCode, jobId, categoryId, position, YearOfExperience, location, salary, startDate, endDate, jd, status }
-=======
- * params: { languageCode, jobId, categoryId, position, yearsOfExperience, location, salary, startDate, endDate, jd, status }
->>>>>>> feature_khuong_dev
  * jdFile: IFormFile JD (optional)
  */
 export function updateJob(params, jdFile) {

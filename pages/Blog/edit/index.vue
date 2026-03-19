@@ -4,13 +4,13 @@
       <a-button type="link" class="btn-back" @click="goBack">
         <a-icon type="arrow-left" /> Quay lại
       </a-button>
-      <h2 class="page-title">{{ isEdit ? "Chỉnh sửa bài viết" : "Thêm bài viết mới" }}</h2>
+      <h2 class="page-title">{{ isEdit ? "Chỉnh sửa bài viết" : "Thêm bài viết m�>i" }}</h2>
     </div>
 
     <a-spin :spinning="loadingDetail">
       <div class="form-card">
         <a-form layout="vertical">
-          <!-- Row 1: Ngôn ngữ + Tiêu đề -->
+          <!-- Row 1: Ngôn ngữ + Tiêu �'ề -->
           <a-row :gutter="20">
             <a-col :span="6">
               <a-form-item label="Ngôn ngữ">
@@ -21,14 +21,14 @@
               </a-form-item>
             </a-col>
             <a-col :span="18">
-              <a-form-item label="Tiêu đề *">
-                <a-input v-model="form.title" placeholder="Nhập tiêu đề bài viết..." size="large" />
+              <a-form-item label="Tiêu �'ề *">
+                <a-input v-model="form.title" placeholder="Nhập tiêu �'ề bài viết..." size="large" />
                 <div v-if="errors.title" class="err">{{ errors.title }}</div>
               </a-form-item>
             </a-col>
           </a-row>
 
-          <!-- Row 2: Loại bài / Nổi bật / Trạng thái -->
+          <!-- Row 2: Loại bài / N�.i bật / Trạng thái -->
           <a-row :gutter="20">
             <a-col :span="8">
               <a-form-item label="Loại bài viết">
@@ -40,10 +40,10 @@
               </a-form-item>
             </a-col>
             <a-col :span="8">
-              <a-form-item label="Nổi bật">
+              <a-form-item label="N�.i bật">
                 <a-select v-model="form.isFeatured" style="width:100%">
                   <a-select-option :value="0">Thường</a-select-option>
-                  <a-select-option :value="1">Nổi bật</a-select-option>
+                  <a-select-option :value="1">N�.i bật</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -69,11 +69,11 @@
             </div>
           </a-form-item>
 
-          <!-- Nội dung: chọn chế độ -->
+          <!-- N�Ti dung: chọn chế �'�T -->
           <a-form-item>
             <template #label>
               <div class="content-label-row">
-                <span>Nội dung bài viết</span>
+                <span>N�Ti dung bài viết</span>
                 <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
                   <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
                   <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -93,21 +93,21 @@
               </div>
               <div v-if="contentPreviewUrl && !contentFileName" class="file-name-tag existing">
                 <a-icon type="file-text" style="color:#2f54eb" />
-                <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
-                <a-button size="small" type="link" :href="contentPreviewUrl" target="_blank">Mở tab</a-button>
+                <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hi�?n tại</span>
+                <a-button size="small" type="link" :href="contentPreviewUrl" target="_blank">M�Y tab</a-button>
               </div>
               <div class="hint">
                 <a-icon type="info-circle" style="color:#6366f1;margin-right:4px;" />
-                Upload file HTML đã xuất từ công cụ bên ngoài.
+                Upload file HTML �'ã xuất từ công cụ bên ngoài.
               </div>
             </div>
 
             <!-- MODE: Rich text editor -->
             <div v-else>
-              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn nội dung bài viết..." />
+              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn n�Ti dung bài viết..." />
               <div v-if="isEdit && contentPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Bài viết đã có file HTML. Soạn nội dung mới sẽ thay thế file cũ.
+                Bài viết �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-item>
@@ -209,7 +209,7 @@ export default {
           this.imagePreview = toFull(d.imageUrl) || null;
           this.contentPreviewUrl = toFull(d.content) || null;
 
-          // Fetch nội dung HTML hiện tại vào editor
+          // Fetch n�Ti dung HTML hi�?n tại vào editor
           if (this.contentPreviewUrl) {
             try {
               const resp = await axios.get(this.contentPreviewUrl, { responseType: "text" });
@@ -223,7 +223,7 @@ export default {
           }
         }
       } catch {
-        this.$message.error("Không thể tải dữ liệu bài viết!");
+        this.$message.error("Không th�f tải dữ li�?u bài viết!");
       } finally {
         this.loadingDetail = false;
       }
@@ -288,7 +288,7 @@ ${this.editorContent}
     validate() {
       this.errors = {};
       if (!this.form.title || !this.form.title.trim())
-        this.errors.title = "Vui lòng nhập tiêu đề";
+        this.errors.title = "Vui lòng nhập tiêu �'ề";
       return Object.keys(this.errors).length === 0;
     },
     async handleSubmit() {
@@ -339,7 +339,7 @@ ${this.editorContent}
           }
         }
       } catch {
-        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
+        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
       } finally {
         this.saving = false;
       }

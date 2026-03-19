@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model="visible"
-    :title="`📄 ${$t('errorDetail')}`"
+    :title="`ðŸ“„ ${$t('errorDetail')}`"
     width="700px"
     centered
     :footer="null"
@@ -14,7 +14,7 @@
       :tip="$t('loadingData')"
     />
 
-    <!-- Có dữ liệu -->
+    <!-- Có dữ li�?u -->
     <div v-else-if="errorDetail" class="detail-wrapper">
       <!-- Thông tin chung -->
       <a-card size="small" bordered class="info-card">
@@ -61,7 +61,7 @@
       <!-- Mô tả và ghi chú -->
       <a-card size="small" bordered class="mt-4 desc-card">
         <!-- Description -->
-        <h4 class="section-title">📝 {{ $t("description") }}</h4>
+        <h4 class="section-title">ðŸ“ {{ $t("description") }}</h4>
         <a-alert
           v-if="errorDetail.description"
           :message="errorDetail.description"
@@ -71,7 +71,7 @@
         <a-empty v-else :description="$t('noDescription')" />
 
         <!-- Note -->
-        <h4 class="section-title mt-4">💬 {{ $t("note") }}</h4>
+        <h4 class="section-title mt-4">ðŸ’¬ {{ $t("note") }}</h4>
         <a-alert
           v-if="errorDetail.note"
           :message="errorDetail.note"
@@ -81,14 +81,14 @@
         <a-empty v-else :description="$t('noNote')" />
 
         <!-- Transaction ID -->
-        <h4 class="section-title mt-4">🔗 {{ $t("transactionId") }}</h4>
+        <h4 class="section-title mt-4">ðŸ”— {{ $t("transactionId") }}</h4>
         <div class="code-block">
           <code>{{ errorDetail.transactionId }}</code>
         </div>
       </a-card>
     </div>
 
-    <!-- Không có dữ liệu -->
+    <!-- Không có dữ li�?u -->
     <a-empty v-else :description="$t('noDataDetail')" class="py-6" />
   </a-modal>
 </template>
@@ -124,7 +124,7 @@ export default {
             this.errorDetail = res.data;
           } else {
             this.errorDetail = null;
-            this.$message.warning(this.$t("noDataFound")); // thông báo không có dữ liệu
+            this.$message.warning(this.$t("noDataFound")); // thông báo không có dữ li�?u
           }
         })
         .catch((err) => {

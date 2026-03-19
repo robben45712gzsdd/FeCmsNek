@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="user-page">
     <h2 class="title">{{ $t("listUser") }}</h2>
 
@@ -240,14 +240,13 @@ export default {
 
     openDetail(user) {
       this.selectedUser = { userId: user.userId, username: user.userName };
-      console.log("👉 selectedUser", this.selectedUser);
+      console.log("ðŸ‘‰ selectedUser", this.selectedUser);
       this.showDetailModal = true;
     },
   },
 };
 </script>
 <style scoped>
-<<<<<<< HEAD
 .user-page {
   padding: 24px;
 }
@@ -264,65 +263,4 @@ export default {
   font-weight: 600;
 }
 /* status, form-row, form-group, tiny-input styles are now in global.css */
-=======
-.status {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
-  width: 100px;
-}
-
-.status.active {
-  background-color: #16a34a;
-}
-
-.status.locked {
-  background-color: #ef4444;
-}
-.title{
-  font-size: 1.125rem;
-}
-.form-row {
-  display: flex;
-  gap: 2.75rem;
-  align-items: flex-end;
-  margin-bottom: 0.5rem;
-}
-.update-btn {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  margin-top: 20px;
-  padding: 18px;
-  font-weight: 700;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-}
-
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  font-size: 0.875rem;
-}
-.user-page{
-  padding: 1rem;
-}
-.tiny-input,
-.date-inputs input {
-  height: 36px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #d0d7dd;
-  background: #fff;
-  font-size: 0.95rem;
-  width: 220px;
-}
->>>>>>> feature_khuong_dev
 </style>
