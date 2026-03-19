@@ -102,6 +102,15 @@ export function updateLabel(body) {
   });
 }
 
+export function deleteLabel(body) {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("/api/AIDemo/DeleteLabel", body)
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
+
 // AIDemo - AI
 export function getListAICMS(params) {
   return new Promise((resolve, reject) => {

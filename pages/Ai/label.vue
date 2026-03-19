@@ -53,6 +53,9 @@
             <a-menu-item @click="openEdit(record)">
               <a-icon type="edit" /> Sửa
             </a-menu-item>
+            <a-menu-item class="danger-item" @click="confirmDelete(record)">
+              <a-icon type="delete" /> Xóa
+            </a-menu-item>
           </a-menu>
         </a-dropdown>
       </template>
@@ -112,6 +115,7 @@ import {
   getDetailLabel,
   createLabel,
   updateLabel,
+  deleteLabel,
 } from "../../apis/ai";
 
 export default {
@@ -303,6 +307,29 @@ export default {
       this.formVisible = false;
       this.formLoading = false;
     },
+    confirmDelete(record) {
+      this.$confirm({
+        title: "Xác nhận xóa label",
+        content: `Bạn có chắc muốn xóa label \"${record.labelName || record.id}\"?`,
+        okText: "Xóa",
+        okType: "danger",
+        cancelText: "Hủy",
+        onOk: () => this.handleDelete(record),
+      });
+    },
+    async handleDelete(record) {
+      try {
+        const body = {
+          id: record.id,
+          languageCode: this.langCode,
+        };
+        await deleteLabel(body);
+        this.$message.success("Xóa label thành công");
+        this.fetchList();
+      } catch (error) {
+        this.$message.error("Xóa label thất bại");
+      }
+    },
     async submitForm() {
       const labelName = (this.formModel.labelName || "").trim();
       if (!labelName) {
@@ -384,5 +411,9 @@ export default {
 
 .detail-grid p {
   margin-bottom: 8px;
+}
+
+.danger-item {
+  color: #d4380d;
 }
 </style>
