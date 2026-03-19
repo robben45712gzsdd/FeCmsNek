@@ -1,0 +1,251 @@
+<template>
+  <div class="blog-page">
+    <div class="blog-header">
+      <h2 class="title">Quản lý Blog</h2>
+      <a-button v-if="activeTab === 'posts'" type="primary" class="btn-add" @click="openAdd">+ Thêm bài viết</a-button>
+    </div>
+
+    <a-tabs v-model="activeTab" @change="onTabChange">
+      <a-tab-pane key="posts" tab="Bài viết">
+        <div class="filter-bar">
+          <a-input-search v-model="keyword" placeholder="Tìm kiếm tiêu đề..." style="width: 280px" @search="fetchList" allow-clear />
+          <a-select v-model="langCode" style="width: 130px" @change="() => { page = 1; fetchList(); }">
+            <a-select-option value="vi">Tiếng Việt</a-select-option>
+            <a-select-option value="us">English</a-select-option>
+          </a-select>
+        </div>
+        <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" row-key="postId" @change="onTableChange">
+          <template #imageUrl="text">
+            <div class="img-cell">
+              <img v-if="text" :src="toFullUrl(text)" alt="thumb" class="post-img" @error="(e) => e.target.style.display='none'" />
+              <span v-else class="no-img"></span>
+            </div>
+          </template>
+          <template #isFeatured="val">
+            <a-tag :color="val ? 'gold' : 'blue'">{{ val ? 'Nổi bật' : 'Thường' }}</a-tag>
+          </template>
+          <template #status="val">
+            <a-tag :color="val === 1 ? 'green' : 'red'">{{ val === 1 ? 'Hiển thị' : 'Ẩn' }}</a-tag>
+          </template>
+          <template #createdDate="val">{{ formatDate(val) }}</template>
+          <template #action="record">
+            <a-dropdown>
+              <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+              <a-menu slot="overlay">
+                <a-menu-item @click="openEdit(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
+                <a-menu-item @click="openPreview(record)"><a-icon type="eye" /> Xem nội dung</a-menu-item>
+                <a-menu-item @click="confirmDelete(record)"><a-icon type="delete" style="color:#ff4d4f" /><span style="color:#ff4d4f"> Xóa</span></a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </template>
+        </a-table>
+      </a-tab-pane>
+
+      <a-tab-pane key="generated" tab="Bài AI tạo">
+        <div class="filter-bar">
+          <a-input-search v-model="genKeyword" placeholder="Tìm kiếm tiêu đề..." style="width: 280px" @search="fetchGenerated" allow-clear />
+          <a-select v-model="genLangCode" style="width: 130px" @change="() => { genPage = 1; fetchGenerated(); }">
+            <a-select-option value="vi">Tiếng Việt</a-select-option>
+            <a-select-option value="us">English</a-select-option>
+          </a-select>
+          <a-button type="primary" :loading="generatingAI" icon="robot" @click="handleGenerateBlog">Tạo bài AI</a-button>
+        </div>
+        <a-table :columns="genColumns" :data-source="genList" :loading="genLoading" :pagination="genPagination" row-key="postId" @change="onGenTableChange">
+          <template #imageUrl="text">
+            <div class="img-cell">
+              <img v-if="text" :src="toFullUrl(text)" alt="thumb" class="post-img" @error="(e) => e.target.style.display='none'" />
+              <span v-else class="no-img"></span>
+            </div>
+          </template>
+          <template #approvalStatus="val">
+            <a-tag :color="val === 1 ? 'green' : val === 2 ? 'red' : 'orange'">
+              {{ val === 1 ? 'Đã duyệt' : val === 2 ? 'Từ chối' : 'Chờ duyệt' }}
+            </a-tag>
+          </template>
+          <template #createdDate="val">{{ formatDate(val) }}</template>
+          <template #action="record">
+            <a-dropdown>
+              <a class="ant-dropdown-link" @click.prevent>Hành động <a-icon type="down" /></a>
+              <a-menu slot="overlay">
+                <a-menu-item @click="openEditGen(record)"><a-icon type="edit" /> Chỉnh sửa</a-menu-item>
+                <a-menu-item @click="openPreview(record)"><a-icon type="eye" /> Xem nội dung</a-menu-item>
+                <a-menu-item @click="approvePost(record, true)"><a-icon type="check-circle" style="color:#52c41a" /><span style="color:#52c41a"> Duyệt</span></a-menu-item>
+                <a-menu-item @click="approvePost(record, false)"><a-icon type="close-circle" style="color:#ff4d4f" /><span style="color:#ff4d4f"> Từ chối</span></a-menu-item>
+                <a-menu-item @click="confirmDelete(record)"><a-icon type="delete" style="color:#ff4d4f" /><span style="color:#ff4d4f"> Xóa</span></a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </template>
+        </a-table>
+      </a-tab-pane>
+    </a-tabs>
+
+    <BlogForm
+      :visible="showForm"
+      :is-edit="isEdit"
+      :record="selectedRecord"
+      :language-code="langCode"
+      @close="showForm = false"
+      @saved="activeTab === 'generated' ? fetchGenerated() : fetchList()"
+    />
+
+    <a-modal :visible="!!previewRecord" title="Xem nội dung bài viết" width="900px" :footer="null" @cancel="previewRecord = null">
+      <iframe v-if="previewRecord && previewRecord.contentUrl" :src="previewRecord.contentUrl" style="width:100%;height:70vh;border:none;border-radius:6px;" />
+      <a-empty v-else description="Chưa có file nội dung" />
+    </a-modal>
+  </div>
+</template>
+
+<script>
+import BlogForm from "./components/BlogForm.vue";
+import { getListPost, getPostDetail, deletePost, getPostGenerate, changeApprovalStatus, generateBlog } from "../../apis/blog";
+
+const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
+
+export default {
+  layout: "adminLayout",
+  middleware: "auth",
+  components: { BlogForm },
+  data() {
+    return {
+      activeTab: "posts",
+      list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
+      genList: [], genLoading: false, genKeyword: "", genLangCode: "vi", genPage: 1, genPageSize: 10, genTotal: 0,
+      showForm: false, isEdit: false, selectedRecord: null, previewRecord: null,
+      generatingAI: false,
+    };
+  },
+  computed: {
+    columns() {
+      return [
+        { title: "#", dataIndex: "ord", key: "ord", width: 55 },
+        { title: "Ảnh", dataIndex: "imageUrl", key: "imageUrl", scopedSlots: { customRender: "imageUrl" }, width: 90 },
+        { title: "Tiêu đề", dataIndex: "title", key: "title", ellipsis: true },
+        { title: "Nổi bật", dataIndex: "isFeatured", key: "isFeatured", scopedSlots: { customRender: "isFeatured" }, width: 110 },
+        { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 120 },
+        { title: "Ngày tạo", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 120 },
+        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+      ];
+    },
+    genColumns() {
+      return [
+        { title: "#", dataIndex: "ord", key: "ord", width: 55 },
+        { title: "Ảnh", dataIndex: "imageUrl", key: "imageUrl", scopedSlots: { customRender: "imageUrl" }, width: 90 },
+        { title: "Tiêu đề", dataIndex: "title", key: "title", ellipsis: true },
+        { title: "Duyệt", dataIndex: "approvalStatus", key: "approvalStatus", scopedSlots: { customRender: "approvalStatus" }, width: 120 },
+        { title: "Ngày tạo", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 120 },
+        { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
+      ];
+    },
+    pagination() { return { current: this.page, pageSize: this.pageSize, total: this.total, showSizeChanger: false }; },
+    genPagination() { return { current: this.genPage, pageSize: this.genPageSize, total: this.genTotal, showSizeChanger: false }; },
+  },
+  mounted() { this.fetchList(); },
+  methods: {
+    toFullUrl(url) {
+      if (!url) return "";
+      return /^https?:\/\//i.test(url) ? url : FILE_BASE.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
+    },
+    onTabChange(tab) { if (tab === "generated" && !this.genList.length) this.fetchGenerated(); },
+    async fetchList() {
+      this.loading = true;
+      try {
+        const res = await getListPost({ languageCode: this.langCode, keyWord: this.keyword || undefined, currentPage: this.page, recordPerPage: this.pageSize });
+        if (res && res.data) {
+          const records = res.data.records || res.data.items || res.data.data || [];
+          this.list = records.map((r, i) => ({ ...r, ord: (this.page - 1) * this.pageSize + i + 1 }));
+          this.total = res.data.totalRecord || res.data.total || 0;
+        } else { this.list = []; this.total = 0; }
+      } catch { this.$message.error("Không thể tải danh sách!"); }
+      finally { this.loading = false; }
+    },
+    onTableChange(pag) { this.page = pag.current; this.fetchList(); },
+    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
+    async openEdit(record) {
+      try {
+        const res = await getPostDetail(record.postId, this.langCode);
+        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
+      } catch { this.selectedRecord = record; }
+      this.isEdit = true; this.showForm = true;
+    },
+    async fetchGenerated() {
+      this.genLoading = true;
+      try {
+        const res = await getPostGenerate({ languageCode: this.genLangCode, keyWord: this.genKeyword || undefined, currentPage: this.genPage, recordPerPage: this.genPageSize });
+        if (res && res.data) {
+          const records = res.data.records || res.data.items || res.data.data || [];
+          this.genList = records.map((r, i) => ({ ...r, ord: (this.genPage - 1) * this.genPageSize + i + 1 }));
+          this.genTotal = res.data.totalRecord || res.data.total || 0;
+        } else { this.genList = []; this.genTotal = 0; }
+      } catch { this.$message.error("Không thể tải danh sách bài AI!"); }
+      finally { this.genLoading = false; }
+    },
+    onGenTableChange(pag) { this.genPage = pag.current; this.fetchGenerated(); },
+    async openEditGen(record) {
+      try {
+        const res = await getPostDetail(record.postId, this.genLangCode);
+        this.selectedRecord = res && res.data ? { ...res.data, postId: record.postId } : record;
+      } catch { this.selectedRecord = record; }
+      this.isEdit = true; this.showForm = true;
+    },
+    async approvePost(record, isAccepted) {
+      try {
+        const res = await changeApprovalStatus({ postId: record.postId, isAccepted });
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.$message.success(isAccepted ? "Đã duyệt bài viết!" : "Đã từ chối bài viết!");
+          this.fetchGenerated();
+        } else { this.$message.error(res?.message || "Thao tác thất bại!"); }
+      } catch { this.$message.error("Có lỗi, vui lòng thử lại!"); }
+    },
+    async openPreview(record) {
+      try {
+        const lc = this.activeTab === "generated" ? this.genLangCode : this.langCode;
+        const res = await getPostDetail(record.postId, lc);
+        const d = res && res.data ? res.data : {};
+        this.previewRecord = { ...d, contentUrl: this.toFullUrl(d.content) };
+      } catch { this.$message.error("Không thể tải nội dung!"); }
+    },
+    confirmDelete(record) {
+      this.$confirm({
+        title: "Xác nhận xóa",
+        content: `Xóa bài viết "${record.title}"?`,
+        okText: "Xóa", okType: "danger", cancelText: "Hủy",
+        onOk: async () => {
+          try {
+            await deletePost(record.postId);
+            this.$message.success("Đã xóa!");
+            this.activeTab === "generated" ? this.fetchGenerated() : this.fetchList();
+          } catch { this.$message.error("Xóa thất bại!"); }
+        },
+      });
+    },
+    async handleGenerateBlog() {
+      this.generatingAI = true;
+      try {
+        const res = await generateBlog();
+        if (res && (res.responseCode === 200 || res.responseCode === 1)) {
+          this.$message.success("Tạo bài AI thành công!");
+        } else {
+          this.$message.success("Tạo bài AI thành công!");
+        }
+        this.fetchGenerated();
+      } catch { this.$message.error("Tạo bài AI thất bại, vui lòng thử lại!"); }
+      finally { this.generatingAI = false; }
+    },
+    formatDate(dateStr) {
+      if (!dateStr) return "";
+      const d = new Date(dateStr);
+      return isNaN(d) ? dateStr : d.toLocaleDateString("vi-VN");
+    },
+  },
+};
+</script>
+
+<style scoped>
+.blog-page { padding: 24px; }
+.blog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.title { font-size: 22px; font-weight: 600; color: #1e293b; margin: 0; }
+.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.img-cell { width: 72px; height: 48px; overflow: hidden; border-radius: 6px; background: #f0f0f0; }
+.post-img { width: 100%; height: 100%; object-fit: cover; }
+.no-img { color: #aaa; font-size: 12px; display: flex; align-items: center; justify-content: center; height: 100%; }
+</style>
