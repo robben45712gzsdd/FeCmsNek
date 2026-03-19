@@ -359,7 +359,7 @@ export default {
           this.$message.error(res?.message || "Xóa tag thất bại!");
         }
       } catch {
-        this.$message.error("Có l�-i, vui lòng thử lại!");
+        this.$message.error("Có lỗi, vui lòng thử lại!");
       } finally {
         this.deletingTagId = null;
       }
@@ -384,7 +384,7 @@ export default {
           this.$message.error(res?.message || "Tạo tag thất bại!");
         }
       } catch {
-        this.$message.error("Có l�-i, vui lòng thử lại!");
+        this.$message.error("Có lỗi, vui lòng thử lại!");
       } finally {
         this.newTagLoading = false;
       }
@@ -439,7 +439,7 @@ export default {
         this.$emit("saved");
         this.$emit("close");
       } catch {
-        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
+        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
       } finally {
         this.loading = false;
       }

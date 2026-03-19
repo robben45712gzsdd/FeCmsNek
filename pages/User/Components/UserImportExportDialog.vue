@@ -197,7 +197,7 @@ export default {
           title: this.$t("action"),
           key: "action",
           customRender: (text, record, index) => {
-            if (!record) return null; // tránh l�-i render lần đầu
+            if (!record) return null; // tránh lỗi render lần đầu
             if (record.status !== STATUS_CODE.ERR_SYSTEM) return null;
 
             return (
@@ -274,7 +274,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.error("�O Import l�-i:", error);
+          console.error("�O Import lỗi:", error);
           this.$message.error(this.$t("accountBalanceDialog.confirmFailed"));
         })
         .finally(() => {
@@ -306,7 +306,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.error("�O Retry l�-i:", err);
+          console.error("�O Retry lỗi:", err);
           this.$message.error("Retry thất bại!");
           this.$set(this.importResult[index], "retrying", false);
         });

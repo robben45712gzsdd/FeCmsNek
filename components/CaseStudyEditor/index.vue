@@ -553,7 +553,7 @@ const ImageEditor = {
           this.$message.error(res?.message || "Tải ảnh thất bại!");
         }
       } catch (err) {
-        this.$message.error("L�-i khi tải ảnh!");
+        this.$message.error("lỗi khi tải ảnh!");
       } finally {
         this.uploading = false;
         e.target.value = "";
@@ -1071,7 +1071,7 @@ export default {
           }
           this.$message ? this.$message.success("Đã load dữ li�?u từ file HTML!") : alert("Đã load xong!");
         } catch {
-          this.$message ? this.$message.error("Parse dữ li�?u thất bại!") : alert("L�-i parse JSON!");
+          this.$message ? this.$message.error("Parse dữ li�?u thất bại!") : alert("lỗi parse JSON!");
         }
       };
       reader.readAsText(file);

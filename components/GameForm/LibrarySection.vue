@@ -113,7 +113,7 @@ export default {
           this.totalRecords = res?.data?.totalRecord || 0;
         })
         .catch((err) => {
-          console.error("L�-i tải ảnh:", err);
+          console.error("lỗi tải ảnh:", err);
           this.$message.error(this.$t("loadImageError"));
         });
     },

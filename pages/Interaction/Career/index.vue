@@ -198,7 +198,7 @@
           </div>
           <div v-else class="cv-fallback">
             <a-icon type="file-unknown" style="font-size:56px;color:#c7d2fe;" />
-            <p style="margin:12px 0 0;font-size:15px;">Không th�f xem trư�>c �'�<nh dạng này</p>
+            <p style="margin:12px 0 0;font-size:15px;">Không thể xem trước định dạng này</p>
             <a :href="toFullUrl(cvPreview.cvUrl)" target="_blank">
               <a-button type="primary" style="margin-top:16px"><a-icon type="download" /> Tải về và xem</a-button>
             </a>
@@ -207,7 +207,6 @@
       </div>
     </a-modal>
 
-    <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� Message Detail Modal �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <a-modal
       :visible="!!messageDetail"
       title="Giới thiệu bản thân"

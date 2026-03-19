@@ -404,7 +404,7 @@ ${this.jdEditorContent}
           }
           this.goBack();
         } catch {
-          this.$message.error("Có l�-i, vui lòng thử lại!");
+          this.$message.error("Có lỗi, vui lòng thử lại!");
         } finally {
           this.saving = false;
         }

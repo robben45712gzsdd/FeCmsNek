@@ -36,7 +36,7 @@ export default {
       if (this.error.statusCode === 404) {
         return this.$t("pageNotFound") ;
       }
-      return this.$t("errorOccurred") || "Đã xảy ra l�-i, vui lòng thử lại sau.";
+      return this.$t("errorOccurred") || "Đã xảy ra lỗi, vui lòng thử lại sau.";
     },
   },
 

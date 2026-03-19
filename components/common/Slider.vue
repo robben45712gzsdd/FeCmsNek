@@ -8,18 +8,35 @@
   >
     <div class="logo" :class="{ collapsed }">
       <div class="brand">
-        <a-avatar style="background-color: #4dabf7" icon="user" />
-        <span v-if="!collapsed" class="brand-title">{{ 'Admin' }}</span>
+        <a-avatar class="brand-avatar" icon="user" />
+        <span v-if="!collapsed" class="brand-title">{{ accountName }}</span>
       </div>
     </div>
- 
+    <div class="balance-container">
+      <p class="balance" :class="{ collapsed }">
+        {{ $t("balance") }}: {{ formattedBalance }}
+        <a-icon
+          type="sync"
+          class="reload-icon"
+          :class="{ spinning: isReloading }"
+          @click="reloadBalance"
+        />
+      </p>
+    </div>
 
     <a-menu
+      class="sidebar-menu"
       theme="light"
       mode="inline"
       :selectedKeys="localSelectedKeys"
       @select="onSelect"
     >
+      <a-menu-item key="8">
+        <nuxt-link to="/case-study-editor">
+          <a-icon type="file-text" />
+          <span>{{ $t("caseStudyEditor") }}</span>
+        </nuxt-link>
+      </a-menu-item>
       <a-menu-item key="9">
         <nuxt-link to="/Projects">
           <a-icon type="project" />
@@ -38,18 +55,34 @@
           <span>Games</span>
         </nuxt-link>
       </a-menu-item>
-      <a-menu-item key="18">
-        <nuxt-link to="/Ai">
-          <a-icon type="robot" />
-          <span>AI</span>
-        </nuxt-link>
-      </a-menu-item>
       <a-menu-item key="100">
         <nuxt-link to="/ImageUploadTool">
           <a-icon type="picture" />
           <span>Upload Ảnh</span>
         </nuxt-link>
       </a-menu-item>
+
+      <a-sub-menu key="ai-demo">
+        <span slot="title"><a-icon type="robot" /><span>AI-Demo</span></span>
+        <a-menu-item key="101">
+          <nuxt-link to="/Ai">
+            <a-icon type="bulb" />
+            <span>AI</span>
+          </nuxt-link>
+        </a-menu-item>
+        <a-menu-item key="102">
+          <nuxt-link to="/Ai/api-key">
+            <a-icon type="key" />
+            <span>api-key</span>
+          </nuxt-link>
+        </a-menu-item>
+        <a-menu-item key="103">
+          <nuxt-link to="/Ai/label">
+            <a-icon type="tags" />
+            <span>label</span>
+          </nuxt-link>
+        </a-menu-item>
+      </a-sub-menu>
 
       <a-sub-menu key="general">
         <span slot="title"><a-icon type="appstore" /><span>Chung</span></span>
@@ -99,6 +132,8 @@
 </template>
 
 <script>
+import { getAccountDetail } from "../../apis/account";
+
 export default {
   name: "Sider",
   props: {
@@ -108,10 +143,13 @@ export default {
   data() {
     return {
       localSelectedKeys: this.selectedKeys,
-      accountName: "Admin",
+      accountName: "Loading...",
+      balance: 0,
+      isReloading: false,
     };
   },
   mounted() {
+    this.loadAccountDetail();
   },
   watch: {
     selectedKeys(newVal) {
@@ -119,9 +157,35 @@ export default {
     },
   },
   methods: {
-  
+    loadAccountDetail() {
+      return getAccountDetail()
+        .then((res) => {
+          if (res && res.data) {
+            this.accountName =
+              res.data.displayName || res.data.customerName || "Admin";
+            this.balance = res.data.wallet || 0;
+          } else {
+            this.accountName = "Admin Portal";
+          }
+        })
+        .catch(() => {
+          this.accountName = "Admin Portal";
+          this.$message.error(this.$t("errorOccurred"));
+        });
+    },
 
- 
+    reloadBalance() {
+      if (this.isReloading) return; 
+      this.isReloading = true;
+
+      this.loadAccountDetail().finally(() => {
+        
+        setTimeout(() => {
+          this.isReloading = false;
+        }, 2000);
+      });
+    },
+
     onSelect({ key }) {
       this.localSelectedKeys = [key];
       this.$emit("update:selectedKeys", [key]);
@@ -132,90 +196,172 @@ export default {
       localStorage.setItem("selectedLanguage", lang);
     },
   },
+
+  computed: {
+    formattedBalance() {
+      return this.balance.toLocaleString();
+    },
+  },
 };
 </script>
 
 <style scoped>
 .custom-sider {
-  background: rgba(255,255,255,.9) !important;
-  backdrop-filter: blur(12px);
-  border-radius: 20px !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(99,102,241,.06);
-  margin: 16px 0 16px 16px;
-  border: 1px solid rgba(255,255,255,.6);
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  border-radius: 18px;
+  border: 1px solid #e4ebfb;
+  box-shadow: 0 10px 30px rgba(37, 83, 185, 0.08);
   overflow: hidden;
 }
+
 .logo {
-  height: 60px;
-  margin: 14px 16px 0 16px;
+  margin: 14px 14px 8px;
+  min-height: 64px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
+
 .logo.collapsed {
   justify-content: center;
+}
+
+.balance-container {
+  margin: 0 14px 10px;
+}
+
+.balance {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #eef4ff;
+  border: 1px solid #d9e6ff;
+  font-weight: 500;
+  color: #274690;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.balance.collapsed {
+  display: none;
+}
+
+.reload-icon {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  color: #2553b9;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.reload-icon:hover {
+  background-color: rgba(37, 83, 185, 0.12);
+}
+
+.spinning {
+  animation: spin 1s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(600deg);
+  }
 }
 
 .brand {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 0 4px;
-  font-weight: 800;
-  font-size: 17px;
-  color: #6366f1;
-}
-.brand-title {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  width: 100%;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #f3f7ff;
+  border: 1px solid #dde8ff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  color: #1e3f88;
 }
 
-/* Menu styling */
-.custom-sider >>> .ant-menu {
-  background: transparent !important;
-  border-right: none !important;
-  padding: 0 8px;
+.brand-avatar {
+  background: linear-gradient(135deg, #4dabf7 0%, #2553b9 100%);
+  flex-shrink: 0;
 }
-.custom-sider >>> .ant-menu-item {
-  border-radius: 10px !important;
-  margin: 2px 0 !important;
-  height: 40px !important;
-  line-height: 40px !important;
-  color: #64748b !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease !important;
+
+.brand-title {
+  color: #1f3d80;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.custom-sider >>> .ant-menu-item:hover {
-  background: #f0f4ff !important;
-  color: #6366f1 !important;
+
+.sidebar-menu {
+  padding: 0 10px 12px;
+  border-right: none;
+  background: transparent;
 }
-.custom-sider >>> .ant-menu-item-selected {
-  background: linear-gradient(135deg, #eef2ff, #f5f3ff) !important;
-  color: #6366f1 !important;
-  font-weight: 600 !important;
+
+.sidebar-menu /deep/ .ant-menu-item,
+.sidebar-menu /deep/ .ant-menu-submenu-title {
+  margin: 4px 0;
+  height: 42px;
+  line-height: 42px;
+  border-radius: 10px;
+  font-weight: 500;
+  color: #35508b;
+  transition: all 0.2s ease;
 }
-.custom-sider >>> .ant-menu-item-selected::after {
-  display: none !important;
+
+.sidebar-menu /deep/ .ant-menu-item a,
+.sidebar-menu /deep/ .ant-menu-submenu-title span {
+  color: inherit;
 }
-.custom-sider >>> .ant-menu-submenu-title {
-  border-radius: 10px !important;
-  color: #64748b !important;
-  font-weight: 500 !important;
-  height: 40px !important;
-  line-height: 40px !important;
+
+.sidebar-menu /deep/ .ant-menu-item:hover,
+.sidebar-menu /deep/ .ant-menu-submenu-title:hover {
+  background: #edf4ff;
+  color: #1f4fb5;
 }
-.custom-sider >>> .ant-menu-submenu-title:hover {
-  color: #6366f1 !important;
+
+.sidebar-menu /deep/ .ant-menu-item-selected {
+  background: #e3eeff;
+  color: #1f4fb5;
+  font-weight: 600;
 }
-.custom-sider >>> .ant-menu-item a {
-  color: inherit !important;
+
+.sidebar-menu /deep/ .ant-menu-item-selected::after {
+  display: none;
 }
-.custom-sider >>> .ant-menu-item .anticon {
-  font-size: 16px !important;
+
+.sidebar-menu /deep/ .ant-menu-submenu-open > .ant-menu-submenu-title {
+  background: #edf4ff;
+  color: #1f4fb5;
+}
+
+.sidebar-menu /deep/ .ant-menu-sub .ant-menu-item,
+.sidebar-menu /deep/ .ant-menu-sub .ant-menu-submenu-title {
+  margin-left: 8px;
+  width: calc(100% - 8px);
+}
+
+@media (max-width: 992px) {
+  .custom-sider {
+    border-radius: 14px;
+  }
+
+  .logo {
+    margin: 12px 12px 6px;
+  }
+
+  .balance-container {
+    margin: 0 12px 8px;
+  }
 }
 </style>

@@ -296,7 +296,7 @@ ${this.editorContent}
         this.$emit("saved");
         this.$emit("close");
       } catch {
-        this.$message.error("Có l�-i xảy ra, vui lòng thử lại!");
+        this.$message.error("Có lỗi xảy ra, vui lòng thử lại!");
       } finally {
         this.loading = false;
       }

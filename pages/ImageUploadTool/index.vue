@@ -118,13 +118,13 @@
         </div>
 
         <div v-else class="error-content">
-          <p>{{ uploadResult.error || 'Có l�-i trong quá trình upload' }}</p>
+          <p>{{ uploadResult.error || 'Có lỗi trong quá trình upload' }}</p>
         </div>
       </div>
 
       <!-- Upload History -->
       <div v-if="uploadHistory.length" class="history-section">
-        <h3>L�<ch sử upload (phiên này)</h3>
+        <h3>Lịch sử upload (phiên này)</h3>
         <div class="history-list">
           <div
             v-for="(item, idx) in uploadHistory"
@@ -241,7 +241,7 @@ export default {
       } catch (err) {
         this.uploadResult = {
           success: false,
-          error: err.message || "Có l�-i khi upload ảnh!",
+          error: err.message || "Có lỗi khi upload ảnh!",
         };
       } finally {
         this.uploading = false;
