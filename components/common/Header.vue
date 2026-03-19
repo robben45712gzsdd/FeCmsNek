@@ -108,6 +108,7 @@ export default {
 
 <style scoped>
 .app-header {
+<<<<<<< HEAD
   height: 56px;
   background: rgba(255,255,255,.85);
   backdrop-filter: blur(12px);
@@ -119,16 +120,33 @@ export default {
   gap: 16px;
   border-radius: 16px;
   box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(99,102,241,.06);
+=======
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  gap: 20px;
+  border-radius: 18px;
+  box-shadow: 0 2px 6px #2553b91a;
+>>>>>>> feature_khuong_dev
 }
 .header-left {
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   gap: 16px;
+=======
+  gap: 24px;
+>>>>>>> feature_khuong_dev
 }
 .trigger {
   display: flex;
   cursor: pointer;
   align-items: center;
+<<<<<<< HEAD
   font-size: 18px;
   color: #64748b;
   width: 32px;
@@ -153,12 +171,30 @@ export default {
 }
 .title-star .anticon {
   color: #f59e0b;
+=======
+  font-size: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title-star {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+>>>>>>> feature_khuong_dev
 }
 .page-title {
   font-weight: 700;
   font-size: 16px;
+<<<<<<< HEAD
   color: #1e293b;
   letter-spacing: -0.01em;
+=======
+>>>>>>> feature_khuong_dev
 }
 
 /* Dropdown ngôn ngữ */
@@ -167,6 +203,7 @@ export default {
   align-items: center;
   gap: 6px;
   cursor: pointer;
+<<<<<<< HEAD
   color: #475569;
   font-weight: 500;
   font-size: 13px;
@@ -205,4 +242,25 @@ export default {
   background: #fef2f2 !important;
   color: #ef4444 !important;
 }
+=======
+  color: #333;
+  font-weight: 500;
+}
+.lang-switch img {
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+}
+.lang-switch:hover {
+  color: #2553b9;
+}
+
+.logout-btn {
+  border: none;
+  display: flex;
+  align-items: center;
+  
+}
+
+>>>>>>> feature_khuong_dev
 </style>

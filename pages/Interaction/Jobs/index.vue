@@ -33,7 +33,18 @@
       </template>
     </a-table>
 
+<<<<<<< HEAD
 
+=======
+    <JobForm
+      :visible="showForm"
+      :is-edit="isEdit"
+      :record="selectedRecord"
+      :language-code="langCode"
+      @close="showForm = false"
+      @saved="fetchList"
+    />
+>>>>>>> feature_khuong_dev
 
     <a-modal
       :visible="!!previewHtml"
@@ -54,6 +65,10 @@
 
 <script>
 import axios from "axios";
+<<<<<<< HEAD
+=======
+import JobForm from "./components/JobForm.vue";
+>>>>>>> feature_khuong_dev
 import { getJobCms, getJobDetailCms, deleteJob } from "../../../apis/interaction";
 
 const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
@@ -61,10 +76,18 @@ const FILE_BASE = process.env.NUXT_ENV_FILE_API_URL;
 export default {
   layout: "adminLayout",
   middleware: "auth",
+<<<<<<< HEAD
   data() {
     return {
       list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
       previewHtml: null,
+=======
+  components: { JobForm },
+  data() {
+    return {
+      list: [], loading: false, keyword: "", langCode: "vi", page: 1, pageSize: 10, total: 0,
+      showForm: false, isEdit: false, selectedRecord: null, previewHtml: null,
+>>>>>>> feature_khuong_dev
     };
   },
   computed: {
@@ -75,7 +98,11 @@ export default {
         { title: "Vị trí", dataIndex: "position", key: "position", ellipsis: true },
         { title: "Địa điểm", dataIndex: "location", key: "location" },
         { title: "Lương", dataIndex: "salary", key: "salary" },
+<<<<<<< HEAD
         { title: "Kinh nghiệm", dataIndex: "YearOfExperience", key: "YearOfExperience", width: 130 },
+=======
+        { title: "Kinh nghiệm", dataIndex: "yearsOfExperience", key: "yearsOfExperience", width: 130 },
+>>>>>>> feature_khuong_dev
         { title: "Ngày", dataIndex: "date", key: "date", width: 100 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
         { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
@@ -102,11 +129,21 @@ export default {
       finally { this.loading = false; }
     },
     onTableChange(pag) { this.page = pag.current; this.fetchList(); },
+<<<<<<< HEAD
     openAdd() {
       this.$router.push({ path: '/Interaction/Jobs/edit', query: { lang: this.langCode } });
     },
     openEdit(record) {
       this.$router.push({ path: '/Interaction/Jobs/edit', query: { id: record.jobId, lang: this.langCode } });
+=======
+    openAdd() { this.isEdit = false; this.selectedRecord = null; this.showForm = true; },
+    async openEdit(record) {
+      try {
+        const res = await getJobDetailCms(this.langCode, record.jobId);
+        this.selectedRecord = res && res.data ? { ...res.data, jobId: record.jobId } : record;
+      } catch { this.selectedRecord = record; }
+      this.isEdit = true; this.showForm = true;
+>>>>>>> feature_khuong_dev
     },
     async openPreview(record) {
       try {

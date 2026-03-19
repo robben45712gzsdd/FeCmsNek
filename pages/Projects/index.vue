@@ -52,8 +52,15 @@
             <a-menu-item key="1" @click="openEdit(record)">
               <a-icon type="edit" /> Chỉnh sửa
             </a-menu-item>
+<<<<<<< HEAD
             <a-menu-item key="2" @click="downloadHtml(record)" :disabled="!record.projectBody">
               <a-icon type="download" /> Tải HTML
+=======
+            <a-menu-item key="2">
+              <nuxt-link :to="'/CaseStudyEditor?projectId=' + record.projectId">
+                <a-icon type="file-text" /> Mở Editor
+              </nuxt-link>
+>>>>>>> feature_khuong_dev
             </a-menu-item>
             <a-menu-item key="3" @click="confirmDelete(record)">
               <a-icon type="delete" style="color: #ff4d4f" />
@@ -64,25 +71,55 @@
       </template>
     </BoxTable>
 
+<<<<<<< HEAD
 
+=======
+    <!-- Form thêm/sửa -->
+    <ProjectForm
+      :visible="showForm"
+      :isEdit="isEdit"
+      :record="selectedRecord"
+      @close="showForm = false"
+      @saved="fetchProjects"
+    />
+>>>>>>> feature_khuong_dev
   </div>
 </template>
 
 <script>
 import BoxTable from "../../components/BoxTable/index.vue";
+<<<<<<< HEAD
 import { getProjectList, deleteProject } from "../../apis/projects";
+=======
+import ProjectForm from "./components/ProjectForm.vue";
+import { getProjectList, getProjectDetail, deleteProject } from "../../apis/projects";
+>>>>>>> feature_khuong_dev
 
 export default {
   layout: "adminLayout",
   middleware: "auth",
+<<<<<<< HEAD
   components: { BoxTable },
+=======
+  components: { BoxTable, ProjectForm },
+>>>>>>> feature_khuong_dev
   data() {
     return {
       projects: [],
       loading: false,
+<<<<<<< HEAD
       page: 1,
       pageSize: 10,
       total: 0,
+=======
+      detailLoading: false,
+      page: 1,
+      pageSize: 10,
+      total: 0,
+      showForm: false,
+      isEdit: false,
+      selectedRecord: null,
+>>>>>>> feature_khuong_dev
       baseImageUrl: process.env.NUXT_ENV_FILE_API_URL,
     };
   },
@@ -133,10 +170,30 @@ export default {
       this.fetchProjects();
     },
     openAdd() {
+<<<<<<< HEAD
       this.$router.push({ path: '/Projects/edit', query: { lang: 'vi' } });
     },
     openEdit(record) {
       this.$router.push({ path: '/Projects/edit', query: { id: record.projectId, lang: 'vi' } });
+=======
+      this.isEdit = false;
+      this.selectedRecord = null;
+      this.showForm = true;
+    },
+    async openEdit(record) {
+      this.detailLoading = true;
+      try {
+        const res = await getProjectDetail(record.projectId);
+        const detail = (res && res.data) ? res.data : record;
+        this.isEdit = true;
+        this.selectedRecord = detail;
+        this.showForm = true;
+      } catch {
+        this.$message.error("Không thể tải chi tiết dự án!");
+      } finally {
+        this.detailLoading = false;
+      }
+>>>>>>> feature_khuong_dev
     },
     confirmDelete(record) {
       this.$confirm({
@@ -166,6 +223,7 @@ export default {
         year: "numeric",
       });
     },
+<<<<<<< HEAD
     async downloadHtml(record) {
       if (!record.projectBody) {
         this.$message.warning("Dự án này chưa có file HTML!");
@@ -191,6 +249,8 @@ export default {
         this.$message.error("Không thể tải file HTML!");
       }
     },
+=======
+>>>>>>> feature_khuong_dev
     onImgError(e) {
       e.target.style.display = "none";
     },

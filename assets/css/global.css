@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ══════════════════════════════════════════════════════
    Design System — Light Mode · Clean & Modern
    ══════════════════════════════════════════════════════ */
@@ -25,10 +26,26 @@ h4, h5 { font-weight: 600; color: #475569; }
 p, span, label { font-size: 14px; }
 
 /* ── Ant Design overrides for light mode ── */
+=======
+/* assets/css/global.css */
+
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fix Tailwind preflight overriding Ant Design input colors */
+>>>>>>> feature_khuong_dev
 .ant-input,
 .ant-select-selection,
 .ant-select-selector {
   background-color: #fff !important;
+<<<<<<< HEAD
   color: #1e293b !important;
   border-color: #e2e8f0 !important;
   border-radius: 10px !important;
@@ -331,4 +348,31 @@ h2.title {
 /* ── Alert ── */
 .ant-alert {
   border-radius: 10px !important;
+=======
+  color: #333 !important;
+}
+
+input,
+textarea,
+select {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Font chữ mặc định */
+body {
+  font-family:  sans-serif;
+  background: #f6f5f7;
+  color: #333;
+}
+
+/* Heading */
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+}
+
+/* Text nhỏ */
+p, span, label, input, button {
+  font-size: 14px;
+>>>>>>> feature_khuong_dev
 }

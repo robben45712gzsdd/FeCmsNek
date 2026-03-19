@@ -1,6 +1,7 @@
 <template>
   <div class="auth-wrapper">
     <div class="auth-card">
+<<<<<<< HEAD
       <div class="auth-left">
         <div class="auth-left-overlay">
           <div class="brand-logo">&#9670;</div>
@@ -48,6 +49,40 @@
             </button>
           </form>
         </div>
+=======
+      <div class="auth-left"></div>
+
+      <div class="auth-right">
+        <h2 class="title">{{ $t("login") }}</h2>
+        <form @submit.prevent="handleLogin">
+          <div class="form-group">
+            <label>{{ $t("username") }}</label>
+            <input
+              v-model="username"
+              type="text"
+              :placeholder="$t('usernamePlaceholder')"
+            />
+          </div>
+          <div class="form-group">
+            <label>{{ $t("password") }}</label>
+            <div class="password-wrapper">
+              <input
+                :type="showPassword ? 'text' : 'password'"
+                v-model="password"
+                :placeholder="$t('passwordPlaceholder')"
+              />
+              <span class="toggle-pass" @click="showPassword = !showPassword">
+                <a-icon :type="showPassword ? 'eye-invisible' : 'eye'" />
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" :disabled="loading">
+            <span v-if="loading">{{ $t("loading") }}...</span>
+            <span v-else>{{ $t("login") }}</span>
+          </button>
+        </form>
+>>>>>>> feature_khuong_dev
       </div>
     </div>
   </div>
@@ -68,6 +103,7 @@ export default {
   },
   methods: {
     handleLogin() {
+<<<<<<< HEAD
       if (!this.username || !this.password) {
         this.$message.warning("Vui lòng nhập đầy đủ thông tin");
         return;
@@ -101,6 +137,21 @@ export default {
 
           const msg = err?.response?.data?.message || this.$t("loginFail");
           this.$message.error(msg);
+=======
+      this.loading = true;
+      login({
+        username: this.username,
+        password: this.password,
+      })
+        .then((res) => {
+          const { token, displayName } = res.data || res.data.data;
+          this.$store.dispatch("auth/login", { token, displayName });
+          this.$message.success(this.$t("loginSuccess"));
+          this.$router.push("/overview");
+        })
+        .catch(() => {
+          this.$message.error(this.$t("loginFail"));
+>>>>>>> feature_khuong_dev
         })
         .finally(() => {
           this.loading = false;
@@ -111,27 +162,45 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature_khuong_dev
 .auth-wrapper {
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fef3f2 100%);
   font-family: 'Inter', system-ui, sans-serif;
+=======
+  background: #eef2f8;
+>>>>>>> feature_khuong_dev
 }
 
 .auth-card {
   display: flex;
+<<<<<<< HEAD
   width: 860px;
   max-width: 92%;
   min-height: 500px;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(99, 102, 241, 0.1), 0 4px 20px rgba(0, 0, 0, 0.05);
+=======
+  width: 80%;
+  height: 460px;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+>>>>>>> feature_khuong_dev
   overflow: hidden;
 }
 
 .auth-left {
+<<<<<<< HEAD
   width: 45%;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
   display: flex;
@@ -215,10 +284,22 @@ export default {
   border-radius: 20px;
   margin-bottom: 16px;
   letter-spacing: 0.02em;
+=======
+  width: 50%;
+  background-image: url("@/assets/bg-01.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-right {
+  width: 50%;
+  padding: 70px 40px;
+>>>>>>> feature_khuong_dev
 }
 
 .title {
   font-size: 28px;
+<<<<<<< HEAD
   font-weight: 800;
   color: #1e293b;
   margin-bottom: 6px;
@@ -275,10 +356,78 @@ export default {
   border-color: #6366f1;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+=======
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 26px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #3b82f6;
+}
+
+.btn {
+  width: 100%;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #2563eb;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  padding-right: 40px;
+}
+
+.password-wrapper input:focus {
+  border-color: #3b82f6;
+>>>>>>> feature_khuong_dev
 }
 
 .toggle-pass {
   position: absolute;
+<<<<<<< HEAD
   right: 14px;
   cursor: pointer;
   user-select: none;
@@ -318,5 +467,13 @@ export default {
 @media (max-width: 700px) {
   .auth-left { display: none; }
   .auth-right { width: 100%; }
+=======
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+>>>>>>> feature_khuong_dev
 }
 </style>

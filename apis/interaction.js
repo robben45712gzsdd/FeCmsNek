@@ -87,7 +87,11 @@ export function getJobDetailCms(languageCode, jobId) {
 
 /**
  * CreateJob
+<<<<<<< HEAD
  * params: { languageCode, categoryId, position, YearOfExperience, location, salary, startDate, endDate }
+=======
+ * params: { languageCode, categoryId, position, yearsOfExperience, location, salary, startDate, endDate }
+>>>>>>> feature_khuong_dev
  * jdFile: IFormFile JD (required)
  */
 export function createJob(params, jdFile) {
@@ -106,7 +110,11 @@ export function createJob(params, jdFile) {
 
 /**
  * UpdateJob
+<<<<<<< HEAD
  * params: { languageCode, jobId, categoryId, position, YearOfExperience, location, salary, startDate, endDate, jd, status }
+=======
+ * params: { languageCode, jobId, categoryId, position, yearsOfExperience, location, salary, startDate, endDate, jd, status }
+>>>>>>> feature_khuong_dev
  * jdFile: IFormFile JD (optional)
  */
 export function updateJob(params, jdFile) {

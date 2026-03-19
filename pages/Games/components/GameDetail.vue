@@ -34,6 +34,21 @@
         <div class="rows-container">
           <div class="rows">
             <div class="row">
+<<<<<<< HEAD
+=======
+              <span class="label">{{ $t("gameTypeId") }}:</span>
+              <span class="value">{{
+                gameTypeName || $t("common.noData")
+              }}</span>
+            </div>
+            <div class="row">
+              <span class="label">{{ $t("typeLiveId") }}:</span>
+              <span class="value">{{
+                typeLiveName || $t("common.noData")
+              }}</span>
+            </div>
+            <div class="row">
+>>>>>>> feature_khuong_dev
               <span class="label">{{ $t("partnerGameId") }}:</span>
               <span class="value">{{
                 detail.partnerGameId || $t("common.noData")
@@ -114,7 +129,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { getPartnerType } from "../../../apis/games";
+=======
+import { getGameType, getTypeLive,getPartnerType } from "../../../apis/games";
+>>>>>>> feature_khuong_dev
 
 export default {
   name: "GameDetail",
@@ -125,7 +144,12 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
 
+=======
+      gameTypeOptions: [],
+      typeLiveOptions: [],
+>>>>>>> feature_khuong_dev
       
     };
   },
@@ -133,19 +157,62 @@ export default {
     hasData() {
       return this.detail && Object.keys(this.detail).length > 0;
     },
+<<<<<<< HEAD
 
+=======
+    gameTypeName() {
+      const found = this.gameTypeOptions.find(
+        (x) => String(x.gameTypeId) === String(this.detail.gameTypeId)
+      );
+      return found ? found.gameTypeName : this.$t("common.noData");
+    },
+    typeLiveName() {
+      const found = this.typeLiveOptions.find(
+        (x) => String(x.typeLiveId) === String(this.detail.typeLiveId)
+      );
+      return found ? found.typeLiveName : this.$t("common.noData");
+    },
+>>>>>>> feature_khuong_dev
   },
   methods: {
     formatDate(dateStr) {
       if (!dateStr) return this.$t("common.noData");
       return new Date(dateStr).toLocaleString("vi-VN");
     },
+<<<<<<< HEAD
 
 
   },
   mounted() {
     if (this.visible) {
 
+=======
+    async fetchGameTypes() {
+      try {
+        const res = await getGameType({ currentPage: 1, recordPerPage: 100 });
+        if (res.responseCode === 1) {
+          this.gameTypeOptions = res.data.records || [];
+        }
+      } catch (err) {
+        console.error("getGameType error:", err);
+      }
+    },
+    async fetchTypeLives() {
+      try {
+        const res = await getTypeLive({ currentPage: 1, recordPerPage: 100 });
+        if (res.responseCode === 1) {
+          this.typeLiveOptions = res.data.records || [];
+        }
+      } catch (err) {
+        console.error("getTypeLive error:", err);
+      }
+    },
+  },
+  mounted() {
+    if (this.visible) {
+      this.fetchGameTypes();
+      this.fetchTypeLives();
+>>>>>>> feature_khuong_dev
     }
   },
   

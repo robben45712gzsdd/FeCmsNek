@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Cookies from "js-cookie";
 
 export default function ({ route, redirect }) {
@@ -13,4 +14,8 @@ export default function ({ route, redirect }) {
   if (accessToken && isLoginPage) {
     return redirect("/overview");
   }
+=======
+export default function () {
+  // Đã tắt kiểm tra đăng nhập, luôn cho phép vào thẳng
+>>>>>>> feature_khuong_dev
 }

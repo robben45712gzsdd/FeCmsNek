@@ -166,6 +166,7 @@ export default {
 
 <style scoped>
 .dashboard {
+<<<<<<< HEAD
   padding: 24px;
 }
 .title {
@@ -190,6 +191,28 @@ export default {
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+=======
+  padding: 20px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.filter-section {
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.filter-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+>>>>>>> feature_khuong_dev
 }
 .filter-row {
   display: flex;
@@ -200,6 +223,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+<<<<<<< HEAD
   margin-bottom: 24px;
 }
 .negative {
@@ -277,6 +301,51 @@ export default {
   border-color: #bfdbfe;
 }
 .profit h3 { color: #2563eb; }
+=======
+  margin-bottom: 20px;
+}
+.negative {
+  color: #ff4d4f; 
+}
+
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  color: #000;
+  background: #f8f9fa;
+}
+.stat-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+.stat-card h3 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+.deposit {
+  background: #4dabf7;
+  color: #fff;
+}
+.withdraw {
+  background: #a5c0d6;
+  color: #fff;
+}
+.balance {
+  background: #ff6b81;
+  color: #fff;
+}
+.win {
+  background: #d0f0ff;
+}
+.loss {
+  background: #e9eff5;
+}
+.profit {
+  background: #e0f7ff;
+}
+>>>>>>> feature_khuong_dev
 </style>
 
 
