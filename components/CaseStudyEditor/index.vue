@@ -15,7 +15,7 @@
           <div class="section-title"><span class="bar" /> About Project</div>
           <div class="field-group">
             <div>
-              <label class="field-label">V�fn bản gi�>i thi�?u (dùng {{text}} và bôi màu)</label>
+              <label class="field-label">V�fn bản Giới thiệu (dùng {{text}} và bôi màu)</label>
               <textarea
                 v-model="meta.aboutText"
                 rows="3"
@@ -41,7 +41,7 @@
             <div class="typo-section" style="margin-top:4px">
               <div class="typo-section-header">Ki�fu chữ �?" About</div>
               <div class="typo-row">
-                <span class="typo-row-label">Tiêu �'ề</span>
+                <span class="typo-row-label">Tiêu đề</span>
                 <select class="typo-select" v-model="meta.aboutTitleTypo.fontFamily">
                   <option v-for="f in fontFamilies" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </select>
@@ -51,7 +51,7 @@
                 <button class="typo-btn typo-italic" :class="{ active: meta.aboutTitleTypo.italic }" type="button" @click="meta.aboutTitleTypo.italic = !meta.aboutTitleTypo.italic">I</button>
               </div>
               <div class="typo-row">
-                <span class="typo-row-label">N�Ti dung</span>
+                <span class="typo-row-label">Nội dung</span>
                 <select class="typo-select" v-model="meta.aboutBodyTypo.fontFamily">
                   <option v-for="f in fontFamilies" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </select>
@@ -233,7 +233,7 @@ const Txa = {
 const RichTxa = {
   props: {
     value: { type: String, default: "" },
-    placeholder: { type: String, default: "Nhập n�Ti dung..." },
+    placeholder: { type: String, default: "Nhập Nội dung..." },
   },
   data() {
     return { focused: false };
@@ -367,7 +367,7 @@ const ListEditor = {
             h("span", { class: "list-bullet" }, "�?�"),
             h("input", {
               class: "item-input",
-              attrs: { type: "text", placeholder: "Nhập n�Ti dung..." },
+              attrs: { type: "text", placeholder: "Nhập Nội dung..." },
               domProps: { value: item },
               on: { input: (e) => this.updateItem(i, e.target.value) }
             }),
@@ -437,7 +437,7 @@ function renderTypoRow(h, label, typo, onChange) {
     h("input", {
       class: "typo-size",
       attrs: { type: "number", min: 8, max: 96, step: 1 },
-      domProps: { value: t.fontSize || (label === "Tiêu �'ề" ? 32 : 16) },
+      domProps: { value: t.fontSize || (label === "Tiêu đề" ? 32 : 16) },
       on: { input: (e) => onChange({ ...t, fontSize: Number(e.target.value) || 16 }) }
     }),
     h("span", { class: "typo-unit" }, ["px"]),
@@ -484,13 +484,13 @@ const ChallengeEditor = {
   render(h) {
     const b = this.block;
     return h("div", { class: "block-body" }, [
-      h("div", [h(Label, null, ["Tiêu �'ề"]), h(Inp, { props: { value: b.title, placeholder: "Challenge" }, on: { "input-value": (v) => this.up("title", v) } })]),
+      h("div", [h(Label, null, ["Tiêu đề"]), h(Inp, { props: { value: b.title, placeholder: "Challenge" }, on: { "input-value": (v) => this.up("title", v) } })]),
       h("div", [h(Label, null, ["Đoạn intro (tuỳ chọn)"]), h(RichTxa, { props: { value: b.intro, placeholder: "Nhập mô tả..." }, on: { "input-value": (v) => this.up("intro", v) } })]),
       h("div", [h(Label, null, ["Danh sách bullet"]), h(ListEditor, { props: { items: b.items || [] }, on: { "update-items": (items) => this.up("items", items) } })]),
       h("div", { class: "typo-section" }, [
         h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
-        renderTypoRow(h, "Tiêu �'ề", b.titleTypo, (v) => this.up("titleTypo", v)),
-        renderTypoRow(h, "N�Ti dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
+        renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
+        renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
     ]);
   }
@@ -506,12 +506,12 @@ const TextSectionEditor = {
   render(h) {
     const b = this.block;
     return h("div", { class: "block-body" }, [
-      h("div", [h(Label, null, ["Tiêu �'ề"]), h(Inp, { props: { value: b.title, placeholder: "Tiêu �'ề..." }, on: { "input-value": (v) => this.up("title", v) } })]),
-      h("div", [h(Label, null, ["N�Ti dung"]), h(RichTxa, { props: { value: b.body, placeholder: "N�Ti dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
+      h("div", [h(Label, null, ["Tiêu đề"]), h(Inp, { props: { value: b.title, placeholder: "Tiêu đề..." }, on: { "input-value": (v) => this.up("title", v) } })]),
+      h("div", [h(Label, null, ["Nội dung"]), h(RichTxa, { props: { value: b.body, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
       h("div", { class: "typo-section" }, [
         h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
-        renderTypoRow(h, "Tiêu �'ề", b.titleTypo, (v) => this.up("titleTypo", v)),
-        renderTypoRow(h, "N�Ti dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
+        renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
+        renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
     ]);
   }
@@ -644,20 +644,20 @@ const SolutionEditor = {
         h(ListEditor, { props: { items: b.featureItems || [] }, on: { "update-items": (items) => this.up("featureItems", items) } })
       ]),
       h("div", [
-        h(Label, null, ["Tiêu �'ề solution"]),
+        h(Label, null, ["Tiêu đề solution"]),
         h(Inp, { props: { value: b.solutionTitle, placeholder: "Solution" }, on: { "input-value": (v) => this.up("solutionTitle", v) } })
       ]),
       h("div", [
-        h(Label, null, ["N�Ti dung solution"]),
-        h(RichTxa, { props: { value: b.solutionText, placeholder: "N�Ti dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
+        h(Label, null, ["Nội dung solution"]),
+        h(RichTxa, { props: { value: b.solutionText, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
       ]),
       h("div", { class: "typo-section" }, [
         h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
-        renderTypoRow(h, "Tiêu �'ề", b.solutionTitleTypo, (v) => this.up("solutionTitleTypo", v)),
-        renderTypoRow(h, "N�Ti dung", b.solutionBodyTypo, (v) => this.up("solutionBodyTypo", v)),
+        renderTypoRow(h, "Tiêu đề", b.solutionTitleTypo, (v) => this.up("solutionTitleTypo", v)),
+        renderTypoRow(h, "Nội dung", b.solutionBodyTypo, (v) => this.up("solutionBodyTypo", v)),
       ]),
       h("div", { class: "subblock-divider" }, [
-        h("div", { class: "subblock-title" }, "N�Ti dung bên trong solution"),
+        h("div", { class: "subblock-title" }, "Nội dung bên trong solution"),
         h(_BlockList, {
           props: { blocks: b.subBlocks || [], allowedTypes: ["image", "text-section", "challenge"], nested: true },
           on: { "change-blocks": (subs) => this.$emit("change-block", { ...b, subBlocks: subs }) }
@@ -736,7 +736,7 @@ const BlockList = {
     addBlock(type) {
       const defaults = {
         challenge: { title: "New Section", intro: "", items: [""] },
-        "text-section": { title: "Tiêu �'ề", body: "" },
+        "text-section": { title: "Tiêu đề", body: "" },
         image: { url: "", alt: "" },
         solution: { featureItems: ["Feature 1"], solutionTitle: "Solution", solutionText: "", subBlocks: [] }
       };

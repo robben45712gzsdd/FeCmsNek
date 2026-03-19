@@ -210,7 +210,7 @@
     <!-- �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� Message Detail Modal �.��.��.��.��.��.��.��.��.��.��.��.��.��.��.� -->
     <a-modal
       :visible="!!messageDetail"
-      title="Gi�>i thi�?u bản thân"
+      title="Giới thiệu bản thân"
       width="560px"
       :footer="null"
       @cancel="messageDetail = null"
@@ -275,9 +275,9 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55, align: "center" },
         { title: "Ứng viên", dataIndex: "fullName", key: "fullName", scopedSlots: { customRender: "fullName" } },
         { title: "SĐT", dataIndex: "phoneNumber", key: "phoneNumber", scopedSlots: { customRender: "phoneNumber" }, width: 150 },
-        { title: "Gi�>i thi�?u", dataIndex: "message", key: "message", scopedSlots: { customRender: "message" }, width: 220 },
+        { title: "Giới thiệu", dataIndex: "message", key: "message", scopedSlots: { customRender: "message" }, width: 220 },
         { title: "CV", dataIndex: "cvUrl", key: "cvUrl", scopedSlots: { customRender: "cvUrl" }, width: 140 },
-        { title: "Ngày n�Tp", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 110 },
+        { title: "Ngày nộp", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 110 },
         { title: "", key: "action", scopedSlots: { customRender: "action" }, width: 50 },
       ];
     },

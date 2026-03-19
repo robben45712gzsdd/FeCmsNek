@@ -42,7 +42,7 @@
       <a-form-model-item label="Sắp ra mắt" prop="isComming">
         <a-select v-model="form.isComming">
           <a-select-option :value="1">Sắp ra mắt</a-select-option>
-          <a-select-option :value="0">D� ra m?t</a-select-option>
+          <a-select-option :value="0">Đã ra mắt</a-select-option>
         </a-select>
       </a-form-model-item>
 

@@ -10,7 +10,7 @@
     <a-spin :spinning="loadingDetail">
       <div class="form-card">
         <a-form layout="vertical">
-          <!-- Row 1: Ngôn ngữ + Tiêu �'ề -->
+          <!-- Row 1: Ngôn ngữ + Tiêu đề -->
           <a-row :gutter="20">
             <a-col :span="6">
               <a-form-item label="Ngôn ngữ">
@@ -21,14 +21,14 @@
               </a-form-item>
             </a-col>
             <a-col :span="18">
-              <a-form-item label="Tiêu �'ề *">
-                <a-input v-model="form.title" placeholder="Nhập tiêu �'ề bài viết..." size="large" />
+              <a-form-item label="Tiêu đề *">
+                <a-input v-model="form.title" placeholder="Nhập tiêu đề bài viết..." size="large" />
                 <div v-if="errors.title" class="err">{{ errors.title }}</div>
               </a-form-item>
             </a-col>
           </a-row>
 
-          <!-- Row 2: Loại bài / N�.i bật / Trạng thái -->
+          <!-- Row 2: Loại bài / Nổi bật / Trạng thái -->
           <a-row :gutter="20">
             <a-col :span="8">
               <a-form-item label="Loại bài viết">
@@ -40,10 +40,10 @@
               </a-form-item>
             </a-col>
             <a-col :span="8">
-              <a-form-item label="N�.i bật">
+              <a-form-item label="Nổi bật">
                 <a-select v-model="form.isFeatured" style="width:100%">
                   <a-select-option :value="0">Thường</a-select-option>
-                  <a-select-option :value="1">N�.i bật</a-select-option>
+                  <a-select-option :value="1">Nổi bật</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -69,11 +69,11 @@
             </div>
           </a-form-item>
 
-          <!-- N�Ti dung: chọn chế �'�T -->
+          <!-- Nội dung: chọn chế �'�T -->
           <a-form-item>
             <template #label>
               <div class="content-label-row">
-                <span>N�Ti dung bài viết</span>
+                <span>Nội dung bài viết</span>
                 <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
                   <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
                   <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -104,10 +104,10 @@
 
             <!-- MODE: Rich text editor -->
             <div v-else>
-              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn n�Ti dung bài viết..." />
+              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn Nội dung bài viết..." />
               <div v-if="isEdit && contentPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Bài viết �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
+                Bài viết �'ã có file HTML. Soạn Nội dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-item>
@@ -209,7 +209,7 @@ export default {
           this.imagePreview = toFull(d.imageUrl) || null;
           this.contentPreviewUrl = toFull(d.content) || null;
 
-          // Fetch n�Ti dung HTML hi�?n tại vào editor
+          // Fetch Nội dung HTML hi�?n tại vào editor
           if (this.contentPreviewUrl) {
             try {
               const resp = await axios.get(this.contentPreviewUrl, { responseType: "text" });
@@ -288,7 +288,7 @@ ${this.editorContent}
     validate() {
       this.errors = {};
       if (!this.form.title || !this.form.title.trim())
-        this.errors.title = "Vui lòng nhập tiêu �'ề";
+        this.errors.title = "Vui lòng nhập tiêu đề";
       return Object.keys(this.errors).length === 0;
     },
     async handleSubmit() {

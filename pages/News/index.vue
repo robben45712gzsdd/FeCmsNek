@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <!-- N�Ti dung -->
+        <!-- Nội dung -->
         <div class="card-content">
           <h3>{{ item.title }}</h3>
           <p class="desc">{{ item.description }}</p>
@@ -250,7 +250,7 @@ export default {
   opacity: 1;
 }
 
-/* N�Ti dung */
+/* Nội dung */
 .card-content {
   padding: 16px;
 }

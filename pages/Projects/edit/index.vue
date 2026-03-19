@@ -108,11 +108,11 @@
             </div>
           </a-form-item>
 
-          <!-- N�Ti dung: chọn chế �'�T -->
+          <!-- Nội dung: chọn chế �'�T -->
           <a-form-item>
             <template #label>
               <div class="content-label-row">
-                <span>N�Ti dung Case Study</span>
+                <span>Nội dung Case Study</span>
                 <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
                   <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
                   <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -139,10 +139,10 @@
 
             <!-- MODE: Rich text editor -->
             <div v-else>
-              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn n�Ti dung case study..." />
+              <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn Nội dung case study..." />
               <div v-if="isEdit && bodyPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Case Study �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
+                Case Study �'ã có file HTML. Soạn Nội dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-item>
@@ -270,7 +270,7 @@ export default {
           this.imagePreview = toFull(d.imageUrl) || null;
           this.bodyPreviewUrl = toFull(d.projectBody) || null;
 
-          // Fetch n�Ti dung HTML hi�?n tại vào editor
+          // Fetch Nội dung HTML hi�?n tại vào editor
           if (this.bodyPreviewUrl) {
             try {
               const resp = await axios.get(this.bodyPreviewUrl, { responseType: "text" });

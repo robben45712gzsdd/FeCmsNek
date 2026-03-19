@@ -54,7 +54,7 @@
       </a-form-item>
 
       <!-- ProjectBody (optional HTML file) -->
-      <a-form-item label="N�Ti dung �?" file HTML (tùy chọn)">
+      <a-form-item label="Nội dung �?" file HTML (tùy chọn)">
         <label class="upload-btn">
           <a-icon type="file-text" /> Chọn file HTML
           <input ref="bodyInput" type="file" accept=".html,.htm" class="file-input-hidden" @change="onBodyChange" />
@@ -79,7 +79,7 @@
       <!-- Modal preview HTML -->
       <a-modal
         :visible="showBodyPreview"
-        title="Xem n�Ti dung HTML"
+        title="Xem Nội dung HTML"
         width="900px"
         :footer="null"
         @cancel="showBodyPreview = false"

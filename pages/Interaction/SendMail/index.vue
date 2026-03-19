@@ -34,7 +34,7 @@ export default {
         { title: "Tên", dataIndex: "name", key: "name" },
         { title: "Email", dataIndex: "email", key: "email" },
         { title: "SĐT", dataIndex: "phoneNumber", key: "phoneNumber", width: 130 },
-        { title: "N�Ti dung", dataIndex: "message", key: "message", ellipsis: true },
+        { title: "Nội dung", dataIndex: "message", key: "message", ellipsis: true },
         { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 110 },
       ];
     },

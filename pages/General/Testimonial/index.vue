@@ -78,7 +78,7 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Họ tên", dataIndex: "name", key: "name", width: 150 },
         { title: "Chức vụ / Công ty", dataIndex: "businessName", key: "businessName", width: 180 },
-        { title: "N�Ti dung", dataIndex: "content", key: "content", scopedSlots: { customRender: "content" }, ellipsis: true },
+        { title: "Nội dung", dataIndex: "content", key: "content", scopedSlots: { customRender: "content" }, ellipsis: true },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 110 },
         { title: "Hành Động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },
       ];

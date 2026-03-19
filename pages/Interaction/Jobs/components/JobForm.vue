@@ -115,7 +115,7 @@
           <RichTextEditor v-model="jdEditorContent" :height="380" placeholder="Soạn mô tả công việc..." />
           <div v-if="isEdit && form.content && !jdEditorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Tin �'ã có file JD. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
+            Tin �'ã có file JD. Soạn Nội dung m�>i sẽ thay thế file cũ.
           </div>
         </div>
       </a-form-model-item>
@@ -298,7 +298,7 @@ ${this.jdEditorContent}
 
         // For new job: need at least some JD content
         if (!this.isEdit && !finalJdFile) {
-          this.$message.warning("Vui lòng tạo n�Ti dung JD (upload file hoặc soạn trực tiếp)!");
+          this.$message.warning("Vui lòng tạo Nội dung JD (upload file hoặc soạn trực tiếp)!");
           return;
         }
 

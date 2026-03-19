@@ -215,7 +215,7 @@ export default {
         { title: "#", dataIndex: "ord", key: "ord", width: 55 },
         { title: "Ảnh", dataIndex: "imageUrl", key: "imageUrl", scopedSlots: { customRender: "imageUrl" }, width: 90 },
         { title: "Tiêu đề", dataIndex: "title", key: "title", ellipsis: true },
-        { title: "N�.i bật", dataIndex: "isFeatured", key: "isFeatured", scopedSlots: { customRender: "isFeatured" }, width: 110 },
+        { title: "Nổi bật", dataIndex: "isFeatured", key: "isFeatured", scopedSlots: { customRender: "isFeatured" }, width: 110 },
         { title: "Trạng thái", dataIndex: "status", key: "status", scopedSlots: { customRender: "status" }, width: 120 },
         { title: "Ngày tạo", dataIndex: "createdDate", key: "createdDate", scopedSlots: { customRender: "createdDate" }, width: 120 },
         { title: "Hành động", key: "action", scopedSlots: { customRender: "action" }, width: 130 },

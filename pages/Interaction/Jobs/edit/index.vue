@@ -121,7 +121,7 @@
               <RichTextEditor v-model="jdEditorContent" :height="700" placeholder="Soạn mô tả công việc..." />
               <div v-if="isEdit && form.content && !jdEditorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Tin �'ã có file JD. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
+                Tin �'ã có file JD. Soạn Nội dung m�>i sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-model-item>
@@ -233,7 +233,7 @@ export default {
           if (r.logoUrl) {
             this.logoPreview = this.toFullUrl(r.logoUrl);
           }
-          // Fetch n�Ti dung JD HTML hi�?n tại vào editor
+          // Fetch Nội dung JD HTML hi�?n tại vào editor
           if (r.content) {
             try {
               const url = this.toFullUrl(r.content);
@@ -360,7 +360,7 @@ ${this.jdEditorContent}
 
         if (!this.isEdit && !finalJdFile) {
           this.$message.warning(
-            "Vui lòng tạo n�Ti dung JD (upload file hoặc soạn trực tiếp)!"
+            "Vui lòng tạo Nội dung JD (upload file hoặc soạn trực tiếp)!"
           );
           return;
         }

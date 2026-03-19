@@ -11,7 +11,7 @@
     @cancel="$emit('close')"
   >
     <a-form layout="vertical">
-      <!-- Ngôn ngữ + Tiêu �'ề -->
+      <!-- Ngôn ngữ + Tiêu đề -->
       <a-row :gutter="16">
         <a-col :span="8">
           <a-form-item label="Ngôn ngữ">
@@ -22,14 +22,14 @@
           </a-form-item>
         </a-col>
         <a-col :span="16">
-          <a-form-item label="Tiêu �'ề *">
-            <a-input v-model="form.title" placeholder="Nhập tiêu �'ề..." />
+          <a-form-item label="Tiêu đề *">
+            <a-input v-model="form.title" placeholder="Nhập tiêu đề..." />
             <div v-if="errors.title" class="err">{{ errors.title }}</div>
           </a-form-item>
         </a-col>
       </a-row>
 
-      <!-- Loại bài / N�.i bật -->
+      <!-- Loại bài / Nổi bật -->
       <a-row :gutter="16">
         <a-col :span="8">
           <a-form-item label="Loại bài viết">
@@ -41,10 +41,10 @@
           </a-form-item>
         </a-col>
         <a-col :span="8">
-          <a-form-item label="N�.i bật">
+          <a-form-item label="Nổi bật">
             <a-select v-model="form.isFeatured" style="width:100%">
               <a-select-option :value="0">Thường</a-select-option>
-              <a-select-option :value="1">N�.i bật</a-select-option>
+              <a-select-option :value="1">Nổi bật</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -70,11 +70,11 @@
         </div>
       </a-form-item>
 
-      <!-- N�Ti dung: chọn chế �'�T -->
+      <!-- Nội dung: chọn chế �'�T -->
       <a-form-item>
         <template #label>
           <div class="content-label-row">
-            <span>N�Ti dung bài viết</span>
+            <span>Nội dung bài viết</span>
             <a-radio-group v-model="contentMode" size="small" button-style="solid" class="mode-switch">
               <a-radio-button value="file"><a-icon type="file-text" /> Upload file</a-radio-button>
               <a-radio-button value="editor"><a-icon type="edit" /> Soạn trực tiếp</a-radio-button>
@@ -106,19 +106,19 @@
 
         <!-- MODE: Rich text editor -->
         <div v-else>
-          <RichTextEditor v-model="editorContent" :height="380" placeholder="Soạn n�Ti dung bài viết..." />
+          <RichTextEditor v-model="editorContent" :height="380" placeholder="Soạn Nội dung bài viết..." />
           <div v-if="isEdit && contentPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Bài viết �'ã có file HTML. Soạn n�Ti dung m�>i sẽ thay thế file cũ.
+            Bài viết �'ã có file HTML. Soạn Nội dung m�>i sẽ thay thế file cũ.
           </div>
         </div>
       </a-form-item>
     </a-form>
 
-    <!-- Modal preview n�Ti dung HTML -->
+    <!-- Modal preview Nội dung HTML -->
     <a-modal
       :visible="showContentPreview"
-      title="Xem n�Ti dung HTML"
+      title="Xem Nội dung HTML"
       width="900px"
       :footer="null"
       @cancel="showContentPreview = false"
@@ -243,7 +243,7 @@ ${this.editorContent}
     },
     validate() {
       this.errors = {};
-      if (!this.form.title || !this.form.title.trim()) this.errors.title = "Vui lòng nhập tiêu �'ề";
+      if (!this.form.title || !this.form.title.trim()) this.errors.title = "Vui lòng nhập tiêu đề";
       return Object.keys(this.errors).length === 0;
     },
     async handleSubmit() {

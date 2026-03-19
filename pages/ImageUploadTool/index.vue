@@ -25,7 +25,7 @@
           
           <div class="drop-content">
             <a-icon type="inbox" style="font-size: 48px; color: #1890ff" />
-            <p class="drop-text">Kéo thả ảnh vào �'ây hoặc</p>
+            <p class="drop-text">Kéo thả ảnh vàođây hoặc</p>
             <a-button type="primary" @click="$refs.fileInput.click()">
               Chọn ảnh từ máy
             </a-button>
