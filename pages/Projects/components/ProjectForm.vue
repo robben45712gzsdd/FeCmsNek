@@ -29,7 +29,7 @@
       </a-row>
 
       <!-- Thumbnail (optional) -->
-      <a-form-item label="Thumbnail �?" ảnh bìa (tùy chọn)">
+      <a-form-item label="Thumbnail ảnh bìa (tùy chọn)">
         <label class="upload-btn">
           <a-icon type="upload" /> Chọn ảnh thumbnail
           <input ref="thumbnailInput" type="file" accept="image/*" class="file-input-hidden" @change="onThumbnailChange" />
@@ -54,7 +54,7 @@
       </a-form-item>
 
       <!-- ProjectBody (optional HTML file) -->
-      <a-form-item label="Nội dung �?" file HTML (tùy chọn)">
+      <a-form-item label="Nội dung file HTML (tùy chọn)">
         <label class="upload-btn">
           <a-icon type="file-text" /> Chọn file HTML
           <input ref="bodyInput" type="file" accept=".html,.htm" class="file-input-hidden" @change="onBodyChange" />
@@ -66,9 +66,9 @@
         <!-- Hiển thị file hi�?n tại nếu �'ã có và chưa chọn file m�>i -->
         <div v-if="bodyPreviewUrl && !bodyFileName" class="file-name-tag" style="background:#f0f5ff;border-color:#adc6ff;">
           <a-icon type="file-text" style="color:#2f54eb" />
-          <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hi�?n tại</span>
+          <span style="flex:1;font-size:12px;color:#2f54eb;">File HTML hiện tại</span>
           <a-button size="small" type="link" @click="openBodyPreview">&#128065; Xem</a-button>
-          <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">&#128279; M�Y tab</a-button>
+          <a-button size="small" type="link" :href="bodyPreviewUrl" target="_blank">&#128279; Mở tab</a-button>
         </div>
         <div class="hint">
           <a-icon type="info-circle" style="color:#6366f1;margin-right:4px;" />
@@ -134,7 +134,7 @@
         </a-select>
         <!-- Tạo tag m�>i inline -->
         <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag m�>i</a-button>
+          <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag mới</a-button>
           <a-button type="dashed" size="small" icon="setting" @click="showManageTags = !showManageTags; showNewTagRow = false">Quản lý tags</a-button>
         </div>
         <div v-if="showNewTagRow" style="display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap">
@@ -146,7 +146,7 @@
             @pressEnter="handleCreateTag"
           />
           <a-select v-model="newTagType" size="small" style="width:160px">
-            <a-select-option :value="1">Trí tu�? nhân tạo</a-select-option>
+            <a-select-option :value="1">Trí tuệ nhân tạo</a-select-option>
             <a-select-option :value="2">Domain</a-select-option>
             <a-select-option :value="3">Technologies</a-select-option>
           </a-select>

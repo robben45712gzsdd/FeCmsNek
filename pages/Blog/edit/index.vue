@@ -4,7 +4,7 @@
       <a-button type="link" class="btn-back" @click="goBack">
         <a-icon type="arrow-left" /> Quay lại
       </a-button>
-      <h2 class="page-title">{{ isEdit ? "Chỉnh sửa bài viết" : "Thêm bài viết m�>i" }}</h2>
+      <h2 class="page-title">{{ isEdit ? "Chỉnh sửa bài viết" : "Thêm bài viết mới" }}</h2>
     </div>
 
     <a-spin :spinning="loadingDetail">

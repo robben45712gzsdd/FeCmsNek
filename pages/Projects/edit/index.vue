@@ -36,7 +36,7 @@
           <!-- Thumbnail -->
           <a-row :gutter="20">
             <a-col :span="12">
-              <a-form-item label="Thumbnail �?" ảnh bìa (tùy chọn)">
+              <a-form-item label="Thumbnail ảnh bìa (tùy chọn)">
                 <label class="upload-btn">
                   <a-icon type="upload" /> Chọn ảnh thumbnail
                   <input ref="thumbnailInput" type="file" accept="image/*" class="file-input-hidden" @change="onThumbnailChange" />
@@ -83,13 +83,13 @@
               </a-select-option>
             </a-select>
             <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
-              <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag m�>i</a-button>
+              <a-button type="dashed" size="small" icon="plus" @click="showNewTagRow = true; showManageTags = false">Tạo tag mới</a-button>
               <a-button type="dashed" size="small" icon="setting" @click="showManageTags = !showManageTags; showNewTagRow = false">Quản lý tags</a-button>
             </div>
             <div v-if="showNewTagRow" style="display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap">
               <a-input v-model="newTagName" placeholder="Tên tag..." size="small" style="flex:1;min-width:100px" @pressEnter="handleCreateTag" />
               <a-select v-model="newTagType" size="small" style="width:160px">
-                <a-select-option :value="1">Trí tu�? nhân tạo</a-select-option>
+                <a-select-option :value="1">Trí tuệ nhân tạo</a-select-option>
                 <a-select-option :value="2">Domain</a-select-option>
                 <a-select-option :value="3">Technologies</a-select-option>
               </a-select>

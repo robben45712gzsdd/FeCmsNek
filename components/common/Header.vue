@@ -34,10 +34,10 @@
         </a>
         <a-menu slot="overlay">
           <a-menu-item key="us" @click="changeLanguage('us')">
-            ðŸ‡¬ðŸ‡§ English
+            English
           </a-menu-item>
           <a-menu-item key="vi" @click="changeLanguage('vi')">
-            �Y?��Y?� Tiếng Việt
+            Tiếng Việt
           </a-menu-item>
         </a-menu>
       </a-dropdown>

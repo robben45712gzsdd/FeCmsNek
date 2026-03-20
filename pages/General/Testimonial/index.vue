@@ -2,7 +2,7 @@
   <div class="page-wrap">
     <div class="page-header">
       <h2 class="title">Quản lý Testimonial</h2>
-      <a-button type="primary" @click="openAdd">+ Thêm �'ánh giá</a-button>
+      <a-button type="primary" @click="openAdd">+ Thêm đánh giá</a-button>
     </div>
 
     <div class="filter-bar">

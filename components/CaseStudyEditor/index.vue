@@ -3,7 +3,7 @@
     <!-- LEFT PANEL -->
     <div id="left-panel">
       <div id="panel-header">
-        <div class="logo">�o�</div>
+        <div class="logo">CS</div>
         <div>
           <div class="title">Case Study Editor</div>
           <div class="subtitle">Block Builder · {{ blocks.length }} block{{ blocks.length !== 1 ? 's' : '' }}</div>
@@ -15,7 +15,7 @@
           <div class="section-title"><span class="bar" /> About Project</div>
           <div class="field-group">
             <div>
-              <label class="field-label">V�fn bản Giới thiệu (dùng {{text}} và bôi màu)</label>
+              <label class="field-label">Văn bản Giới thiệu (dùng {{text}} và bôi màu)</label>
               <textarea
                 v-model="meta.aboutText"
                 rows="3"
@@ -32,14 +32,14 @@
             <div>
               <label class="field-label">Font chữ toàn trang</label>
               <select class="meta-select" v-model="meta.globalFont">
-                <option value="">�"?�"? Default (Inter) �"?�"?</option>
+                <option value="">Default (Inter)</option>
                 <template v-for="f in fontFamilies">
                   <option v-if="f.value" :key="f.value" :value="f.value">{{ f.label }}</option>
                 </template>
               </select>
             </div>
             <div class="typo-section" style="margin-top:4px">
-              <div class="typo-section-header">Ki�fu chữ �?" About</div>
+              <div class="typo-section-header">Kiểu chữ - About</div>
               <div class="typo-row">
                 <span class="typo-row-label">Tiêu đề</span>
                 <select class="typo-select" v-model="meta.aboutTitleTypo.fontFamily">
@@ -64,16 +64,16 @@
           </div>
         </div>
 
-        <div class="blocks-label">�?" Blocks �?"</div>
+        <div class="blocks-label">Blocks</div>
         <BlockList :blocks="blocks" @change-blocks="blocks = $event" />
       </div>
 
       <div id="panel-footer">
         <input ref="loadFileInput" type="file" accept=".html,.htm" style="display:none" @change="onLoadFileChange" />
         <button class="btn-load" @click="loadFromFile">ðŸ“‚ Load HTML</button>
-        <button class="btn-primary" @click="download">�? Tải HTML</button>
+        <button class="btn-primary" @click="download">Tải HTML</button>
         <button class="btn-copy" :class="{ copied }" @click="copyCode">
-          {{ copied ? '�o" Copied' : 'Copy' }}
+          {{ copied ? 'Copied' : 'Copy' }}
         </button>
       </div>
     </div>
@@ -134,21 +134,21 @@ async function deletePendingUrl(url) {
 let _id = 100;
 const uid = () => ++_id;
 
-// Forward reference �?" assigned after BlockList is defined (for circular use in SolutionEditor)
+// Forward reference assigned after BlockList is defined (for circular use in SolutionEditor)
 let _BlockList;
 
 const BLOCK_TYPES = [
-  { type: "challenge", icon: "*", label: "Challenge / Text voi bullet list" },
+  { type: "challenge", icon: "*", label: "Challenge / Text với bullet list" },
   { type: "solution", icon: "S", label: "Solution (sidebar feature + content)" },
-  { type: "text-section", icon: "T", label: "Text Section (tieu de + noi dung)" },
-  { type: "image", icon: "I", label: "Hinh anh" }
+  { type: "text-section", icon: "T", label: "Text Section (tiêu đề + nội dung)" },
+  { type: "image", icon: "I", label: "Hình ảnh" }
 ];
 
 const TYPE_META = {
-  challenge: { icon: "�s�", color: "#f59e0b", label: "Challenge" },
-  solution: { icon: "ðŸ§©", color: "#6366f1", label: "Solution" },
-  "text-section": { icon: "ðŸ“", color: "#10b981", label: "Text Section" },
-  image: { icon: "ðŸ–¼", color: "#3b82f6", label: "Image" }
+  challenge: { icon: "C", color: "#f59e0b", label: "Challenge" },
+  solution: { icon: "S", color: "#6366f1", label: "Solution" },
+  "text-section": { icon: "T", color: "#10b981", label: "Text Section" },
+  image: { icon: "I", color: "#3b82f6", label: "Image" }
 };
 
 const DEFAULT_BLOCKS = [
@@ -279,10 +279,10 @@ const RichTxa = {
         h("button", { attrs: { type: "button", title: "Italic" }, class: "rtb rtb-italic", on: { click: () => this.exec("italic") } }, ["I"]),
         h("button", { attrs: { type: "button", title: "Underline" }, class: "rtb", on: { click: () => this.exec("underline") } }, ["U"]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Bullet list" }, class: "rtb", on: { click: () => this.exec("insertUnorderedList") } }, ["�?�"]),
+        h("button", { attrs: { type: "button", title: "Bullet list" }, class: "rtb", on: { click: () => this.exec("insertUnorderedList") } }, ["•"]),
         h("button", { attrs: { type: "button", title: "Numbered list" }, class: "rtb", on: { click: () => this.exec("insertOrderedList") } }, ["1."]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Link" }, class: "rtb", on: { click: this.insertLink } }, ["ðŸ”—"]),
+        h("button", { attrs: { type: "button", title: "Link" }, class: "rtb", on: { click: this.insertLink } }, ["L"]),
         h("div", { class: "rtb-color-wrap" }, [
           h("button", { attrs: { type: "button", title: "Màu chữ" }, class: "rtb", on: { click: this.setColor } }, ["A"]),
           h("input", {
@@ -293,7 +293,7 @@ const RichTxa = {
           }),
         ]),
         h("span", { class: "rtb-sep" }),
-        h("button", { attrs: { type: "button", title: "Xóa format" }, class: "rtb", on: { click: () => this.exec("removeFormat") } }, ["�o."]),
+        h("button", { attrs: { type: "button", title: "Xóa format" }, class: "rtb", on: { click: () => this.exec("removeFormat") } }, ["Tx"]),
       ]),
       h("div", {
         ref: "editor",
@@ -356,15 +356,15 @@ const ListEditor = {
               h(
                 "button",
                 { on: { click: () => this.move(i, -1) } },
-                "�-�"
+                "↑"
               ),
               h(
                 "button",
                 { on: { click: () => this.move(i, 1) } },
-                "�-�"
+                "↓"
               )
             ]),
-            h("span", { class: "list-bullet" }, "�?�"),
+            h("span", { class: "list-bullet" }, "•"),
             h("input", {
               class: "item-input",
               attrs: { type: "text", placeholder: "Nhập Nội dung..." },
@@ -374,7 +374,7 @@ const ListEditor = {
             h(
               "button",
               { class: "list-remove-btn", on: { click: () => this.remove(i) } },
-              "�-"
+              "x"
             )
           ]
         )
@@ -488,7 +488,7 @@ const ChallengeEditor = {
       h("div", [h(Label, null, ["Đoạn intro (tuỳ chọn)"]), h(RichTxa, { props: { value: b.intro, placeholder: "Nhập mô tả..." }, on: { "input-value": (v) => this.up("intro", v) } })]),
       h("div", [h(Label, null, ["Danh sách bullet"]), h(ListEditor, { props: { items: b.items || [] }, on: { "update-items": (items) => this.up("items", items) } })]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
         renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
         renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
@@ -509,7 +509,7 @@ const TextSectionEditor = {
       h("div", [h(Label, null, ["Tiêu đề"]), h(Inp, { props: { value: b.title, placeholder: "Tiêu đề..." }, on: { "input-value": (v) => this.up("title", v) } })]),
       h("div", [h(Label, null, ["Nội dung"]), h(RichTxa, { props: { value: b.body, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("body", v) } })]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
         renderTypoRow(h, "Tiêu đề", b.titleTypo, (v) => this.up("titleTypo", v)),
         renderTypoRow(h, "Nội dung", b.bodyTypo, (v) => this.up("bodyTypo", v)),
       ])
@@ -553,7 +553,7 @@ const ImageEditor = {
           this.$message.error(res?.message || "Tải ảnh thất bại!");
         }
       } catch (err) {
-        this.$message.error("lỗi khi tải ảnh!");
+        this.$message.error("Lỗi khi tải ảnh!");
       } finally {
         this.uploading = false;
         e.target.value = "";
@@ -576,7 +576,7 @@ const ImageEditor = {
             class: "btn-upload-img",
             attrs: { type: "button", disabled: this.uploading },
             on: { click: this.triggerUpload }
-          }, [this.uploading ? "Dang tai..." : "Chon anh"]),
+          }, [this.uploading ? "Đang tải..." : "Chọn ảnh"]),
           b.url
             ? h("span", { style: { fontSize: "11px", color: "#6b7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "160px", display: "inline-block" } }, [b.url])
             : h("span", { style: { fontSize: "11px", color: "#9ca3af" } }, ["Chưa chọn ảnh"]),
@@ -585,7 +585,7 @@ const ImageEditor = {
                 class: "btn-clear-img",
                 attrs: { type: "button", title: "Xóa ảnh" },
                 on: { click: this.clearImage }
-              }, ["�- Xóa"])
+              }, ["Xóa"])
             : null
         ])
       ]),
@@ -593,7 +593,7 @@ const ImageEditor = {
       // Size controls
       h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "6px" } }, [
         h("div", [
-          h(Label, null, ["Cỡ r�Tng (" + (b.width || 100) + "%]"]),
+          h(Label, null, ["Cỡ rộng (" + (b.width || 100) + "%)"]),
           h("input", {
             attrs: { type: "range", min: 10, max: 100, step: 5, value: b.width || 100 },
             style: { width: "100%", accentColor: "#6366f1", cursor: "pointer" },
@@ -601,7 +601,7 @@ const ImageEditor = {
           })
         ]),
         h("div", [
-          h(Label, null, ["Bo góc (" + (b.borderRadius !== undefined ? b.borderRadius : 8) + "px]"]),
+          h(Label, null, ["Bo góc (" + (b.borderRadius !== undefined ? b.borderRadius : 8) + "px)"]),
           h("input", {
             attrs: { type: "range", min: 0, max: 48, step: 2, value: b.borderRadius !== undefined ? b.borderRadius : 8 },
             style: { width: "100%", accentColor: "#6366f1", cursor: "pointer" },
@@ -610,9 +610,9 @@ const ImageEditor = {
         ])
       ]),
       h("div", { style: { marginTop: "6px" } }, [
-        h(Label, null, ["Can le"]),
+        h(Label, null, ["Canh lề"]),
         h("div", { style: { display: "flex", gap: "6px", marginTop: "4px" } },
-          [["left", "Trai"], ["center", "Giua"], ["right", "Phai"]].map(([val, label]) =>
+          [["left", "Trái"], ["center", "Giữa"], ["right", "Phải"]].map(([val, label]) =>
             h("button", {
               class: "btn-align" + (b.align === val || (!b.align && val === "center") ? " active" : ""),
               attrs: { type: "button" },
@@ -628,7 +628,7 @@ const ImageEditor = {
   }
 };
 
-// �"?�"? SolutionEditor: defined outside BlockList, uses _BlockList forward ref �"?�"?
+// SolutionEditor: defined outside BlockList, uses _BlockList forward ref
 const SolutionEditor = {
   props: { block: Object },
   methods: {
@@ -652,7 +652,7 @@ const SolutionEditor = {
         h(RichTxa, { props: { value: b.solutionText, placeholder: "Nội dung..." }, on: { "input-value": (v) => this.up("solutionText", v) } })
       ]),
       h("div", { class: "typo-section" }, [
-        h("div", { class: "typo-section-header" }, ["Ki�fu chữ"]),
+        h("div", { class: "typo-section-header" }, ["Kiểu chữ"]),
         renderTypoRow(h, "Tiêu đề", b.solutionTitleTypo, (v) => this.up("solutionTitleTypo", v)),
         renderTypoRow(h, "Nội dung", b.solutionBodyTypo, (v) => this.up("solutionBodyTypo", v)),
       ]),
@@ -667,14 +667,14 @@ const SolutionEditor = {
   }
 };
 
-// �"?�"? BlockCard: defined outside BlockList for stable component identity �"?�"?
+// BlockCard: defined outside BlockList for stable component identity
 const BlockCard = {
   props: { block: Object, canMoveUp: Boolean, canMoveDown: Boolean, nested: Boolean },
   data() {
     return { open: true };
   },
   render(h) {
-    const meta = TYPE_META[this.block.type] || { icon: "�-�", color: "#94a3b8", label: this.block.type };
+    const meta = TYPE_META[this.block.type] || { icon: "?", color: "#94a3b8", label: this.block.type };
     const subtitle = this.block.title || this.block.solutionTitle || "";
     return h("div", {
       class: ["block-card", this.nested ? "nested" : ""],
@@ -695,8 +695,8 @@ const BlockCard = {
         h("button", {
           class: "block-delete-btn",
           on: { click: (e) => { e.stopPropagation(); this.$emit("delete"); } }
-        }, "�-"),
-        h("span", { class: "block-toggle" }, this.open ? "�-�" : "�-�")
+        }, "x"),
+        h("span", { class: "block-toggle" }, this.open ? "▾" : "▸")
       ]),
       this.open
         ? h("div", null, [
@@ -894,7 +894,7 @@ ${fontLink}  <style>
     .challenge-section a, .text-section a, .solution-content a { color: #6366f1; text-decoration: underline; }
     .challenge-list { list-style: none; padding: 0; margin: 16px 0 0 0; }
     .challenge-list li { font-weight: 500; font-size: 16px; line-height: 26px; color: #525252; padding-left: 16px; position: relative; margin-bottom: 6px; }
-    .challenge-list li::before { content: '�?�'; position: absolute; left: 0; color: #525252; }
+    .challenge-list li::before { content: '•'; position: absolute; left: 0; color: #525252; }
     .content-image { margin: 50px 0; }
     .content-image img { height: auto; }
     .solution-container { display: flex; gap: 60px; margin-bottom: 50px; align-items: flex-start; }
@@ -928,7 +928,7 @@ ${bodyHTML}
 
 function previewBlockHTML(block, hl) {
   if (block.type === "image") {
-    if (!block.url) return "<div class=\"pv-image\"><div class=\"pv-image-placeholder\">ðŸ–¼ Image placeholder</div></div>";
+    if (!block.url) return "<div class=\"pv-image\"><div class=\"pv-image-placeholder\">Image placeholder</div></div>";
     const w = block.width || 100;
     const align = block.align || "center";
     const br = block.borderRadius !== undefined ? block.borderRadius : 8;
@@ -982,7 +982,7 @@ export default {
       tab: "preview",
       copied: false,
       tabs: [
-        { id: "preview", label: "ðŸ‘ Preview" },
+        { id: "preview", label: "Preview" },
         { id: "code", label: "</> HTML" }
       ]
     };
@@ -1058,7 +1058,7 @@ export default {
         const text = ev.target.result;
         const match = text.match(/<!--\s*EDITOR_DATA:(.*?)\s*-->\s*$/s);
         if (!match) {
-          this.$message ? this.$message.error("File HTML này không có dữ li�?u editor!") : alert("File HTML này không có dữ li�?u editor (thiếu EDITOR_DATA)!");
+          this.$message ? this.$message.error("File HTML này không có dữ liệu editor!") : alert("File HTML này không có dữ liệu editor (thiếu EDITOR_DATA)!");
           return;
         }
         try {
@@ -1069,9 +1069,9 @@ export default {
             const reassign = (b) => ({ ...b, id: uid(), subBlocks: b.subBlocks ? b.subBlocks.map(reassign) : undefined });
             this.blocks = data.blocks.map(reassign);
           }
-          this.$message ? this.$message.success("Đã load dữ li�?u từ file HTML!") : alert("Đã load xong!");
+          this.$message ? this.$message.success("Đã load dữ liệu từ file HTML!") : alert("Đã load xong!");
         } catch {
-          this.$message ? this.$message.error("Parse dữ li�?u thất bại!") : alert("lỗi parse JSON!");
+          this.$message ? this.$message.error("Parse dữ liệu thất bại!") : alert("Lỗi parse JSON!");
         }
       };
       reader.readAsText(file);
@@ -1647,7 +1647,7 @@ textarea { resize: vertical; line-height: 1.6; display: block; }
 .pv-challenge-intro { font-size: 13px; line-height: 22px; color: #525252; margin-bottom: 8px; }
 .pv-list { list-style: none; padding: 0; margin: 0; }
 .pv-list li { font-size: 13px; line-height: 22px; color: #525252; padding-left: 14px; position: relative; margin-bottom: 4px; }
-.pv-list li::before { content: '�?�'; position: absolute; left: 0; }
+.pv-list li::before { content: '•'; position: absolute; left: 0; }
 
 .pv-text-section { margin-bottom: 16px; }
 .pv-text-title { font-weight: 700; font-size: 15px; line-height: 40px; color: #0f172a; }
@@ -1705,7 +1705,7 @@ input[type="color"] {
   flex-shrink: 0;
 }
 
-/* �"?�"? Rich Text Editor (RichTxa) �"?�"? */
+/* Rich Text Editor (RichTxa) */
 .rich-txa-wrap {
   border: 1px solid #e2e8f0;
   border-radius: 8px;

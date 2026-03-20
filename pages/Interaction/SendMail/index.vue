@@ -1,14 +1,14 @@
 <template>
   <div class="page-wrap">
     <div class="page-header">
-      <h2 class="title">Liên hệ?</h2>
+      <h2 class="title">Liên hệ</h2>
     </div>
     <div class="filter-bar">
       <a-input-search v-model="keyword" placeholder="Tìm kiếm..." style="width:280px" @search="fetchList" allow-clear />
     </div>
     <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" row-key="mailId" @change="onTableChange">
       <template #action="record">
-        <a-popconfirm title="Xóa Liên hệ? này?" ok-text="Xóa" ok-type="danger" cancel-text="Hủy" @confirm="remove(record)">
+        <a-popconfirm title="Xóa Liên hệ này?" ok-text="Xóa" ok-type="danger" cancel-text="Hủy" @confirm="remove(record)">
           <a-button type="link" style="color:#ff4d4f"><a-icon type="delete" /> Xóa</a-button>
         </a-popconfirm>
       </template>

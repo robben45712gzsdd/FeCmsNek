@@ -61,7 +61,7 @@
       <!-- Mô tả và ghi chú -->
       <a-card size="small" bordered class="mt-4 desc-card">
         <!-- Description -->
-        <h4 class="section-title">ðŸ“ {{ $t("description") }}</h4>
+        <h4 class="section-title">{{ $t("description") }}</h4>
         <a-alert
           v-if="errorDetail.description"
           :message="errorDetail.description"
@@ -71,7 +71,7 @@
         <a-empty v-else :description="$t('noDescription')" />
 
         <!-- Note -->
-        <h4 class="section-title mt-4">ðŸ’¬ {{ $t("note") }}</h4>
+        <h4 class="section-title mt-4">{{ $t("note") }}</h4>
         <a-alert
           v-if="errorDetail.note"
           :message="errorDetail.note"
@@ -81,7 +81,7 @@
         <a-empty v-else :description="$t('noNote')" />
 
         <!-- Transaction ID -->
-        <h4 class="section-title mt-4">ðŸ”— {{ $t("transactionId") }}</h4>
+        <h4 class="section-title mt-4">{{ $t("transactionId") }}</h4>
         <div class="code-block">
           <code>{{ errorDetail.transactionId }}</code>
         </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap">
     <div class="page-header">
-      <h2 class="title">Quản lý Lãnh �'ạo</h2>
-      <a-button type="primary" @click="openAdd">+ Thêm lãnh �'ạo</a-button>
+      <h2 class="title">Quản lý Lãnh đạo</h2>
+      <a-button type="primary" @click="openAdd">+ Thêm lãnh đạo</a-button>
     </div>
 
     <div class="filter-bar">

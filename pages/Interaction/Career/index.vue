@@ -131,7 +131,7 @@
 
         <template #phoneNumber="text">
           <span v-if="text" class="phone-text"><a-icon type="phone" style="margin-right:4px;color:#94a3b8" />{{ text }}</span>
-          <span v-else class="no-cv">�?"</span>
+          <span v-else class="no-cv">Không có thông tin</span>
         </template>
 
         <template #createdDate="text">
@@ -143,12 +143,12 @@
             <span class="message-snippet">{{ text }}</span>
             <a class="message-more">Xem thêm</a>
           </div>
-          <span v-else class="no-cv">�?"</span>
+          <span v-else class="no-cv">Không có thông tin</span>
         </template>
 
         <template #action="record">
           <a-popconfirm
-            title="Xóa �'ơn ứng tuyển này?"
+            title="Xóa đơn ứng tuyển này?"
             ok-text="Xóa"
             ok-type="danger"
             cancel-text="Hủy"
