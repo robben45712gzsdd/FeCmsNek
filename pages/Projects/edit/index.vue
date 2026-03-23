@@ -142,7 +142,7 @@
               <RichTextEditor v-model="editorContent" :height="700" placeholder="Soạn Nội dung case study..." />
               <div v-if="isEdit && bodyPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
                 <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-                Case Study �'ã có file HTML. Soạn Nội dung m�>i sẽ thay thế file cũ.
+                Case Study �'ã có file HTML. Soạn Nội dung mới sẽ thay thế file cũ.
               </div>
             </div>
           </a-form-item>

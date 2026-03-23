@@ -434,7 +434,7 @@ export default {
           this.$message.success("Cập nhật thành công!");
         } else {
           await addProject(this.buildFormData());
-          this.$message.success("Thêm m�>i thành công!");
+          this.$message.success("Thêm mới thành công!");
         }
         this.$emit("saved");
         this.$emit("close");

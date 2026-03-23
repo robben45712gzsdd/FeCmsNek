@@ -109,7 +109,7 @@
           <RichTextEditor v-model="editorContent" :height="380" placeholder="Soạn Nội dung bài viết..." />
           <div v-if="isEdit && contentPreviewUrl && !editorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Bài viết �'ã có file HTML. Soạn Nội dung m�>i sẽ thay thế file cũ.
+            Bài viết �'ã có file HTML. Soạn Nội dung mới sẽ thay thế file cũ.
           </div>
         </div>
       </a-form-item>

@@ -79,7 +79,7 @@
 
     <a-modal
       :visible="formVisible"
-      :title="isEdit ? 'Cập nhật Label' : 'Tạo Label m�>i'"
+      :title="isEdit ? 'Cập nhật Label' : 'Tạo Label mới'"
       :confirm-loading="formLoading"
       ok-text="Lưu"
       cancel-text="Hủy"
@@ -97,6 +97,24 @@
             <a-select-option value="en">Tiếng Anh (en)</a-select-option>
           </a-select>
         </a-form-model-item>
+        <a-form-model-item label="Group" required>
+          <a-select
+            v-model="formModel.groupId"
+            :loading="categoryGroupLoading"
+            placeholder="Chọn nhóm"
+            style="width: 100%"
+            show-search
+            option-filter-prop="children"
+          >
+            <a-select-option
+              v-for="group in categoryGroups"
+              :key="String(group.id)"
+              :value="group.id"
+            >
+              {{ group.name }}
+            </a-select-option>
+          </a-select>
+        </a-form-model-item>
         <a-form-model-item label="LabelName" required>
           <a-input
             v-model="formModel.labelName"
@@ -112,6 +130,7 @@
 <script>
 import {
   getListLabelCMS,
+  getListCategoryGroup,
   getDetailLabel,
   createLabel,
   updateLabel,
@@ -128,6 +147,8 @@ export default {
       list: [],
       keyword: "",
       langCode: "vi",
+      categoryGroups: [],
+      categoryGroupLoading: false,
       detailVisible: false,
       detailLoading: false,
       detailRecord: null,
@@ -137,6 +158,7 @@ export default {
       formModel: {
         id: null,
         languageCode: "vi",
+        groupId: undefined,
         labelName: "",
       },
     };
@@ -155,12 +177,6 @@ export default {
           dataIndex: "id",
           key: "id",
           width: 100,
-        },
-        {
-          title: "NameId",
-          dataIndex: "nameId",
-          key: "nameId",
-          width: 120,
         },
         {
           title: "LabelName",
@@ -182,6 +198,7 @@ export default {
         const nextLang = this.normalizeLanguageCode(newLocale);
         if (nextLang !== this.langCode) {
           this.langCode = nextLang;
+          this.fetchCategoryGroups();
           this.fetchList();
         }
       },
@@ -189,6 +206,7 @@ export default {
   },
   mounted() {
     this.syncLanguageFromSystem();
+    this.fetchCategoryGroups();
     this.fetchList();
   },
   methods: {
@@ -202,6 +220,37 @@ export default {
       const savedLang = localStorage.getItem("selectedLanguage");
       const sourceLang = this.$i18n.locale || savedLang || "vi";
       this.langCode = this.normalizeLanguageCode(sourceLang);
+    },
+    getCategoryGroupId(item) {
+      return item?.id ?? item?.groupId ?? item?.categoryGroupId;
+    },
+    getCategoryGroupName(item) {
+      return (
+        item?.groupName ||
+        item?.categoryGroupName ||
+        item?.name ||
+        item?.title ||
+        `Group ${this.getCategoryGroupId(item)}`
+      );
+    },
+    async fetchCategoryGroups() {
+      this.categoryGroupLoading = true;
+      try {
+        const res = await getListCategoryGroup({ languageCode: this.langCode });
+        const rawList = Array.isArray(res?.data) ? res.data : [];
+        this.categoryGroups = rawList
+          .map((item) => ({
+            ...item,
+            id: this.getCategoryGroupId(item),
+            name: this.getCategoryGroupName(item),
+          }))
+          .filter((item) => item.id !== undefined && item.id !== null);
+      } catch (error) {
+        this.categoryGroups = [];
+        this.$message.error("Không thể tải danh sách nhóm");
+      } finally {
+        this.categoryGroupLoading = false;
+      }
     },
     async fetchList() {
       this.loading = true;
@@ -245,6 +294,7 @@ export default {
       this.formModel = {
         id: null,
         languageCode: this.langCode,
+        groupId: undefined,
         labelName: "",
       };
       this.formVisible = true;
@@ -263,12 +313,14 @@ export default {
         this.formModel = {
           id: detail.id || record.id,
           languageCode: this.langCode,
+          groupId: detail.groupId ?? record.groupId ?? undefined,
           labelName: detail.labelName || record.labelName || "",
         };
       } catch (error) {
         this.formModel = {
           id: record.id,
           languageCode: this.langCode,
+          groupId: record.groupId ?? undefined,
           labelName: record.labelName || "",
         };
         this.$message.error("Không th�f tải dữ li�?u label");
@@ -290,6 +342,7 @@ export default {
         this.formModel = {
           id: this.formModel.id,
           languageCode,
+          groupId: detail.groupId ?? this.formModel.groupId,
           labelName: detail.labelName || "",
         };
       } catch (error) {
@@ -298,7 +351,7 @@ export default {
           languageCode,
           labelName: "",
         };
-        this.$message.warning("Chưa có dữ li�?u cho ngôn ngữ này, bạn có th�f nhập m�>i");
+        this.$message.warning("Chưa có dữ liệu cho ngôn ngữ này, bạn có thể nhập mới");
       } finally {
         this.formLoading = false;
       }
@@ -332,8 +385,13 @@ export default {
     },
     async submitForm() {
       const labelName = (this.formModel.labelName || "").trim();
+      const groupId = this.formModel.groupId;
       if (!labelName) {
         this.$message.warning("Vui lòng nhập LabelName");
+        return;
+      }
+      if (groupId === undefined || groupId === null || groupId === "") {
+        this.$message.warning("Vui lòng chọn Group");
         return;
       }
 
@@ -343,6 +401,7 @@ export default {
           const body = {
             id: this.formModel.id,
             languageCode: this.formModel.languageCode,
+            groupId,
             labelName,
           };
           await updateLabel(body);
@@ -350,6 +409,7 @@ export default {
         } else {
           const body = {
             languageCode: this.formModel.languageCode,
+            groupId,
             labelName,
           };
           await createLabel(body);

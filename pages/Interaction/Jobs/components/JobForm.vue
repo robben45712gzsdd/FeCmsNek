@@ -115,7 +115,7 @@
           <RichTextEditor v-model="jdEditorContent" :height="380" placeholder="Soạn mô tả công việc..." />
           <div v-if="isEdit && form.content && !jdEditorContent" class="hint" style="margin-top:8px">
             <a-icon type="info-circle" style="color:#fa8c16;margin-right:4px;" />
-            Tin �'ã có file JD. Soạn Nội dung m�>i sẽ thay thế file cũ.
+            Tin �'ã có file JD. Soạn Nội dung mới sẽ thay thế file cũ.
           </div>
         </div>
       </a-form-model-item>

@@ -75,6 +75,15 @@ export function getListLabelCMS(params) {
   });
 }
 
+export function getListCategoryGroup(params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("/api/AIDemo/GetListCategoryGroup", { params })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err));
+  });
+}
+
 export function getDetailLabel(params) {
   return new Promise((resolve, reject) => {
     axios
