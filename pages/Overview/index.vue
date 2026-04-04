@@ -1,4 +1,14 @@
 ﻿<template>
+  <h1>Chào mừng bạn đến với trang tổng quan</h1>
+</template>
+<script>
+export default {
+  layout: "adminLayout",
+  middleware: "auth",
+};
+</script>
+
+<!-- <template>
   <div class="dashboard">
     <h2 class="title">{{ $t("Overview") }}</h2>
     <a-spin :spinning="loading" :tip="$t('loadingData')">
@@ -279,4 +289,4 @@ export default {
 .profit h3 { color: #2563eb; }
 </style>
 
-
+ -->

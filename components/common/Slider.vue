@@ -9,10 +9,10 @@
     <div class="logo" :class="{ collapsed }">
       <div class="brand">
         <a-avatar class="brand-avatar" icon="user" />
-        <span v-if="!collapsed" class="brand-title">{{ accountName }}</span>
+        <span v-if="!collapsed" class="brand-title">Admin</span>
       </div>
     </div>
-    <div class="balance-container">
+    <!-- <div class="balance-container">
       <p class="balance" :class="{ collapsed }">
         {{ $t("balance") }}: {{ formattedBalance }}
         <a-icon
@@ -22,7 +22,7 @@
           @click="reloadBalance"
         />
       </p>
-    </div>
+    </div> -->
 
     <a-menu
       class="sidebar-menu"
@@ -149,7 +149,7 @@ export default {
     };
   },
   mounted() {
-    this.loadAccountDetail();
+    // this.loadAccountDetail();
   },
   watch: {
     selectedKeys(newVal) {
@@ -157,34 +157,34 @@ export default {
     },
   },
   methods: {
-    loadAccountDetail() {
-      return getAccountDetail()
-        .then((res) => {
-          if (res && res.data) {
-            this.accountName =
-              res.data.displayName || res.data.customerName || "Admin";
-            this.balance = res.data.wallet || 0;
-          } else {
-            this.accountName = "Admin Portal";
-          }
-        })
-        .catch(() => {
-          this.accountName = "Admin Portal";
-          this.$message.error(this.$t("errorOccurred"));
-        });
-    },
+    // loadAccountDetail() {
+    //   return getAccountDetail()
+    //     .then((res) => {
+    //       if (res && res.data) {
+    //         this.accountName =
+    //           res.data.displayName || res.data.customerName || "Admin";
+    //         this.balance = res.data.wallet || 0;
+    //       } else {
+    //         this.accountName = "Admin Portal";
+    //       }
+    //     })
+    //     .catch(() => {
+    //       this.accountName = "Admin Portal";
+    //       this.$message.error(this.$t("errorOccurred"));
+    //     });
+    // },
 
-    reloadBalance() {
-      if (this.isReloading) return; 
-      this.isReloading = true;
+    // reloadBalance() {
+    //   if (this.isReloading) return; 
+    //   this.isReloading = true;
 
-      this.loadAccountDetail().finally(() => {
+    //   this.loadAccountDetail().finally(() => {
         
-        setTimeout(() => {
-          this.isReloading = false;
-        }, 2000);
-      });
-    },
+    //     setTimeout(() => {
+    //       this.isReloading = false;
+    //     }, 2000);
+    //   });
+    // },
 
     onSelect({ key }) {
       this.localSelectedKeys = [key];
